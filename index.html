@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROSE Celebrations | Digital Catalogue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --black: #050505; --glass: rgba(15, 15, 15, 0.9); --transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- 1. LOGO REVEAL PRELOADER --- */
+        #preloader {
+            position: fixed; inset: 0; background: var(--black); 
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 10000; transition: opacity 1.5s ease;
+        }
+        .logo-box { width: 200px; opacity: 0; animation: logoEntrance 3.5s forwards; }
+        @keyframes logoEntrance { 
+            0% { opacity: 0; filter: blur(15px); transform: scale(0.8); }
+            50% { opacity: 1; filter: blur(0px); transform: scale(1); }
+            100% { opacity: 1; filter: drop-shadow(0 0 20px var(--gold)); }
+        }
+
+        /* --- 2. FLOATING NAVIGATION --- */
+        nav {
+            position: fixed; top: 25px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 700px; padding: 15px 30px;
+            background: var(--glass); backdrop-filter: blur(15px);
+            border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 9000;
+        }
+        nav a { color: #888; text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+
+        /* --- 3. SCROLL REVEAL --- */
+        section { min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column; justify-content: center; opacity: 0; filter: blur(5px); transition: var(--transition); }
+        section.reveal { opacity: 1; filter: blur(0px); }
+
+        .hero { text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #050505 100%); }
+        .hero h1 { font-family: 'Cinzel'; font-size: clamp(3.5rem, 12vw, 7rem); color: var(--gold); letter-spacing: 20px; }
+
+        /* --- 4. EXPANDED 3D FLIPBOOK (DEVICE SPECIFIC) --- */
+        .catalogue-container { perspective: 2500px; display: flex; justify-content: center; padding: 60px 0; }
+        .book { position: relative; width: 340px; height: 480px; transform-style: preserve-3d; cursor: pointer; }
+        
+        .page { 
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0; 
+            transform-origin: left; transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1); 
+            transform-style: preserve-3d; background: #111; border: 1px solid var(--gold); 
+            border-radius: 0 15px 15px 0; box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+        }
+        .page.flipped { transform: rotateY(-180deg); }
+        
+        .page-inner { 
+            padding: 30px; height: 100%; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center; 
+            backface-visibility: hidden; 
+        }
+        .page-img { width: 100%; height: 240px; object-fit: cover; border: 1px solid var(--gold); margin-bottom: 20px; border-radius: 5px; }
+        .page h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 10px; font-size: 1.4rem; }
+        .page p { font-size: 0.85rem; font-weight: 300; line-height: 1.5; color: #bbb; }
+
+        /* --- 5. DOUBT SOLVER --- */
+        .faq-item { background: var(--glass); border: 1px solid rgba(212, 175, 55, 0.1); margin-bottom: 15px; border-radius: 12px; overflow: hidden; }
+        .faq-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; color: var(--gold); font-family: 'Cinzel'; }
+        .faq-body { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.5s ease; color: #ccc; font-size: 0.95rem; }
+        .faq-item.active .faq-body { max-height: 200px; padding-bottom: 25px; }
+
+        /* --- 6. PRE-BOOKING --- */
+        .book-card { background: var(--glass); border: 1px solid var(--gold); padding: 60px 40px; border-radius: 30px; text-align: center; max-width: 600px; margin: auto; }
+        .gold-btn { display: inline-block; padding: 20px 50px; background: var(--gold); color: #000; text-decoration: none; font-weight: bold; border-radius: 50px; font-family: 'Cinzel'; margin-top: 30px; transition: 0.3s; }
+        .gold-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--gold); }
+
+        @media (max-width: 768px) { .book { width: 290px; height: 420px; } nav { width: 95%; } }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <img src="rose_logo.png" class="logo-box" alt="ROSE Celebrations">
+        <p style="color:var(--gold); margin-top: 25px; font-family:'Cinzel'; letter-spacing: 5px; font-size: 0.7rem;">KAKINADA</p>
+    </div>
+
+    <nav id="navbar">
+        <a href="#hero">HOME</a>
+        <a href="#about">STORY</a>
+        <a href="#services">CATALOGUE</a>
+        <a href="#doubts">DOUBTS</a>
+        <a href="#booking">BOOKING</a>
+    </nav>
+
+    <section id="hero" class="hero reveal">
+        <h1>ROSE</h1>
+        <p style="letter-spacing: 8px;">Prathi Kshanam Oka Celebration</p>
+    </section>
+
+    <section id="about">
+        <div style="text-align: center; max-width: 800px; margin: auto;">
+            <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 25px; font-size: 2.5rem;">Our Brand</h2>
+            <p style="font-weight: 300; line-height: 2; color: #ddd;">
+                Under the leadership of <strong>Karthik Nethala</strong>, ROSE Celebrations has become Kakinada's premier boutique event service. We don't just plan events; we create cinematic legacies. From the stealthiest beachfront proposals to the grandest wedding reveals, we ensure every emotion is captured and delivered through your private Memory Vault.
+            </p>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 style="text-align:center; font-family:'Cinzel'; color:var(--gold); margin-bottom:40px;">Interactive Catalogue</h2>
+        <div class="catalogue-container">
+            <div class="book">
+                <div class="page" style="z-index: 6;" onclick="this.classList.toggle('flipped')">
+                    <div class="page-inner">
+                        <h3 style="letter-spacing: 5px;">THE COLLECTION</h3>
+                        <p style="color:var(--gold); margin-top: 15px;">Tap to Open</p>
+                    </div>
+                </div>
+                <div class="page" style="z-index: 5;" onclick="this.classList.toggle('flipped')">
+                    <div class="page-inner">
+                        <img src="proposal_sample.jpg" class="page-img" alt="Proposal">
+                        <h3>Proposals</h3>
+                        <p>Ocean-side stories, forever framed. We manage the tides and the stealth filming.</p>
+                    </div>
+                </div>
+                <div class="page" style="z-index: 4;" onclick="this.classList.toggle('flipped')">
+                    <div class="page-inner">
+                        <img src="birthday_sample.jpg" class="page-img" alt="Birthday">
+                        <h3>Birthdays</h3>
+                        <p>Luxury setups and Midnight Gold themes that turn a year older into a masterpiece.</p>
+                    </div>
+                </div>
+                <div class="page" style="z-index: 3;" onclick="this.classList.toggle('flipped')">
+                    <div class="page-inner">
+                        <img src="anniversary_sample.jpg" class="page-img" alt="Anniversary">
+                        <h3>Anniversaries</h3>
+                        <p>Reliving your love story with cinematic atmosphere and unscripted joy.</p>
+                    </div>
+                </div>
+                <div class="page" style="z-index: 2;" onclick="this.classList.toggle('flipped')">
+                    <div class="page-inner">
+                        <img src="wedding_sample.jpg" class="page-img" alt="Wedding">
+                        <h3>Weddings</h3>
+                        <p>Boutique decor and grand reveals that stay in your heart forever.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="doubts">
+        <h2 style="text-align:center; font-family:'Cinzel'; color:var(--gold); margin-bottom:40px;">Doubt Solver</h2>
+        <div style="max-width: 800px; margin: auto; width: 100%;">
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-header">What is the "Memory Vault"? <span>+</span></div>
+                <div class="faq-body">A secure digital gallery where your celebration films are hosted in 4K resolution for a lifetime.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-header">How do I secure a date? <span>+</span></div>
+                <div class="faq-body">Fill our pre-booking form. We only accept 4 premium events per month to maintain our cinematic standard.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="book-card">
+            <h2 style="font-family:'Cinzel'; color:var(--gold); font-size: 2rem;">Initiate Booking</h2>
+            <p style="margin-top: 15px; font-weight: 300;">Ready to plan something new? Our calendar fills up quickly.</p>
+            <a href="https://forms.gle/your-link" target="_blank" class="gold-btn">OPEN BOOKING FORM</a>
+        </div>
+    </section>
+
+    <script>
+        // Preloader Logic
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => document.getElementById('preloader').remove(), 1500);
+            }, 3000);
+        };
+
+        // Scroll Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
