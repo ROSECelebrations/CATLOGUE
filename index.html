@@ -2,90 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROSE Celebrations | Kakinada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ROSE Celebrations | Kakinada Luxury</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #050505; --accent: rgba(212, 175, 55, 0.15); }
+        :root { --gold: #D4AF37; --black: #050505; --accent: rgba(212, 175, 55, 0.2); }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            background: var(--black); 
-            color: #fff; 
-            font-family: 'Montserrat', sans-serif; 
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* --- 1. COLUMN-STYLE BACKGROUND IMAGES (50% OPACITY) --- */
+        /* --- 1. RESPONSIVE 5-COLUMN BG GRID (50% OPACITY) --- */
         .bg-grid {
-            position: fixed; inset: 0;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            z-index: -1;
-            opacity: 0.5;
-            filter: grayscale(30%) brightness(0.4);
+            position: fixed; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr);
+            z-index: -1; opacity: 0.5; filter: grayscale(40%) brightness(0.3);
         }
-        .bg-column {
-            background-size: cover;
-            background-position: center;
-            border-right: 1px solid rgba(212, 175, 55, 0.1);
-        }
+        .bg-column { background-size: cover; background-position: center; border-right: 1px solid rgba(212, 175, 55, 0.1); }
 
-        /* --- 2. WELCOME ENTRANCE --- */
-        #welcome-screen {
-            position: fixed; inset: 0; background: var(--black);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 10000; transition: opacity 1.5s ease;
+        /* --- 2. LOGO WELCOME ENTRANCE --- */
+        #welcome {
+            position: fixed; inset: 0; background: var(--black); z-index: 10000;
+            display: flex; justify-content: center; align-items: center; transition: 1.5s ease;
         }
-        .welcome-logo { width: 250px; filter: drop-shadow(0 0 20px var(--gold)); animation: bloom 3s forwards; }
+        .welcome-logo { width: clamp(150px, 30vw, 250px); filter: drop-shadow(0 0 20px var(--gold)); animation: bloom 3s forwards; }
         @keyframes bloom { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
         /* --- 3. CENTERED NAVIGATION --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 25px;
-            display: flex; justify-content: center; align-items: center; gap: 40px;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 9000;
+            position: fixed; top: 0; width: 100%; padding: clamp(15px, 4vh, 30px);
+            display: flex; justify-content: center; align-items: center; gap: clamp(20px, 6vw, 60px);
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 9000;
         }
-        nav a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; }
+        nav a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: clamp(0.65rem, 1.5vw, 0.85rem); letter-spacing: 3px; }
 
-        /* --- 4. CENTERED SECTIONS --- */
-        section { 
-            min-height: 100vh; width: 100%; 
-            display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; 
-            text-align: center; padding: 0 10%;
-        }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
 
-        .hero h1 { font-family: 'Cinzel'; font-size: clamp(3rem, 10vw, 7rem); color: var(--gold); letter-spacing: 15px; }
-        .hero p { letter-spacing: 8px; color: #eee; margin-top: 15px; font-weight: 200; }
-
-        /* --- 5. INFINITY CAROUSEL --- */
-        .carousel-window { width: 100%; overflow: hidden; padding: 60px 0; }
-        .track { display: flex; animation: scroll 40s linear infinite; width: fit-content; }
+        /* --- 4. THE PEAK CAROUSEL --- */
+        .carousel-outer { position: relative; width: 100%; max-width: 1200px; display: flex; align-items: center; justify-content: center; margin: 40px 0; }
+        .carousel-window { width: 85%; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .track { display: flex; gap: 20px; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        
         .card { 
-            width: 300px; height: 450px; margin: 0 15px; 
-            background: rgba(15, 15, 15, 0.9); border: 1px solid var(--gold); 
-            border-radius: 10px; display: flex; flex-direction: column; 
-            justify-content: flex-end; padding: 30px; position: relative;
-            overflow: hidden;
+            min-width: clamp(220px, 35vw, 300px); 
+            height: clamp(320px, 50vh, 450px);
+            background: rgba(15, 15, 15, 0.95); border: 1px solid var(--gold);
+            border-radius: 12px; position: relative; overflow: hidden; flex-shrink: 0; cursor: pointer;
         }
-        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.5s; }
-        .card:hover img { opacity: 0.7; transform: scale(1.1); }
-        .card h3 { font-family: 'Cinzel'; color: var(--gold); z-index: 1; font-size: 1.1rem; letter-spacing: 2px; }
+        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; transition: 0.5s; }
+        .card:hover img { opacity: 0.6; transform: scale(1.05); }
+        .card-info { position: absolute; bottom: 20px; left: 20px; text-align: left; z-index: 2; }
+        .card-info h3 { font-family: 'Cinzel'; color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
 
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .nav-btn {
+            background: rgba(0,0,0,0.6); border: 1px solid var(--gold); color: var(--gold);
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+            position: absolute; z-index: 10; font-size: 1.5rem; transition: 0.3s;
+        }
+        .nav-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
+        .btn-l { left: -10px; } .btn-r { right: -10px; }
 
-        /* --- 6. GOLD LOGO CONTACTS --- */
-        .contact { background: rgba(0,0,0,0.9); width: 100%; padding: 100px 0; }
-        .gold-icons { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-top: 40px; }
-        .icon-box { text-align: center; text-decoration: none; transition: 0.4s; }
-        .icon-box:hover { transform: translateY(-10px); }
-        .icon-box img { width: 45px; height: 45px; filter: drop-shadow(0 0 5px var(--gold)); margin-bottom: 15px; }
-        .icon-box p { color: var(--gold); font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 2px; }
+        /* --- 5. INTERACTIVE POPUP (MODAL) --- */
+        #modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center; z-index: 10001; padding: 25px;
+        }
+        .modal-content {
+            background: #111; border: 1px solid var(--gold); padding: clamp(30px, 5vw, 50px);
+            border-radius: 20px; max-width: 500px; text-align: center; box-shadow: 0 0 40px var(--accent);
+        }
+        .modal-content h2 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 20px; letter-spacing: 3px; }
+        .modal-content p { line-height: 1.8; font-weight: 300; color: #ccc; font-size: 0.95rem; }
+        .close-btn { margin-top: 30px; border: 1px solid var(--gold); padding: 10px 30px; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 30px; }
 
+        /* --- 6. CONTACT (GOLD LOGOS) --- */
+        .contact { background: rgba(0,0,0,0.9); width: 100%; padding: 80px 5%; border-top: 1px solid var(--accent); }
+        .icon-grid { display: flex; justify-content: center; gap: clamp(30px, 8vw, 80px); flex-wrap: wrap; margin-top: 40px; }
+        .icon-box { text-align: center; text-decoration: none; color: var(--gold); font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 2px; }
+        .icon-box img { width: 40px; height: 40px; filter: drop-shadow(0 0 5px var(--gold)); margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; }
+
+        @media (max-width: 600px) { .nav-btn { display: none; } .carousel-window { width: 100%; mask-image: none; } }
     </style>
 </head>
 <body>
@@ -98,74 +91,101 @@
         <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80');"></div>
     </div>
 
-    <div id="welcome-screen">
-        <img src="3.png" class="welcome-logo" alt="ROSE">
-    </div>
+    <div id="welcome"><img src="3.png" class="welcome-logo"></div>
 
     <nav>
         <a href="#story">OUR STORY</a>
-        <a href="#events">COLLECTION</a>
+        <a href="#events">EVENTS</a>
         <a href="#contact">CONTACT</a>
     </nav>
 
-    <section class="hero">
-        <h1>ROSE</h1>
-        <p>PRATHI KSHANAM OKA CELEBRATION</p>
+    <section id="hero">
+        <h1 style="font-family:'Cinzel'; font-size: clamp(2.5rem, 10vw, 7rem); color: var(--gold); letter-spacing: clamp(5px, 3vw, 20px);">ROSE</h1>
+        <p style="letter-spacing: clamp(4px, 1.5vw, 10px); color: #888; text-transform: uppercase;">Prathi Kshanam Oka Celebration</p>
     </section>
 
     <section id="story">
         <div style="max-width: 800px;">
-            <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 25px; font-size: 2.5rem;">The Origin</h2>
-            <p style="font-weight: 200; line-height: 2.5; color: #ccc;">Born from a beach-side dream in <span style="color:var(--gold);">Kakinada</span>, ROSE Celebrations exists to turn your most personal ideologies into cinematic legacies. From anniversaries to silent proposals, we create the masterpiece your family deserves.</p>
+            <h2 style="font-family:'Cinzel'; color:var(--gold); font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px;">The Origin</h2>
+            <p style="font-weight: 200; line-height: 2.2; color: #ccc; font-size: clamp(0.85rem, 2vw, 1.1rem);">Born from a heart-warming beach-side dream in <span style="color:var(--gold);">Kakinada</span>, ROSE Celebrations exists to turn your personal ideology into a cinematic masterpiece. We don't just plan events; we write your <strong>Book of Memories</strong>.</p>
         </div>
     </section>
 
-    <section id="events" class="carousel-window">
-        <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 50px; letter-spacing: 5px;">THE INFINITY COLLECTION</h2>
-        <div class="track" id="event-track">
+    <section id="events">
+        <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 30px; letter-spacing: 5px;">THE INFINITY COLLECTION</h2>
+        <div class="carousel-outer">
+            <button class="nav-btn btn-l" onclick="moveSlide(-1)">&#8249;</button>
+            <div class="carousel-window">
+                <div class="track" id="track"></div>
             </div>
+            <button class="nav-btn btn-r" onclick="moveSlide(1)">&#8250;</button>
+        </div>
     </section>
 
     <section id="contact" class="contact">
-        <img src="3.png" style="width: 180px; filter: drop-shadow(0 0 10px var(--gold)); margin-bottom: 50px;">
-        <div class="gold-icons">
+        <img src="3.png" style="width: 150px; filter: drop-shadow(0 0 10px var(--gold)); margin-bottom: 40px;">
+        <div class="icon-grid">
             <a href="https://instagram.com/celebratewithroses" class="icon-box" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/D4AF37/instagram-new.png">
-                <p>INSTAGRAM</p>
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/instagram-new.png">INSTAGRAM
             </a>
             <a href="https://youtube.com/@celebratewithroses" class="icon-box" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/D4AF37/youtube-play.png">
-                <p>YOUTUBE</p>
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/youtube-play.png">YOUTUBE
             </a>
             <div class="icon-box">
-                <img src="https://img.icons8.com/ios-filled/100/D4AF37/marker.png">
-                <p>GPT COLONY, KAKINADA</p>
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/marker.png">GPT COLONY, KAKINADA
             </div>
         </div>
     </section>
 
+    <div id="modal">
+        <div class="modal-content">
+            <h2 id="m-title"></h2>
+            <p id="m-desc"></p>
+            <div class="close-btn" onclick="closeModal()">CLOSE</div>
+        </div>
+    </div>
+
     <script>
         const events = [
-            { name: "BIRTHDAYS", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80" },
-            { name: "WEDDINGS", img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80" },
-            { name: "ANNIVERSARY", img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80" },
-            { name: "PROPOSALS", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80" },
-            { name: "SURPRISES", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80" },
-            { name: "CUSTOM", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80" },
-            { name: "DATE NIGHT", img: "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80" }
+            { name: "BIRTHDAYS", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80", desc: "We plan, create, and bring your unique birthday visions to life with our creative ideas." },
+            { name: "WEDDINGS", img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80", desc: "Recreating the magic of your special day with cinematic detail and elegance." },
+            { name: "ANNIVERSARY", img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80", desc: "Celebrating your journey of love with curated details that honor your specific story." },
+            { name: "PROPOSALS", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80", desc: "Bespoke proposal setups designed specifically around individual customer requirements." },
+            { name: "SURPRISES", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80", desc: "Our specialty. We meticulously plan surprises that transform moments into lifelong memories." },
+            { name: "CUSTOM", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80", desc: "We design and engage directly with you to ensure your unique satisfaction is achieved." },
+            { name: "DATE NIGHT", img: "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80", desc: "From candle-lit night to first proposal recreations based on your ideology." }
         ];
 
-        const track = document.getElementById('event-track');
-        [...events, ...events].forEach(event => {
+        const track = document.getElementById('track');
+        events.forEach(ev => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<img src="${event.img}"><h3>${event.name}</h3>`;
+            card.innerHTML = `<img src="${ev.img}"><div class="card-info"><h3>${ev.name}</h3></div>`;
+            card.onclick = () => openModal(ev.name, ev.desc);
             track.appendChild(card);
         });
 
+        let index = 0;
+        function moveSlide(dir) {
+            const cardWidth = document.querySelector('.card').offsetWidth + 20;
+            const visibleWidth = document.querySelector('.carousel-window').offsetWidth;
+            const max = events.length - Math.floor(visibleWidth / cardWidth);
+            index = Math.min(Math.max(index + dir, 0), max);
+            track.style.transform = `translateX(-${index * cardWidth}px)`;
+        }
+
+        function openModal(t, d) {
+            document.getElementById('m-title').innerText = t;
+            document.getElementById('m-desc').innerText = d;
+            document.getElementById('modal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
         window.onload = () => {
-            setTimeout(() => { document.getElementById('welcome-screen').style.opacity = '0'; 
-            setTimeout(() => document.getElementById('welcome-screen').remove(), 1500); }, 3000);
+            setTimeout(() => { 
+                document.getElementById('welcome').style.opacity = '0';
+                setTimeout(()=>document.getElementById('welcome').remove(), 1500);
+            }, 3000);
         };
     </script>
 </body>
