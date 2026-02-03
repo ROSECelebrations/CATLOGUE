@@ -17,7 +17,7 @@
         }
         .bg-column { background-size: cover; background-position: center; border-right: 1px solid rgba(212, 175, 55, 0.05); }
 
-        /* --- 2. ENTRANCE --- */
+        /* --- 2. THE BLOOM ENTRANCE --- */
         #welcome {
             position: fixed; inset: 0; background: var(--black); z-index: 10000;
             display: flex; justify-content: center; align-items: center; transition: 1.5s ease-in-out;
@@ -25,7 +25,7 @@
         .welcome-logo { width: clamp(150px, 35vw, 250px); filter: drop-shadow(0 0 25px var(--gold)); animation: bloom 3s forwards; }
         @keyframes bloom { 0% { opacity: 0; transform: scale(0.9) blur(10px); } 100% { opacity: 1; transform: scale(1) blur(0px); } }
 
-        /* --- 3. NAV & QUOTE TICKER --- */
+        /* --- 3. NAV & TAGLINE BAR --- */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 9000;
             background: linear-gradient(to bottom, rgba(0,0,0,0.95) 60%, transparent);
@@ -35,19 +35,18 @@
             display: flex; justify-content: center; align-items: center; 
             gap: clamp(20px, 8vw, 70px); padding: 20px 0 10px 0;
         }
-        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 4px; cursor: pointer; transition: 0.4s; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 4px; cursor: pointer; }
         
-        #quote-bar {
+        #tagline-bar {
             width: 100%; height: 35px; display: flex; align-items: center; justify-content: center;
             border-bottom: 0.5px solid var(--accent); background: rgba(0,0,0,0.5);
         }
-        #brand-quote {
-            font-family: 'Montserrat'; font-weight: 200; font-size: clamp(0.45rem, 1.2vw, 0.75rem); 
-            color: var(--gold); letter-spacing: 3px; text-transform: uppercase; 
-            transition: opacity 1.5s ease; opacity: 0; text-align: center; white-space: nowrap;
+        .static-tagline {
+            font-family: 'Montserrat'; font-weight: 200; font-size: clamp(0.5rem, 1.5vw, 0.75rem); 
+            color: var(--gold); letter-spacing: 4px; text-transform: uppercase; white-space: nowrap;
         }
 
-        /* --- 4. HERO SECTION --- */
+        /* --- 4. HERO SECTION & LIVE QUOTES --- */
         section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; position: relative; }
         .hero h1 { 
             font-family: 'Cinzel'; 
@@ -58,14 +57,12 @@
             margin-top: 80px;
         }
 
-        .tagline { 
-            letter-spacing: clamp(4px, 1.5vw, 12px); 
-            color: #888; 
-            text-transform: uppercase; 
+        #brand-quote {
+            font-family: 'Montserrat'; font-weight: 200; 
             font-size: clamp(0.55rem, 1.8vw, 0.9rem); 
-            margin-top: 15px;
-            white-space: nowrap; 
-            width: 100%;
+            color: #888; text-transform: uppercase; 
+            margin-top: 20px; transition: opacity 1.5s ease; 
+            opacity: 0; letter-spacing: 3px; max-width: 80vw;
         }
 
         /* --- 5. THE ABOUT VAULT --- */
@@ -96,13 +93,13 @@
         
         .card { 
             min-width: clamp(250px, 45vw, 400px); 
-            height: clamp(300px, 35vh, 480px);
+            height: clamp(350px, 30vh, 500px);
             background: rgba(10, 10, 10, 0.95); border: 0.5px solid var(--gold); border-radius: 15px; 
-            position: relative; overflow: hidden; flex-shrink: 0; cursor: pointer; scroll-snap-align: center;
+            position: relative; overflow: hidden; flex-shrink: 0; scroll-snap-align: center;
         }
         .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; pointer-events: none; }
         .card-info { position: absolute; bottom: 20px; left: 20px; text-align: left; }
-        .card-info h3 { font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; letter-spacing: 3px; }
+        .card-info h3 { font-family: 'Cinzel'; color: var(--gold); font-size: 1rem; letter-spacing: 3px; }
 
         /* --- 7. FOOTER --- */
         .contact { background: rgba(0,0,0,0.96); width: 100%; padding: 60px 5%; border-top: 1px solid var(--accent); text-align: center; }
@@ -112,7 +109,6 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: clamp(3.5rem, 15vw, 7rem); letter-spacing: 12px; }
-            .card { height: 30vh; min-width: 75vw; }
             .carousel-window { mask-image: none; }
         }
     </style>
@@ -135,21 +131,19 @@
             <a href="#events">COLLECTION</a>
             <a href="#contact">RESERVE</a>
         </div>
-        <div id="quote-bar">
-            <p id="brand-quote">FETCHING LEGACY...</p>
+        <div id="tagline-bar">
+            <p class="static-tagline">Prathi Kshanam Oka Celebration</p>
         </div>
     </nav>
 
     <section id="hero">
         <h1>ROSE</h1>
-        <p class="tagline">Prathi Kshanam Oka Celebration</p>
+        <p id="brand-quote">FETCHING LEGACY...</p>
     </section>
 
     <div id="about-overlay">
         <h2 class="about-header">THE ORIGIN</h2>
-        <div class="about-bio">
-            Born from a quiet golden hour on the <span style="color:var(--gold);">Kakinada shore</span>, ROSE Celebrations turns your personal ideology into a cinematic masterpiece.
-        </div>
+        <div class="about-bio">Born from a quiet golden hour on the <span style="color:var(--gold);">Kakinada shore</span>, ROSE Celebrations turns your ideology into a cinematic masterpiece.</div>
         <div class="creator-grid">
             <div class="creator-card"><div class="creator-img"></div><h4>KARTHIK</h4></div>
             <div class="creator-card"><div class="creator-img"></div><h4>AKSHITH</h4></div>
@@ -181,18 +175,26 @@
         function openAbout() { document.getElementById('about-overlay').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeAbout() { document.getElementById('about-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
+        // RELIABLE INTERNET QUOTE ENGINE
         let liveQuotes = [];
         let qIdx = 0;
         const qEl = document.getElementById('brand-quote');
 
         async function initQuotes() {
             try {
-                const res = await fetch("https://type.fit/api/quotes");
+                // Using a more reliable API for luxury quotes
+                const res = await fetch("https://api.quotable.io/random?tags=wisdom,excellence&limit=10");
+                if (!res.ok) throw new Error();
                 const data = await res.json();
-                liveQuotes = data.filter(q => q.text.length < 50).sort(() => Math.random() - 0.5);
+                liveQuotes = Array.isArray(data) ? data : [data];
                 rotateQuote();
             } catch (e) {
-                liveQuotes = [{text: "PRATHI KSHANAM OKA CELEBRATION"}];
+                // Fallback Brand Pillars if API is down
+                liveQuotes = [
+                    {content: "YOUR LEGACY, OUR CINEMATIC MASTERPIECE"},
+                    {content: "WHERE EVERY SECOND IS A SYMPHONY OF SOUL"},
+                    {content: "REWRITING THE ART OF CELEBRATION"}
+                ];
                 rotateQuote();
             }
         }
@@ -200,7 +202,8 @@
         function rotateQuote() {
             qEl.style.opacity = 0;
             setTimeout(() => {
-                qEl.innerText = (liveQuotes[qIdx].text).toUpperCase();
+                const text = liveQuotes[qIdx].content || liveQuotes[qIdx].text;
+                qEl.innerText = text.toUpperCase();
                 qEl.style.opacity = 1;
                 qIdx = (qIdx + 1) % liveQuotes.length;
             }, 1500);
