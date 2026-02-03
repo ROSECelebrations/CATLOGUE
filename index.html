@@ -3,195 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROSE Celebrations | Digital Catalogue</title>
+    <title>ROSE Celebrations | Kakinada</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #050505; --glass: rgba(15, 15, 15, 0.9); --transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        :root { --gold: #D4AF37; --black: #050505; --accent: rgba(212, 175, 55, 0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* --- 1. LOGO REVEAL PRELOADER --- */
-        #preloader {
-            position: fixed; inset: 0; background: var(--black); 
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; z-index: 10000; transition: opacity 1.5s ease;
-        }
-        .logo-box { width: 200px; opacity: 0; animation: logoEntrance 3.5s forwards; }
-        @keyframes logoEntrance { 
-            0% { opacity: 0; filter: blur(15px); transform: scale(0.8); }
-            50% { opacity: 1; filter: blur(0px); transform: scale(1); }
-            100% { opacity: 1; filter: drop-shadow(0 0 20px var(--gold)); }
+        body { 
+            background: var(--black); 
+            color: #fff; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* --- 2. FLOATING NAVIGATION --- */
+        /* --- 1. COLUMN-STYLE BACKGROUND IMAGES (50% OPACITY) --- */
+        .bg-grid {
+            position: fixed; inset: 0;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            z-index: -1;
+            opacity: 0.5;
+            filter: grayscale(30%) brightness(0.4);
+        }
+        .bg-column {
+            background-size: cover;
+            background-position: center;
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        /* --- 2. WELCOME ENTRANCE --- */
+        #welcome-screen {
+            position: fixed; inset: 0; background: var(--black);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000; transition: opacity 1.5s ease;
+        }
+        .welcome-logo { width: 250px; filter: drop-shadow(0 0 20px var(--gold)); animation: bloom 3s forwards; }
+        @keyframes bloom { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        /* --- 3. CENTERED NAVIGATION --- */
         nav {
-            position: fixed; top: 25px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 700px; padding: 15px 30px;
-            background: var(--glass); backdrop-filter: blur(15px);
-            border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.2);
-            display: flex; justify-content: space-around; align-items: center;
-            z-index: 9000;
+            position: fixed; top: 0; width: 100%; padding: 25px;
+            display: flex; justify-content: center; align-items: center; gap: 40px;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 9000;
         }
-        nav a { color: #888; text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+        nav a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; }
 
-        /* --- 3. SCROLL REVEAL --- */
-        section { min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column; justify-content: center; opacity: 0; filter: blur(5px); transition: var(--transition); }
-        section.reveal { opacity: 1; filter: blur(0px); }
-
-        .hero { text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #050505 100%); }
-        .hero h1 { font-family: 'Cinzel'; font-size: clamp(3.5rem, 12vw, 7rem); color: var(--gold); letter-spacing: 20px; }
-
-        /* --- 4. EXPANDED 3D FLIPBOOK (DEVICE SPECIFIC) --- */
-        .catalogue-container { perspective: 2500px; display: flex; justify-content: center; padding: 60px 0; }
-        .book { position: relative; width: 340px; height: 480px; transform-style: preserve-3d; cursor: pointer; }
-        
-        .page { 
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0; 
-            transform-origin: left; transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1); 
-            transform-style: preserve-3d; background: #111; border: 1px solid var(--gold); 
-            border-radius: 0 15px 15px 0; box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+        /* --- 4. CENTERED SECTIONS --- */
+        section { 
+            min-height: 100vh; width: 100%; 
+            display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; 
+            text-align: center; padding: 0 10%;
         }
-        .page.flipped { transform: rotateY(-180deg); }
-        
-        .page-inner { 
-            padding: 30px; height: 100%; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; text-align: center; 
-            backface-visibility: hidden; 
+
+        .hero h1 { font-family: 'Cinzel'; font-size: clamp(3rem, 10vw, 7rem); color: var(--gold); letter-spacing: 15px; }
+        .hero p { letter-spacing: 8px; color: #eee; margin-top: 15px; font-weight: 200; }
+
+        /* --- 5. INFINITY CAROUSEL --- */
+        .carousel-window { width: 100%; overflow: hidden; padding: 60px 0; }
+        .track { display: flex; animation: scroll 40s linear infinite; width: fit-content; }
+        .card { 
+            width: 300px; height: 450px; margin: 0 15px; 
+            background: rgba(15, 15, 15, 0.9); border: 1px solid var(--gold); 
+            border-radius: 10px; display: flex; flex-direction: column; 
+            justify-content: flex-end; padding: 30px; position: relative;
+            overflow: hidden;
         }
-        .page-img { width: 100%; height: 240px; object-fit: cover; border: 1px solid var(--gold); margin-bottom: 20px; border-radius: 5px; }
-        .page h3 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 10px; font-size: 1.4rem; }
-        .page p { font-size: 0.85rem; font-weight: 300; line-height: 1.5; color: #bbb; }
+        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.5s; }
+        .card:hover img { opacity: 0.7; transform: scale(1.1); }
+        .card h3 { font-family: 'Cinzel'; color: var(--gold); z-index: 1; font-size: 1.1rem; letter-spacing: 2px; }
 
-        /* --- 5. DOUBT SOLVER --- */
-        .faq-item { background: var(--glass); border: 1px solid rgba(212, 175, 55, 0.1); margin-bottom: 15px; border-radius: 12px; overflow: hidden; }
-        .faq-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; color: var(--gold); font-family: 'Cinzel'; }
-        .faq-body { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.5s ease; color: #ccc; font-size: 0.95rem; }
-        .faq-item.active .faq-body { max-height: 200px; padding-bottom: 25px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- 6. PRE-BOOKING --- */
-        .book-card { background: var(--glass); border: 1px solid var(--gold); padding: 60px 40px; border-radius: 30px; text-align: center; max-width: 600px; margin: auto; }
-        .gold-btn { display: inline-block; padding: 20px 50px; background: var(--gold); color: #000; text-decoration: none; font-weight: bold; border-radius: 50px; font-family: 'Cinzel'; margin-top: 30px; transition: 0.3s; }
-        .gold-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--gold); }
+        /* --- 6. GOLD LOGO CONTACTS --- */
+        .contact { background: rgba(0,0,0,0.9); width: 100%; padding: 100px 0; }
+        .gold-icons { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-top: 40px; }
+        .icon-box { text-align: center; text-decoration: none; transition: 0.4s; }
+        .icon-box:hover { transform: translateY(-10px); }
+        .icon-box img { width: 45px; height: 45px; filter: drop-shadow(0 0 5px var(--gold)); margin-bottom: 15px; }
+        .icon-box p { color: var(--gold); font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 2px; }
 
-        @media (max-width: 768px) { .book { width: 290px; height: 420px; } nav { width: 95%; } }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <img src="3.png" class="logo-box" alt="ROSE Celebrations">
-        <p style="color:var(--gold); margin-top: 25px; font-family:'Cinzel'; letter-spacing: 5px; font-size: 0.7rem;">KAKINADA</p>
+    <div class="bg-grid">
+        <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80');"></div>
+        <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80');"></div>
+        <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1529636798458-92182e662485?q=80');"></div>
+        <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80');"></div>
+        <div class="bg-column" style="background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80');"></div>
     </div>
 
-    <nav id="navbar">
-        <a href="#hero">HOME</a>
-        <a href="#about">STORY</a>
-        <a href="#services">CATALOGUE</a>
-        <a href="#doubts">DOUBTS</a>
-        <a href="#booking">BOOKING</a>
+    <div id="welcome-screen">
+        <img src="3.png" class="welcome-logo" alt="ROSE">
+    </div>
+
+    <nav>
+        <a href="#story">OUR STORY</a>
+        <a href="#events">COLLECTION</a>
+        <a href="#contact">CONTACT</a>
     </nav>
 
-    <section id="hero" class="hero reveal">
+    <section class="hero">
         <h1>ROSE</h1>
-        <p style="letter-spacing: 8px;">Prathi Kshanam Oka Celebration</p>
+        <p>PRATHI KSHANAM OKA CELEBRATION</p>
     </section>
 
-    <section id="about">
-        <div style="text-align: center; max-width: 800px; margin: auto;">
-            <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 25px; font-size: 2.5rem;">Our Brand</h2>
-            <p style="font-weight: 300; line-height: 2; color: #ddd;">
-                Under the leadership of <strong>Karthik Nethala</strong>, ROSE Celebrations has become Kakinada's premier boutique event service. We don't just plan events; we create cinematic legacies. From the stealthiest beachfront proposals to the grandest wedding reveals, we ensure every emotion is captured and delivered through your private Memory Vault.
-            </p>
+    <section id="story">
+        <div style="max-width: 800px;">
+            <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 25px; font-size: 2.5rem;">The Origin</h2>
+            <p style="font-weight: 200; line-height: 2.5; color: #ccc;">Born from a beach-side dream in <span style="color:var(--gold);">Kakinada</span>, ROSE Celebrations exists to turn your most personal ideologies into cinematic legacies. From anniversaries to silent proposals, we create the masterpiece your family deserves.</p>
         </div>
     </section>
 
-    <section id="services">
-        <h2 style="text-align:center; font-family:'Cinzel'; color:var(--gold); margin-bottom:40px;">Interactive Catalogue</h2>
-        <div class="catalogue-container">
-            <div class="book">
-                <div class="page" style="z-index: 6;" onclick="this.classList.toggle('flipped')">
-                    <div class="page-inner">
-                        <h3 style="letter-spacing: 5px;">THE COLLECTION</h3>
-                        <p style="color:var(--gold); margin-top: 15px;">Tap to Open</p>
-                    </div>
-                </div>
-                <div class="page" style="z-index: 5;" onclick="this.classList.toggle('flipped')">
-                    <div class="page-inner">
-                        <img src="proposal_sample.jpg" class="page-img" alt="Proposal">
-                        <h3>Proposals</h3>
-                        <p>Ocean-side stories, forever framed. We manage the tides and the stealth filming.</p>
-                    </div>
-                </div>
-                <div class="page" style="z-index: 4;" onclick="this.classList.toggle('flipped')">
-                    <div class="page-inner">
-                        <img src="birthday_sample.jpg" class="page-img" alt="Birthday">
-                        <h3>Birthdays</h3>
-                        <p>Luxury setups and Midnight Gold themes that turn a year older into a masterpiece.</p>
-                    </div>
-                </div>
-                <div class="page" style="z-index: 3;" onclick="this.classList.toggle('flipped')">
-                    <div class="page-inner">
-                        <img src="anniversary_sample.jpg" class="page-img" alt="Anniversary">
-                        <h3>Anniversaries</h3>
-                        <p>Reliving your love story with cinematic atmosphere and unscripted joy.</p>
-                    </div>
-                </div>
-                <div class="page" style="z-index: 2;" onclick="this.classList.toggle('flipped')">
-                    <div class="page-inner">
-                        <img src="wedding_sample.jpg" class="page-img" alt="Wedding">
-                        <h3>Weddings</h3>
-                        <p>Boutique decor and grand reveals that stay in your heart forever.</p>
-                    </div>
-                </div>
+    <section id="events" class="carousel-window">
+        <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom: 50px; letter-spacing: 5px;">THE INFINITY COLLECTION</h2>
+        <div class="track" id="event-track">
             </div>
-        </div>
     </section>
 
-    <section id="doubts">
-        <h2 style="text-align:center; font-family:'Cinzel'; color:var(--gold); margin-bottom:40px;">Doubt Solver</h2>
-        <div style="max-width: 800px; margin: auto; width: 100%;">
-            <div class="faq-item" onclick="this.classList.toggle('active')">
-                <div class="faq-header">What is the "Memory Vault"? <span>+</span></div>
-                <div class="faq-body">A secure digital gallery where your celebration films are hosted in 4K resolution for a lifetime.</div>
+    <section id="contact" class="contact">
+        <img src="3.png" style="width: 180px; filter: drop-shadow(0 0 10px var(--gold)); margin-bottom: 50px;">
+        <div class="gold-icons">
+            <a href="https://instagram.com/celebratewithroses" class="icon-box" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/instagram-new.png">
+                <p>INSTAGRAM</p>
+            </a>
+            <a href="https://youtube.com/@celebratewithroses" class="icon-box" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/youtube-play.png">
+                <p>YOUTUBE</p>
+            </a>
+            <div class="icon-box">
+                <img src="https://img.icons8.com/ios-filled/100/D4AF37/marker.png">
+                <p>GPT COLONY, KAKINADA</p>
             </div>
-            <div class="faq-item" onclick="this.classList.toggle('active')">
-                <div class="faq-header">How do I secure a date? <span>+</span></div>
-                <div class="faq-body">Fill our pre-booking form. We only accept 4 premium events per month to maintain our cinematic standard.</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="booking">
-        <div class="book-card">
-            <h2 style="font-family:'Cinzel'; color:var(--gold); font-size: 2rem;">Initiate Booking</h2>
-            <p style="margin-top: 15px; font-weight: 300;">Ready to plan something new? Our calendar fills up quickly.</p>
-            <a href="https://forms.gle/your-link" target="_blank" class="gold-btn">OPEN BOOKING FORM</a>
         </div>
     </section>
 
     <script>
-        // Preloader Logic
+        const events = [
+            { name: "BIRTHDAYS", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80" },
+            { name: "WEDDINGS", img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80" },
+            { name: "ANNIVERSARY", img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80" },
+            { name: "PROPOSALS", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80" },
+            { name: "SURPRISES", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80" },
+            { name: "CUSTOM", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80" },
+            { name: "DATE NIGHT", img: "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80" }
+        ];
+
+        const track = document.getElementById('event-track');
+        [...events, ...events].forEach(event => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<img src="${event.img}"><h3>${event.name}</h3>`;
+            track.appendChild(card);
+        });
+
         window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => document.getElementById('preloader').remove(), 1500);
-            }, 3000);
+            setTimeout(() => { document.getElementById('welcome-screen').style.opacity = '0'; 
+            setTimeout(() => document.getElementById('welcome-screen').remove(), 1500); }, 3000);
         };
-
-        // Scroll Reveal Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section').forEach(section => observer.observe(section));
     </script>
 </body>
-
 </html>
-
