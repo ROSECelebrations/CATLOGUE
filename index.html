@@ -11,72 +11,70 @@
         body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; width: 100%; }
 
         /* --- 1. CINEMATIC BACKGROUND --- */
-        .bg-grid { position: fixed; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); z-index: -1; opacity: 0.25; pointer-events: none; }
+        .bg-grid { position: fixed; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); z-index: -1; opacity: 0.2; pointer-events: none; }
         .bg-column { border-right: 1px solid rgba(212, 175, 55, 0.08); background-size: cover; background-position: center; filter: grayscale(100%) brightness(0.15); }
 
         /* --- 2. ENTRANCE --- */
         #welcome { position: fixed; inset: 0; background: var(--black); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s ease; pointer-events: none; }
-        .welcome-logo { width: 180px; object-fit: contain; filter: drop-shadow(0 0 30px var(--gold)); animation: bloom 3s ease forwards; }
+        .welcome-logo { width: 180px; filter: drop-shadow(0 0 30px var(--gold)); animation: bloom 3s ease forwards; }
         @keyframes bloom { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
         /* --- 3. NAVIGATION --- */
         nav { position: fixed; top: 0; width: 100%; z-index: 9000; background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent); display: flex; flex-direction: column; align-items: center; }
-        .nav-links { display: flex; gap: clamp(20px, 8vw, 80px); padding: clamp(15px, 4vh, 30px) 0 10px; }
-        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 4px; cursor: pointer; opacity: 0.8; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; text-shadow: 0 0 10px var(--gold); }
-        
+        .nav-links { display: flex; gap: clamp(20px, 8vw, 80px); padding: 25px 0 10px; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 4px; cursor: pointer; transition: 0.3s; }
         #tagline-bar { width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--glass); border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
         .tagline { font-family: 'Montserrat'; font-weight: 200; font-size: clamp(0.45rem, 1vw, 0.6rem); color: var(--gold); letter-spacing: clamp(3px, 1.5vw, 6px); text-transform: uppercase; white-space: nowrap; }
 
         /* --- 4. HERO --- */
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; position: relative; }
-        .hero h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 13rem); color: var(--white); letter-spacing: clamp(12px, 4vw, 35px); text-shadow: 0 0 60px rgba(255,255,255,0.1); line-height: 1; }
-        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: clamp(0.7rem, 2vw, 1rem); color: #888; transition: opacity 1.5s ease; opacity: 0; max-width: 800px; min-height: 4em; margin-top: -10px; display: flex; align-items: center; justify-content: center; }
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; position: relative; }
+        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 13rem); color: var(--white); letter-spacing: clamp(12px, 4vw, 35px); text-shadow: 0 0 60px rgba(255,255,255,0.1); line-height: 1; }
+        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: clamp(0.7rem, 2vw, 1rem); color: #888; transition: opacity 1.5s ease; opacity: 0; max-width: 800px; min-height: 3em; margin-top: -10px; }
 
-        /* --- 5. THE ORIGIN --- */
-        .origin-section { padding: 100px 0; max-width: 800px; margin: 0 auto; text-align: center; }
-        .origin-section h2 { font-family: 'Cinzel'; color: var(--gold); font-size: clamp(1.2rem, 4vw, 1.6rem); letter-spacing: 10px; margin-bottom: 30px; }
-        .origin-section p { font-weight: 200; font-size: clamp(0.9rem, 2vw, 1.05rem); color: #aaa; line-height: 2.2; letter-spacing: 0.5px; }
+        /* --- 5. SPACING & SECTIONS --- */
+        .section-gap { padding: 120px 0; display: flex; flex-direction: column; align-items: center; }
+        .section-title { font-family: 'Cinzel'; color: var(--gold); font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 50px; text-align: center; }
+        .origin-content { max-width: 650px; text-align: center; padding: 0 20px; }
+        .origin-content p { font-weight: 200; font-size: 1.05rem; color: #aaa; line-height: 2.2; letter-spacing: 0.5px; }
 
-        /* --- 6. NUCLEUS HUB (MIND-MAP) --- */
-        .mindmap-section { padding: 80px 0; position: relative; width: 100%; }
-        .mindmap-container { position: relative; width: 100%; max-width: 1000px; height: 500px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
-        .central-nucleus { width: clamp(140px, 25vw, 200px); object-fit: contain; z-index: 10; filter: drop-shadow(0 0 25px var(--gold)); }
-        
-        .arm { position: absolute; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); width: 25%; top: 50%; opacity: 0.2; }
-        .arm-left { left: 10%; transform: rotate(-10deg); }
-        .arm-right { right: 10%; transform: rotate(10deg); }
-
-        .map-node { position: absolute; text-decoration: none; color: var(--gold); font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 3px; text-align: center; transition: 0.4s ease; z-index: 11; }
-        .map-node img { width: 30px; height: 30px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; filter: brightness(0) saturate(100%) invert(84%) sepia(26%) saturate(600%) hue-rotate(1deg) brightness(92%) contrast(89%); }
-        .map-node:hover { transform: scale(1.1); text-shadow: 0 0 10px var(--gold); }
-        
-        .node-ig { left: 5%; top: 35%; }
-        .node-yt { right: 5%; top: 35%; }
+        /* --- 6. NUCLEUS HUB --- */
+        .mindmap-container { position: relative; width: 100%; max-width: 900px; height: 450px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+        .central-nucleus { width: clamp(140px, 20vw, 190px); z-index: 10; filter: drop-shadow(0 0 25px var(--gold)); }
+        .map-node { position: absolute; text-decoration: none; color: var(--gold); font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 3px; text-align: center; z-index: 11; transition: 0.4s; }
+        .map-node img { width: 30px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; filter: brightness(0) saturate(100%) invert(84%) sepia(26%) saturate(600%) hue-rotate(1deg) brightness(92%) contrast(89%); }
+        .node-ig { left: 8%; top: 35%; }
+        .node-yt { right: 8%; top: 35%; }
         .node-loc { bottom: 5%; left: 50%; transform: translateX(-50%); }
 
-        /* --- 7. INFINITY COLLECTION --- */
-        .carousel-outer { width: 100vw; padding: 60px 0; overflow: hidden; }
-        .carousel-window { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 15%; }
+        /* --- 7. CAROUSEL --- */
+        .carousel-window { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 10%; width: 100%; }
         .carousel-window::-webkit-scrollbar { display: none; }
-        .track { display: flex; gap: 20px; }
-        .card { min-width: clamp(260px, 60vw, 350px); height: clamp(300px, 35vh, 450px); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 10px; position: relative; overflow: hidden; scroll-snap-align: center; }
-        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
-        .card h3 { position: absolute; bottom: 20px; left: 20px; font-family: 'Cinzel'; color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; }
+        .track { display: flex; gap: 30px; }
+        .card { min-width: 320px; height: 400px; border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px; position: relative; overflow: hidden; scroll-snap-align: center; cursor: pointer; transition: 0.5s; }
+        .card:hover { border-color: var(--gold); transform: scale(1.02); }
+        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.8s; }
+        .card:hover img { opacity: 0.6; }
+        .card h3 { position: absolute; bottom: 25px; left: 25px; font-family: 'Cinzel'; color: var(--gold); font-size: 0.9rem; letter-spacing: 3px; }
 
-        /* --- 8. CREATOR VAULT --- */
+        /* --- 8. POPUP MODAL --- */
+        #modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; justify-content: center; align-items: center; z-index: 10010; padding: 30px; }
+        .modal-content { background: #0a0a0a; border: 1px solid var(--gold); padding: 50px 40px; border-radius: 20px; max-width: 500px; text-align: center; position: relative; }
+        .modal-content h2 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 20px; letter-spacing: 5px; }
+        .modal-content p { font-weight: 200; line-height: 2; color: #ccc; font-size: 0.95rem; }
+        .close-btn { margin-top: 30px; border: 1px solid var(--gold); padding: 10px 35px; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 50px; font-size: 0.7rem; }
+
+        /* --- 9. CREATOR OVERLAY --- */
         #about-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.99); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10005; padding: 30px; }
         .creator-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; max-width: 900px; }
         .creator-card { text-align: center; }
-        .creator-img { width: clamp(80px, 15vw, 130px); aspect-ratio: 1/1; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto 10px; background: #0a0a0a; overflow: hidden; }
+        .creator-img { width: clamp(80px, 12vw, 130px); aspect-ratio: 1/1; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto 10px; background: #111; }
         .creator-card h4 { font-family: 'Cinzel'; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; }
 
         @media (max-width: 768px) {
-            .arm { display: none; }
-            .mindmap-container { height: 500px; flex-direction: column; justify-content: space-evenly; }
+            .mindmap-container { height: 450px; flex-direction: column; justify-content: space-evenly; }
             .map-node { position: relative; margin: 0; inset: auto; transform: none; }
             .creator-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-            .hero h1 { margin-top: 40px; }
+            .card { min-width: 80vw; }
         }
     </style>
 </head>
@@ -103,40 +101,42 @@
         </div>
     </nav>
 
-    <section id="hero">
+    <header>
         <h1>ROSE</h1>
         <p id="brand-quote">ARCHITECTING LEGACY...</p>
+    </header>
+
+    <section class="section-gap">
+        <h2 class="section-title">THE ORIGIN</h2>
+        <div class="origin-content">
+            <p>Born from a silent golden hour on the <span style="color:var(--gold);">Kakinada shore</span>, ROSE transforms personal ideology into a cinematic masterpiece. We believe your story is the ultimate luxury.</p>
+        </div>
     </section>
 
-    <section class="origin-section">
-        <h2>THE ORIGIN</h2>
-        <p>Born from a silent golden hour on the <span style="color:var(--gold);">Kakinada shore</span>, ROSE transforms personal ideology into a cinematic masterpiece. Your story is the ultimate luxury.</p>
-    </section>
-
-    <section id="contact" class="mindmap-section">
+    <section id="contact" class="section-gap">
+        <h2 class="section-title">CONTACT THE LEGACY</h2>
         <div class="mindmap-container">
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
-            <img src="3.png" class="central-nucleus" alt="ROSE Nucleus">
-            <a href="https://instagram.com/celebratewithroses" class="map-node node-ig" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">INSTAGRAM
-            </a>
-            <a href="https://youtube.com/@celebratewithroses" class="map-node node-yt" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/youtube-play.png">YOUTUBE
-            </a>
-            <div class="map-node node-loc">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/marker.png">KAKINADA
-            </div>
+            <img src="3.png" class="central-nucleus" alt="ROSE">
+            <a href="https://instagram.com/celebratewithroses" class="map-node node-ig" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">INSTAGRAM</a>
+            <a href="https://youtube.com/@celebratewithroses" class="map-node node-yt" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/youtube-play.png">YOUTUBE</a>
+            <div class="map-node node-loc"><img src="https://img.icons8.com/ios-filled/100/ffffff/marker.png">KAKINADA</div>
         </div>
     </section>
 
-    <section id="events">
-        <div class="carousel-outer">
-            <div class="carousel-window">
-                <div class="track" id="track"></div>
-            </div>
+    <section id="events" class="section-gap">
+        <h2 class="section-title">INFINITY COLLECTION</h2>
+        <div class="carousel-window">
+            <div class="track" id="track"></div>
         </div>
     </section>
+
+    <div id="modal">
+        <div class="modal-content">
+            <h2 id="m-title"></h2>
+            <p id="m-desc"></p>
+            <div class="close-btn" onclick="document.getElementById('modal').style.display='none'">CLOSE</div>
+        </div>
+    </div>
 
     <div id="about-overlay">
         <h2 style="font-family:'Cinzel'; color:var(--gold); letter-spacing: 12px; margin-bottom: 30px;">THE ARCHITECTS</h2>
@@ -146,60 +146,51 @@
             <div class="creator-card"><div class="creator-img"></div><h4>NAGASAI</h4></div>
             <div class="creator-card"><div class="creator-img"></div><h4>AZAD</h4></div>
         </div>
-        <a onclick="closeAbout()" style="margin-top:60px; color:var(--gold); font-family:'Cinzel'; cursor:pointer; font-size: 0.75rem; border: 1px solid var(--gold); padding: 12px 45px; border-radius: 50px;">CLOSE</a>
+        <a onclick="closeAbout()" style="margin-top:60px; color:var(--gold); font-family:'Cinzel'; cursor:pointer; font-size: 0.7rem; border: 1px solid var(--gold); padding: 10px 40px; border-radius: 50px;">CLOSE</a>
     </div>
 
     <script>
         function openAbout() { document.getElementById('about-overlay').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeAbout() { document.getElementById('about-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-        // ROBUST QUOTE ENGINE
+        // LIVE QUOTE ENGINE
         let quotes = [];
         let qIdx = 0;
-        const brandPillars = [
-            {text: "YOUR LEGACY, OUR CINEMATIC MASTERPIECE"},
-            {text: "WHERE EVERY SECOND IS A SYMPHONY OF SOUL"},
-            {text: "PRATHI KSHANAM OKA CELEBRATION"},
-            {text: "TRANSFORMING IDEOLOGY INTO ART"}
-        ];
-
         async function initQuotes() {
             try {
                 const res = await fetch("https://type.fit/api/quotes");
                 const data = await res.json();
-                quotes = data.filter(q => q.text.length < 60);
-                if (quotes.length === 0) throw new Error();
-                quotes.sort(() => Math.random() - 0.5);
+                quotes = data.filter(q => q.text.length < 55).sort(() => Math.random() - 0.5);
                 rotate();
-            } catch (e) {
-                quotes = brandPillars;
-                rotate();
-            }
+            } catch (e) { rotate(); }
         }
-
         function rotate() {
             const el = document.getElementById('brand-quote');
             el.style.opacity = 0;
             setTimeout(() => {
-                el.innerText = `"${quotes[qIdx].text}"`.toUpperCase();
-                qIdx = (qIdx + 1) % quotes.length;
-                el.style.opacity = 1;
+                if (quotes.length > 0) { el.innerText = `"${quotes[qIdx].text}"`.toUpperCase(); qIdx = (qIdx + 1) % quotes.length; el.style.opacity = 1; }
             }, 1500);
         }
 
-        // CAROUSEL
         const events = [
-            { name: "BIRTHDAYS", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80" },
-            { name: "WEDDINGS", img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80" },
-            { name: "ANNIVERSARY", img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80" },
-            { name: "PROPOSALS", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80" },
-            { name: "SURPRISES", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80" }
+            { name: "BIRTHDAYS", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80", desc: "We plan, create, and bring your unique birthday visions to life with our creative ideas." },
+            { name: "WEDDINGS", img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80", desc: "Recreating the magic of your special day with cinematic detail and elegance." },
+            { name: "ANNIVERSARIES", img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80", desc: "Celebrating your journey of love with curated details that honor your specific story." },
+            { name: "CUSTOM CELEBRATIONS", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80", desc: "We design and engage directly with you to ensure your unique satisfaction is achieved." },
+            { name: "SURPRISE CELEBRATIONS", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80", desc: "Our specialty. We meticulously plan surprises that transform moments into lifelong memories." },
+            { name: "PROPOSALS", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80", desc: "Bespoke proposal setups designed specifically around individual customer requirements." }
         ];
+
         const track = document.getElementById('track');
-        [...events, ...events].forEach(ev => {
+        events.forEach(ev => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `<img src="${ev.img}"><h3>${ev.name}</h3>`;
+            card.onclick = () => {
+                document.getElementById('m-title').innerText = ev.name;
+                document.getElementById('m-desc').innerText = ev.desc;
+                document.getElementById('modal').style.display = 'flex';
+            };
             track.appendChild(card);
         });
 
