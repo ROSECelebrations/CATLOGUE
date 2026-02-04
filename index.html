@@ -34,12 +34,12 @@
         #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: clamp(0.7rem, 2vw, 1.1rem); color: #888; transition: opacity 1.5s ease; opacity: 0; max-width: 800px; min-height: 3em; margin-top: -10px; display: flex; align-items: center; justify-content: center; text-align: center; }
 
         /* SCROLL INDICATOR */
-        .scroll-down { position: absolute; bottom: 30px; font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 5px; color: var(--gold); animation: pulse 2s infinite; }
+        .scroll-down { position: absolute; bottom: 80px; font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 5px; color: var(--gold); animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(10px); } }
 
         /* --- 5. FLOATING RESERVE BUTTON --- */
         .reserve-btn { 
-            position: fixed; bottom: 30px; right: 30px; z-index: 9999; 
+            position: fixed; bottom: 20px; right: 20px; z-index: 9999; 
             background: var(--gold); color: #000; font-family: 'Cinzel'; 
             padding: 15px 30px; border-radius: 50px; text-decoration: none; 
             font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;
@@ -87,9 +87,11 @@
         .creator-card h4 { font-family: 'Cinzel'; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 768px) {
+            .scroll-down { bottom: 120px; font-size: 0.5rem; }
+            .reserve-btn { width: auto; right: 20px; left: auto; padding: 10px 20px; font-size: 0.7rem; }
             .mindmap-container { height: 600px; flex-direction: column; justify-content: space-evenly; }
             .map-node { position: relative; margin: 0; inset: auto; transform: none; }
-            .reserve-btn { width: calc(100% - 40px); left: 20px; text-align: center; bottom: 20px; }
+            .creator-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .card { min-width: 80vw; }
         }
     </style>
@@ -98,7 +100,7 @@
 
     <div id="welcome"><img src="3.png" alt="ROSE" class="welcome-logo"></div>
 
-    <a href="YOUR_GOOGLE_FORM_URL" class="reserve-btn" target="_blank">RESERVE NOW</a>
+    <a href="https://forms.gle/Nszf5mUb15LAwMqw7" class="reserve-btn" target="_blank">RESERVE NOW</a>
 
     <nav>
         <div class="nav-links">
@@ -125,23 +127,11 @@
     <section id="contact" class="section-gap">
         <h2 class="section-title">CONTACT THE LEGACY</h2>
         <div class="mindmap-container">
-            <img src="3.png" class="central-nucleus" alt="ROSE">
-            
-            <a href="https://instagram.com/celebratewithroses" class="map-node node-ig" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">INSTAGRAM
-            </a>
-            
-            <a href="https://youtube.com/@RoseGnapakaalu" class="map-node node-yt" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/youtube-play.png">YOUTUBE
-            </a>
-            
-            <a href="mailto:celebratewithroses@gmail.com" class="map-node node-mail">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/new-post.png">EMAIL
-            </a>
-            
-            <div class="map-node node-loc">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/marker.png">GPT COLONY, KAKINADA
-            </div>
+            <img src="rose_logo.png" class="central-nucleus" alt="ROSE">
+            <a href="https://instagram.com/celebratewithroses" class="map-node node-ig" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">INSTAGRAM</a>
+            <a href="https://youtube.com/@RoseGnapakaalu" class="map-node node-yt" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/youtube-play.png">YOUTUBE</a>
+            <a href="mailto:celebratewithroses@gmail.com" class="map-node node-mail"><img src="https://img.icons8.com/ios-filled/100/ffffff/new-post.png">EMAIL</a>
+            <div class="map-node node-loc"><img src="https://img.icons8.com/ios-filled/100/ffffff/marker.png">GPT COLONY, KAKINADA</div>
         </div>
     </section>
 
@@ -170,11 +160,7 @@
 
         let quotes = [];
         let qIdx = 0;
-        const brandPillars = [
-            {text: "YOUR LEGACY, OUR CINEMATIC MASTERPIECE"},
-            {text: "WHERE EVERY SECOND IS A SYMPHONY"},
-            {text: "PRATHIKSHANAM OKA CELEBRATION"}
-        ];
+        const brandPillars = [{text: "YOUR LEGACY, OUR CINEMATIC MASTERPIECE"}, {text: "WHERE EVERY SECOND IS A SYMPHONY"}, {text: "PRATHIKSHANAM OKA CELEBRATION"}];
 
         async function initQuotes() {
             try {
@@ -189,11 +175,7 @@
             const el = document.getElementById('brand-quote');
             el.style.opacity = 0;
             setTimeout(() => {
-                if (quotes.length > 0) { 
-                    el.innerText = `"${quotes[qIdx].text}"`.toUpperCase(); 
-                    qIdx = (qIdx + 1) % quotes.length; 
-                    el.style.opacity = 1; 
-                }
+                if (quotes.length > 0) { el.innerText = `"${quotes[qIdx].text}"`.toUpperCase(); qIdx = (qIdx + 1) % quotes.length; el.style.opacity = 1; }
             }, 1500);
         }
 
@@ -208,9 +190,9 @@
             { name: "BIRTHDAYS", img: "birthday.jpeg", desc: "We plan, create, and bring your unique birthday visions to life with our creative ideas." },
             { name: "WEDDINGS", img: "wedding.jpeg", desc: "Recreating the magic of your special day with cinematic detail and elegance." },
             { name: "ANNIVERSARIES", img: "anniversary.jpeg", desc: "Celebrating your journey of love with curated details that honor your specific story." },
-            { name: "CUSTOM CELEBRATIONS", img: "custom.jpg", desc: "We design and engage directly with you to ensure your unique satisfaction is achieved." },
+            { name: "CUSTOM CELEBRATIONS", img: "download (1).jpeg", desc: "We design and engage directly with you to ensure your unique satisfaction is achieved." },
             { name: "SURPRISE CELEBRATIONS", img: "special.jpeg", desc: "Our specialty. We meticulously plan surprises that transform moments into lifelong memories." },
-            { name: "PROPOSALS", img: "proposals.jpeg", desc: "Bespoke proposal setups designed specifically around individual customer requirements." },
+            { name: "PROPOSALS", img: "special.jpeg", desc: "Bespoke proposal setups designed specifically around individual customer requirements." },
             { name: "DATE NIGHT", img: "date night.jpeg", desc: "A cinematic surprise planned exclusively for your special person to celebrate private milestones." }
         ];
 
