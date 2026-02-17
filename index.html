@@ -6,244 +6,188 @@
     <title>ROSE | Premium Luxury Celebrations</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,200;0,400;1,200&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #050505; --white: #FFFFFF; --glass: rgba(255, 255, 255, 0.03); --rose-glow: rgba(139, 0, 0, 0.4); }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; width: 100%; }
+        :root { 
+            --gold: #D4AF37; 
+            --black: #050505; 
+            --white: #FFFFFF; 
+            --rose-glow: rgba(139, 0, 0, 0.4);
+            --warm-burgundy: #1a0505;
+            --ease-lux: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* --- 1. CINEMATIC BACKGROUND --- */
-        .bg-grid { position: fixed; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); z-index: -1; opacity: 0.2; pointer-events: none; }
-        .bg-column { border-right: 1px solid rgba(212, 175, 55, 0.08); background-size: cover; background-position: center; filter: grayscale(100%) brightness(0.15); }
+        /* --- 1. REDEFINED LUXURY LOADING --- */
+        #welcome { 
+            position: fixed; inset: 0; background: var(--black); z-index: 10000; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 2.5s var(--ease-lux); pointer-events: none;
+        }
+        .logo-loader {
+            width: 180px; filter: drop-shadow(0 0 20px #ff4d4d);
+            animation: logoHeartbeat 1.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+            margin-bottom: 40px;
+        }
+        @keyframes logoHeartbeat {
+            0% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
+            15% { transform: scale(1.15); filter: drop-shadow(0 0 40px #ff4d4d); }
+            30% { transform: scale(1.05); filter: drop-shadow(0 0 25px #ff4d4d); }
+            45% { transform: scale(1.25); filter: drop-shadow(0 0 50px #ff4d4d); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
+        }
+        #loading-msg {
+            font-family: 'Cinzel'; color: var(--gold); font-size: 0.65rem; 
+            letter-spacing: 8px; text-transform: uppercase; opacity: 0;
+            animation: textReveal 3s forwards;
+        }
+        @keyframes textReveal { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* --- 2. ENTRANCE --- */
-        #welcome { position: fixed; inset: 0; background: var(--black); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s ease; pointer-events: none; }
-        .welcome-logo { width: 180px; object-fit: contain; filter: drop-shadow(0 0 30px var(--gold)); animation: bloom 3s ease forwards; }
-        @keyframes bloom { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        /* --- 2. LUXURY PETAL PARTICLES --- */
+        #petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.4; }
 
-        /* --- 3. NAVIGATION --- */
-        nav { position: fixed; top: 0; width: 100%; z-index: 9000; background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent); display: flex; flex-direction: column; align-items: center; }
-        .nav-links { display: flex; gap: clamp(20px, 8vw, 80px); padding: 25px 0 10px; }
-        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 4px; cursor: pointer; opacity: 0.8; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; text-shadow: 0 0 10px var(--gold); }
-        
-        #tagline-bar { width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--glass); border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
-        .tagline { font-family: 'Montserrat'; font-weight: 200; font-size: clamp(0.55rem, 1vw, 0.6rem); color: var(--gold); letter-spacing: clamp(3px, 1.5vw, 6px); text-transform: uppercase; white-space: nowrap; }
+        /* --- 3. CINEMATIC NAVIGATION --- */
+        nav { position: fixed; top: 0; width: 100%; z-index: 9000; background: linear-gradient(to bottom, rgba(26,5,5,0.9), transparent); display: flex; flex-direction: column; align-items: center; }
+        .nav-links { display: flex; gap: clamp(20px, 8vw, 60px); padding: 30px 0 15px; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 5px; opacity: 0.7; transition: 0.5s var(--ease-lux); }
+        .nav-links a:hover { opacity: 1; letter-spacing: 7px; text-shadow: 0 0 15px var(--gold); }
+        #tagline-bar { width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(139, 0, 0, 0.15); border-bottom: 1px solid rgba(212, 175, 55, 0.1); backdrop-filter: blur(8px); }
+        .tagline { font-family: 'Montserrat'; font-weight: 200; font-size: 0.6rem; color: #ffb3b3; letter-spacing: 4px; text-transform: uppercase; }
 
         /* --- 4. HERO SECTION --- */
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; position: relative; }
-        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 13rem); color: var(--white); letter-spacing: clamp(12px, 4vw, 35px); text-shadow: 0 0 60px rgba(255,255,255,0.1); line-height: 1; }
-        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: clamp(0.7rem, 2vw, 1.1rem); color: #888; transition: opacity 1.5s ease; opacity: 0; max-width: 800px; min-height: 3em; margin-top: -10px; display: flex; align-items: center; justify-content: center; text-align: center; }
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; background: radial-gradient(circle, #200505 0%, #050505 80%); }
+        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 12rem); color: var(--white); letter-spacing: clamp(10px, 4vw, 30px); text-shadow: 0 0 60px rgba(255,77,77,0.3); line-height: 1; animation: h1Fade 3s var(--ease-lux); }
+        @keyframes h1Fade { from { opacity: 0; transform: translateY(30px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: 1.1rem; color: #ffcccc; transition: opacity 2s ease; opacity: 0; margin-top: 20px; max-width: 700px; }
 
-        .scroll-down { position: absolute; bottom: 80px; font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 5px; color: var(--gold); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(10px); } }
-
-        /* --- 5. FLOATING RESERVE BUTTON --- */
-        .reserve-btn { 
-            position: fixed; bottom: 20px; right: 20px; z-index: 9999; 
-            background: var(--gold); color: #000; font-family: 'Cinzel'; 
-            padding: 15px 30px; border-radius: 50px; text-decoration: none; 
-            font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); transition: 0.4s;
-        }
-        .reserve-btn:hover { transform: scale(1.05) translateY(-5px); background: #fff; }
-
-        /* --- 6. SPACING & TITLES --- */
-        .section-gap { padding: 120px 0; display: flex; flex-direction: column; align-items: center; }
-        .section-title { font-family: 'Cinzel'; color: var(--gold); font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 50px; text-align: center; }
-        
-        /* --- 7. CAROUSELS & FEATURED --- */
-        .featured-video-container { width: 90%; max-width: 800px; margin: 0 auto; position: relative; }
+        /* --- 5. CAROUSEL & TILES --- */
+        .section-gap { padding: 120px 0; position: relative; z-index: 2; }
+        .section-title { font-family: 'Cinzel'; color: var(--gold); font-size: 1.1rem; letter-spacing: 12px; text-transform: uppercase; margin-bottom: 80px; text-align: center; }
         .carousel-window { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 10%; width: 100%; }
-        .carousel-window::-webkit-scrollbar { display: none; }
-        .track { display: flex; gap: 30px; }
-        
-        .card { min-width: 320px; height: 400px; border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px; position: relative; overflow: hidden; scroll-snap-align: center; cursor: pointer; transition: 0.5s; background: #000; }
-        .card:hover { border-color: var(--gold); transform: scale(1.02); }
-        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.8s; }
-        
-        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1; pointer-events: none; }
-        .play-overlay img { width: 60px; height: 60px; opacity: 0.8; }
+        .track { display: flex; gap: 40px; }
+        .card { min-width: 340px; height: 500px; border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; position: relative; overflow: hidden; scroll-snap-align: center; cursor: pointer; transition: 0.8s var(--ease-lux); background: #000; }
+        .card:hover { border-color: #ff4d4d; transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 1.5s var(--ease-lux); }
+        .card:hover img { opacity: 0.6; transform: scale(1.1); }
+        .card h3 { position: absolute; bottom: 0; width: 100%; padding: 40px; background: linear-gradient(transparent, rgba(26,5,5,0.95)); font-family: 'Cinzel'; color: var(--gold); font-size: 0.85rem; letter-spacing: 4px; }
 
-        .card h3 { position: absolute; bottom: 0; width: 100%; padding: 25px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); font-family: 'Cinzel'; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; z-index: 2; }
-        
-        .valentine-card { width: 100%; max-width: 800px; height: 450px; border: 1px solid var(--rose-glow); animation: valentinePulse 3s infinite; margin: 0 auto; }
-        @keyframes valentinePulse { 0%, 100% { box-shadow: 0 0 5px transparent; } 50% { box-shadow: 0 0 20px var(--rose-glow); } }
+        /* --- 6. MODAL --- */
+        #modal { position: fixed; inset: 0; background: rgba(5,0,0,0.98); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10010; padding: 30px; backdrop-filter: blur(15px); }
+        .modal-content { background: var(--warm-burgundy); border: 1px solid #ff4d4d; padding: 60px 40px; border-radius: 30px; max-width: 600px; width: 95%; text-align: center; box-shadow: 0 0 50px rgba(255,77,77,0.1); }
+        .modal-content h2 { font-family: 'Cinzel'; color: #ff4d4d; margin-bottom: 20px; letter-spacing: 6px; }
+        .modal-content p { color: #ffe6e6; font-size: 1.1rem; line-height: 1.8; font-weight: 200; margin-bottom: 40px; }
+        .close-btn { border: 1px solid #ff4d4d; padding: 12px 40px; color: #ff4d4d; font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 50px; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
+        .close-btn:hover { background: #ff4d4d; color: #fff; }
 
-        /* --- 8. NESTED GALLERY MODAL --- */
-        #modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10010; padding: 30px; }
-        .modal-content { background: #0a0a0a; border: 1px solid var(--gold); padding: 40px; border-radius: 20px; max-width: 900px; width: 95%; text-align: center; max-height: 90vh; overflow-y: auto; }
-        .modal-content h2 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 10px; letter-spacing: 5px; }
-        .modal-content p { font-weight: 200; color: #ccc; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px; }
-        
-        .nested-gallery { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
-        .nested-gallery::-webkit-scrollbar { height: 4px; }
-        .nested-gallery::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .nested-gallery img { height: 300px; width: auto; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); flex-shrink: 0; transition: 0.3s; }
+        .reserve-btn { position: fixed; bottom: 40px; right: 40px; z-index: 9999; background: #ff4d4d; color: #fff; font-family: 'Cinzel'; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; box-shadow: 0 10px 40px rgba(255,77,77,0.4); transition: 0.4s var(--ease-lux); }
+        .reserve-btn:hover { transform: scale(1.05); background: #fff; color: #ff4d4d; }
 
-        .close-btn { margin-top: 30px; border: 1px solid var(--gold); padding: 10px 35px; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 50px; font-size: 0.7rem; letter-spacing: 2px; transition: 0.3s; }
-        .close-btn:hover { background: var(--gold); color: #000; }
-
-        /* --- 9. CREATOR VAULT & MINDMAP --- */
-        .mindmap-container { position: relative; width: 100%; max-width: 900px; height: 500px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
-        .central-nucleus { width: clamp(140px, 20vw, 190px); z-index: 10; filter: drop-shadow(0 0 25px var(--gold)); object-fit: contain; }
-        .map-node { position: absolute; text-decoration: none; color: var(--gold); font-family: 'Cinzel'; font-size: 0.6rem; letter-spacing: 3px; text-align: center; z-index: 11; transition: 0.4s; }
-        .map-node img { width: 30px; margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto; filter: brightness(0) saturate(100%) invert(84%) sepia(26%) saturate(600%) hue-rotate(1deg) brightness(92%) contrast(89%); }
-        .node-ig { left: 8%; top: 20%; } .node-yt { right: 8%; top: 20%; } .node-mail { left: 8%; bottom: 20%; } .node-loc { right: 8%; bottom: 20%; }
-
-        #about-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.99); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10005; padding: 30px; }
-        .creator-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; max-width: 900px; }
-        .creator-card { text-align: center; }
-        .creator-img { width: clamp(80px, 15vw, 150px); aspect-ratio: 1/1; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto 10px; background: #111; background-size: cover; background-position: center; }
-        .creator-card h4 { font-family: 'Cinzel'; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; }
-
-        @media (max-width: 768px) {
-            .creator-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-            .valentine-card { height: 300px; width: 95%; }
-            .card { min-width: 80vw; }
-        }
+        @media (max-width: 768px) { .card { min-width: 85vw; height: 420px; } header h1 { font-size: 4rem; } }
     </style>
 </head>
 <body>
 
-    <div id="welcome"><img src="3.png" alt="ROSE" class="welcome-logo"></div>
-    <a href="https://forms.gle/Nszf5mUb15LAwMqw7" class="reserve-btn" target="_blank">RESERVE NOW</a>
+    <canvas id="petal-canvas"></canvas>
+    
+    <div id="welcome">
+        <img src="3.png" class="logo-loader" alt="ROSE">
+        <div id="loading-msg">Architecting your hope...</div>
+    </div>
+
+    <a href="https://forms.gle/Nszf5mUb15LAwMqw7" class="reserve-btn" target="_blank">RESERVE HOPE</a>
 
     <nav>
         <div class="nav-links">
-            <a onclick="openAbout()">OUR STORY</a>
-            <a href="#events">COLLECTION</a>
-            <a href="#contact">RESERVE</a>
+            <a href="#events">THE COLLECTION</a>
+            <a href="https://instagram.com/celebratewithroses" target="_blank">EXPERIENCE</a>
+            <a href="https://youtube.com/@RoseGnapakaalu" target="_blank">CINEMATICS</a>
         </div>
-        <div id="tagline-bar"><p class="tagline">ప్రతిక్షణం ఒక వేడుక</p></div>
+        <div id="tagline-bar"><p class="tagline">ప్రతిక్షణం ఒక వేడుక • REDEFINING THE ART OF SURPRISE</p></div>
     </nav>
 
     <header>
         <h1>ROSE</h1>
-        <p id="brand-quote">AWAITING WISDOM...</p>
-        <div class="scroll-down">SCROLL TO DISCOVER</div>
+        <p id="brand-quote">Where your love story becomes a cinematic masterpiece.</p>
     </header>
 
-    <section class="section-gap" style="background: linear-gradient(to bottom, transparent, #100000);">
-        <h2 class="section-title" style="color:#ff4d4d; text-shadow: 0 0 10px rgba(255,0,0,0.3);">VALENTINE'S FEATURE</h2>
-        <div class="featured-video-container" id="featured-valentine"></div>
-    </section>
-
     <section id="events" class="section-gap">
-        <h2 class="section-title">OUR CELEBRATIONS ARCHIVE</h2>
+        <h2 class="section-title">THE ART OF SURPRISE</h2>
         <div class="carousel-window"><div class="track" id="track-events"></div></div>
-    </section>
-
-    <section id="contact" class="section-gap">
-        <h2 class="section-title">CONTACT THE LEGACY</h2>
-        <div class="mindmap-container">
-            <img src="3.png" class="central-nucleus" alt="ROSE">
-            <a href="https://instagram.com/celebratewithroses" class="map-node node-ig" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">INSTAGRAM</a>
-            <a href="https://youtube.com/@RoseGnapakaalu" class="map-node node-yt" target="_blank"><img src="https://img.icons8.com/ios-filled/100/ffffff/youtube-play.png">YOUTUBE</a>
-            <a href="mailto:celebratewithroses@gmail.com" class="map-node node-mail"><img src="https://img.icons8.com/ios-filled/100/ffffff/new-post.png">EMAIL</a>
-            <div class="map-node node-loc"><img src="https://img.icons8.com/ios-filled/100/ffffff/marker.png">GPT COLONY, KAKINADA</div>
-        </div>
     </section>
 
     <div id="modal">
         <div class="modal-content">
             <h2 id="m-title"></h2>
             <p id="m-desc"></p>
-            <div class="nested-gallery" id="modal-gallery"></div>
-            <div class="close-btn" onclick="document.getElementById('modal').style.display='none'">CLOSE COLLECTION</div>
+            <div class="close-btn" onclick="document.getElementById('modal').style.display='none'">BACK TO DISCOVERY</div>
         </div>
     </div>
 
-    <div id="about-overlay">
-        <h2 style="font-family:'Cinzel'; color:var(--gold); letter-spacing: 12px; margin-bottom: 50px;">THE ARCHITECTS</h2>
-        <div class="creator-grid" id="track-creators"></div>
-        <div class="close-btn" onclick="closeAbout()">CLOSE</div>
-    </div>
-
     <script>
-        function openAbout() { document.getElementById('about-overlay').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeAbout() { document.getElementById('about-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+        // --- LUXURY PETAL PARTICLES ---
+        const canvas = document.getElementById('petal-canvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
 
-        let quotes = []; let qIdx = 0;
-        const brandPillars = [{text: "YOUR LEGACY, OUR CINEMATIC MASTERPIECE"}, {text: "WHERE EVERY SECOND IS A SYMPHONY"}, {text: "ప్రతిక్షణం ఒక వేడుక"}];
-        async function initQuotes() {
-            try {
-                const res = await fetch("https://type.fit/api/quotes");
-                const data = await res.json();
-                quotes = data.filter(q => q.text.length < 55).sort(() => Math.random() - 0.5);
-                rotate();
-            } catch (e) { quotes = brandPillars; rotate(); }
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.w = Math.random() * 10 + 5;
+                this.h = this.w * 1.2;
+                this.opacity = Math.random() * 0.4;
+                this.speed = Math.random() * 0.5 + 0.2;
+                this.rot = Math.random() * Math.PI;
+            }
+            draw() {
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rot);
+                ctx.globalAlpha = this.opacity; ctx.fillStyle = '#8b0000';
+                ctx.beginPath(); ctx.ellipse(0, 0, this.w, this.h, 0, 0, Math.PI * 2);
+                ctx.fill(); ctx.restore();
+            }
+            update() { this.y += this.speed; this.rot += 0.01; if (this.y > canvas.height) this.y = -20; }
         }
-        function rotate() {
-            const el = document.getElementById('brand-quote');
-            el.style.opacity = 0;
-            setTimeout(() => { if (quotes.length > 0) { el.innerText = `"${quotes[qIdx].text}"`.toUpperCase(); qIdx = (qIdx + 1) % quotes.length; el.style.opacity = 1; } }, 1500);
+        for(let i=0; i<35; i++) petals.push(new Petal());
+        function animate() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
         }
+        animate();
 
-        const featuredValentine = { 
-            name: "STRANGER PHOTOGRAPHY: FOUR ANGELS", 
-            videoId: "SyCGLu_ZXiE", 
-            desc: "A tired day ended by a beautiful memory with four angels in Kakinada." 
-        };
-
-        const archiveCollection = [
-            { name: "WEDDING RECREATIONS", img: "WEDDING RECREATION.jpg", desc: "Cinematic beach-side weddings at Kakinada shore.", album: ["w1.jpg", "w2.jpg", "w3.jpg", "w4.jpg", "w5.jpg", "w6.jpg"] },
-            { name: "BIRTHDAY CELEBRATIONS", img: "BIRTHDAY.jpg", desc: "Creative birthday visions brought to life with gold and light.", album: ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"] },
-            { name: "ANNIVERSARY GALA", img: "anniversary.jpeg", desc: "Celebrating love stories with curated high-end details.", album: ["a1.jpg", "a2.jpg", "a3.jpg", "a4.jpg", "a5.jpg"] }
+        // --- CORE DATA & LOGIC ---
+        const hopeMessages = ["Architecting your hope...", "Crafting luxury surprises...", "Where love finds its rhythm...", "Your cinematic moment awaits..."];
+        const collectionData = [
+            { name: "DATE NIGHT", img: "anniversary.jpeg", desc: "An intimate evening designed for connection. Luxury dining and curated ambiance where time stands still." },
+            { name: "PROPOSAL PLANS", img: "v1.jpg", desc: "The ultimate 'Yes' experience. We design the cinematic stage for your life's most significant question." },
+            { name: "SPECIAL SURPRISE", img: "BIRTHDAY.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
+            { name: "CUSTOM CELEBRATIONS", img: "WEDDING RECREATION.jpg", desc: "Your unique vision, executed with luxury. We are the architects of your imagination." },
+            { name: "WEDDING RECREATIONS", img: "w1.jpg", desc: "Relive the heartbeat of your wedding day with high-end recreations at Kakinada's finest shores." }
         ];
 
-        const creators = [ {name:"ZAY", img:"zay.jpg"}, {name:"AKSHITH", img:"akshith.jpg"}, {name:"NAGASAI", img:"nagasai.jpg"}, {name:"AZAD", img:"azad.jpg"} ];
-
-        function buildFeatured() {
-            const container = document.getElementById('featured-valentine');
-            const thumbUrl = `https://img.youtube.com/vi/${featuredValentine.videoId}/maxresdefault.jpg`;
-            container.innerHTML = `
-                <div class="card valentine-card" onclick="window.open('https://youtu.be/${featuredValentine.videoId}', '_blank')">
-                    <img src="${thumbUrl}" alt="${featuredValentine.name}">
-                    <div class="play-overlay">
-                        <img src="https://img.icons8.com/ios-filled/100/ffffff/play--v1.png" alt="Play">
-                    </div>
-                    <h3>${featuredValentine.name}</h3>
-                </div>`;
-        }
-
-        function buildArchive() {
+        function init() {
+            document.getElementById('loading-msg').innerText = hopeMessages[Math.floor(Math.random()*hopeMessages.length)];
+            
             const track = document.getElementById('track-events');
-            archiveCollection.forEach(ev => {
+            collectionData.forEach(ev => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `<img src="${ev.img}"><h3>${ev.name}</h3>`;
                 card.onclick = () => {
                     document.getElementById('m-title').innerText = ev.name;
                     document.getElementById('m-desc').innerText = ev.desc;
-                    const gallery = document.getElementById('modal-gallery');
-                    gallery.innerHTML = '';
-                    ev.album.forEach(src => {
-                        const img = document.createElement('img');
-                        img.src = src;
-                        gallery.appendChild(img);
-                    });
                     document.getElementById('modal').style.display = 'flex';
                 };
                 track.appendChild(card);
             });
+
+            setTimeout(() => document.getElementById('brand-quote').style.opacity = 1, 1500);
+            setTimeout(() => document.getElementById('welcome').style.opacity = '0', 4500);
+            setTimeout(() => document.getElementById('welcome').remove(), 6500);
         }
-
-        window.onload = () => {
-            initQuotes();
-            setInterval(rotate, 8000);
-            buildFeatured();
-            buildArchive();
-            
-            const creatorTrack = document.getElementById('track-creators');
-            creators.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'creator-card';
-                div.innerHTML = `<div class="creator-img" style="background-image: url('${p.img}')"></div><h4>${p.name}</h4>`;
-                creatorTrack.appendChild(div);
-            });
-
-            setTimeout(() => { document.getElementById('welcome').style.opacity = '0'; }, 3000);
-            setTimeout(() => { document.getElementById('welcome').remove(); }, 5000);
-        };
+        window.onload = init;
     </script>
 </body>
 </html>
