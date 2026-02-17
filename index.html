@@ -17,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* --- 1. REDEFINED LUXURY LOADING --- */
+        /* --- 1. LUXURY LOADING --- */
         #welcome { 
             position: fixed; inset: 0; background: var(--black); z-index: 10000; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
@@ -29,40 +29,32 @@
             margin-bottom: 40px;
         }
         @keyframes logoHeartbeat {
-            0% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
             15% { transform: scale(1.15); filter: drop-shadow(0 0 40px #ff4d4d); }
-            30% { transform: scale(1.05); filter: drop-shadow(0 0 25px #ff4d4d); }
             45% { transform: scale(1.25); filter: drop-shadow(0 0 50px #ff4d4d); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
         }
-        #loading-msg {
-            font-family: 'Cinzel'; color: var(--gold); font-size: 0.65rem; 
-            letter-spacing: 8px; text-transform: uppercase; opacity: 0;
-            animation: textReveal 3s forwards;
-        }
-        @keyframes textReveal { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* --- 2. LUXURY PETAL PARTICLES --- */
+        /* --- 2. LUXURY PETALS --- */
         #petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.4; }
 
-        /* --- 3. CINEMATIC NAVIGATION --- */
+        /* --- 3. NAVIGATION --- */
         nav { position: fixed; top: 0; width: 100%; z-index: 9000; background: linear-gradient(to bottom, rgba(26,5,5,0.9), transparent); display: flex; flex-direction: column; align-items: center; }
         .nav-links { display: flex; gap: clamp(20px, 8vw, 60px); padding: 30px 0 15px; }
-        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 5px; opacity: 0.7; transition: 0.5s var(--ease-lux); }
+        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 5px; opacity: 0.7; transition: 0.5s var(--ease-lux); cursor: pointer; }
         .nav-links a:hover { opacity: 1; letter-spacing: 7px; text-shadow: 0 0 15px var(--gold); }
         #tagline-bar { width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(139, 0, 0, 0.15); border-bottom: 1px solid rgba(212, 175, 55, 0.1); backdrop-filter: blur(8px); }
         .tagline { font-family: 'Montserrat'; font-weight: 200; font-size: 0.6rem; color: #ffb3b3; letter-spacing: 4px; text-transform: uppercase; }
 
-        /* --- 4. HERO SECTION --- */
+        /* --- 4. HERO --- */
         header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; background: radial-gradient(circle, #200505 0%, #050505 80%); }
-        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 12rem); color: var(--white); letter-spacing: clamp(10px, 4vw, 30px); text-shadow: 0 0 60px rgba(255,77,77,0.3); line-height: 1; animation: h1Fade 3s var(--ease-lux); }
-        @keyframes h1Fade { from { opacity: 0; transform: translateY(30px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: 1.1rem; color: #ffcccc; transition: opacity 2s ease; opacity: 0; margin-top: 20px; max-width: 700px; }
+        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 12rem); color: var(--white); letter-spacing: clamp(10px, 4vw, 30px); text-shadow: 0 0 60px rgba(255,77,77,0.3); line-height: 1; }
+        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: 1.1rem; color: #ffcccc; transition: opacity 2s ease; opacity: 0; margin-top: 20px; }
 
-        /* --- 5. CAROUSEL & TILES --- */
+        /* --- 5. COLLECTION CAROUSEL --- */
         .section-gap { padding: 120px 0; position: relative; z-index: 2; }
         .section-title { font-family: 'Cinzel'; color: var(--gold); font-size: 1.1rem; letter-spacing: 12px; text-transform: uppercase; margin-bottom: 80px; text-align: center; }
         .carousel-window { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 10%; width: 100%; }
+        .carousel-window::-webkit-scrollbar { display: none; }
         .track { display: flex; gap: 40px; }
         .card { min-width: 340px; height: 500px; border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; position: relative; overflow: hidden; scroll-snap-align: center; cursor: pointer; transition: 0.8s var(--ease-lux); background: #000; }
         .card:hover { border-color: #ff4d4d; transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
@@ -70,18 +62,34 @@
         .card:hover img { opacity: 0.6; transform: scale(1.1); }
         .card h3 { position: absolute; bottom: 0; width: 100%; padding: 40px; background: linear-gradient(transparent, rgba(26,5,5,0.95)); font-family: 'Cinzel'; color: var(--gold); font-size: 0.85rem; letter-spacing: 4px; }
 
-        /* --- 6. MODAL --- */
-        #modal { position: fixed; inset: 0; background: rgba(5,0,0,0.98); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10010; padding: 30px; backdrop-filter: blur(15px); }
-        .modal-content { background: var(--warm-burgundy); border: 1px solid #ff4d4d; padding: 60px 40px; border-radius: 30px; max-width: 600px; width: 95%; text-align: center; box-shadow: 0 0 50px rgba(255,77,77,0.1); }
-        .modal-content h2 { font-family: 'Cinzel'; color: #ff4d4d; margin-bottom: 20px; letter-spacing: 6px; }
-        .modal-content p { color: #ffe6e6; font-size: 1.1rem; line-height: 1.8; font-weight: 200; margin-bottom: 40px; }
-        .close-btn { border: 1px solid #ff4d4d; padding: 12px 40px; color: #ff4d4d; font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 50px; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
-        .close-btn:hover { background: #ff4d4d; color: #fff; }
+        /* --- 6. REWRITTEN POPUPS (MODAL) --- */
+        #modal { position: fixed; inset: 0; background: rgba(5,0,0,0.98); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10010; padding: 30px; backdrop-filter: blur(20px); }
+        .modal-content { 
+            background: var(--warm-burgundy); 
+            border: 1px solid var(--gold); 
+            padding: 80px 50px; 
+            border-radius: 40px; 
+            max-width: 700px; 
+            width: 95%; 
+            text-align: center; 
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            position: relative;
+            animation: modalFade 0.6s var(--ease-lux);
+        }
+        @keyframes modalFade { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-content h2 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 25px; letter-spacing: 8px; font-size: 1.8rem; }
+        .modal-content p { color: #ffe6e6; font-size: 1.2rem; line-height: 2; font-weight: 200; margin-bottom: 50px; font-style: italic; }
+        .close-btn { 
+            border: 1px solid var(--gold); padding: 15px 45px; 
+            color: var(--gold); font-family: 'Cinzel'; cursor: pointer; 
+            display: inline-block; border-radius: 50px; font-size: 0.8rem; 
+            letter-spacing: 3px; transition: 0.4s;
+        }
+        .close-btn:hover { background: var(--gold); color: #000; }
 
-        .reserve-btn { position: fixed; bottom: 40px; right: 40px; z-index: 9999; background: #ff4d4d; color: #fff; font-family: 'Cinzel'; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; box-shadow: 0 10px 40px rgba(255,77,77,0.4); transition: 0.4s var(--ease-lux); }
-        .reserve-btn:hover { transform: scale(1.05); background: #fff; color: #ff4d4d; }
+        .reserve-btn { position: fixed; bottom: 40px; right: 40px; z-index: 9999; background: #ff4d4d; color: #fff; font-family: 'Cinzel'; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; box-shadow: 0 10px 40px rgba(255,77,77,0.4); }
 
-        @media (max-width: 768px) { .card { min-width: 85vw; height: 420px; } header h1 { font-size: 4rem; } }
+        @media (max-width: 768px) { .card { min-width: 85vw; } .modal-content { padding: 50px 30px; } }
     </style>
 </head>
 <body>
@@ -90,7 +98,7 @@
     
     <div id="welcome">
         <img src="3.png" class="logo-loader" alt="ROSE">
-        <div id="loading-msg">Architecting your hope...</div>
+        <div id="loading-msg" style="font-family:'Cinzel'; color:var(--gold); letter-spacing:5px;">Architecting Hope...</div>
     </div>
 
     <a href="https://forms.gle/Nszf5mUb15LAwMqw7" class="reserve-btn" target="_blank">RESERVE HOPE</a>
@@ -98,8 +106,7 @@
     <nav>
         <div class="nav-links">
             <a href="#events">THE COLLECTION</a>
-            <a href="https://instagram.com/celebratewithroses" target="_blank">EXPERIENCE</a>
-            <a href="https://youtube.com/@RoseGnapakaalu" target="_blank">CINEMATICS</a>
+            <a href="https://instagram.com/celebratewithroses" target="_blank">INSTAGRAM</a>
         </div>
         <div id="tagline-bar"><p class="tagline">ప్రతిక్షణం ఒక వేడుక • REDEFINING THE ART OF SURPRISE</p></div>
     </nav>
@@ -110,7 +117,7 @@
     </header>
 
     <section id="events" class="section-gap">
-        <h2 class="section-title">THE ART OF SURPRISE</h2>
+        <h2 class="section-title">THE ARCHIVE OF HOPE</h2>
         <div class="carousel-window"><div class="track" id="track-events"></div></div>
     </section>
 
@@ -123,13 +130,12 @@
     </div>
 
     <script>
-        // --- LUXURY PETAL PARTICLES ---
+        // LUXURY PETALS
         const canvas = document.getElementById('petal-canvas');
         const ctx = canvas.getContext('2d');
         let petals = [];
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        resize();
+        window.addEventListener('resize', resize); resize();
 
         class Petal {
             constructor() {
@@ -157,19 +163,18 @@
         }
         animate();
 
-        // --- CORE DATA & LOGIC ---
-        const hopeMessages = ["Architecting your hope...", "Crafting luxury surprises...", "Where love finds its rhythm...", "Your cinematic moment awaits..."];
+        // INTEGRATED COLLECTION DATA
         const collectionData = [
-            { name: "DATE NIGHT", img: "anniversary.jpeg", desc: "An intimate evening designed for connection. Luxury dining and curated ambiance where time stands still." },
-            { name: "PROPOSAL PLANS", img: "v1.jpg", desc: "The ultimate 'Yes' experience. We design the cinematic stage for your life's most significant question." },
-            { name: "SPECIAL SURPRISE", img: "BIRTHDAY.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
-            { name: "CUSTOM CELEBRATIONS", img: "WEDDING RECREATION.jpg", desc: "Your unique vision, executed with luxury. We are the architects of your imagination." },
-            { name: "WEDDING RECREATIONS", img: "w1.jpg", desc: "Relive the heartbeat of your wedding day with high-end recreations at Kakinada's finest shores." }
+            { name: "WEDDING RECREATIONS", img: "WEDDING RECREATION.jpg", desc: "Your unique vision, executed with luxury. We are the architects of your imagination." },
+            { name: "CUSTOM CELEBRATIONS", img: "CUSTOM.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
+            { name: "SPECIAL SURPRISE", img: "SURPRISE.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
+            { name: "DATE NIGHT PLANS", img: "DATE NIGHT.jpg", desc: "Relive the heartbeat of your wedding day with high-end recreations at Kakinada's finest shores." },
+            { name: "ANNIVERSARIES", img: "anniversary.jpeg", desc: "An intimate evening designed for connection. Luxury dining and curated ambiance where time stands still." },
+            { name: "PROPOSAL PLANS", img: "special.jpeg", desc: "The ultimate 'Yes' experience. We design the cinematic stage for your life's most significant question." },
+            { name: "BIRTHDAY CELEBRATIONS", img: "BIRTHDAY.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." }
         ];
 
         function init() {
-            document.getElementById('loading-msg').innerText = hopeMessages[Math.floor(Math.random()*hopeMessages.length)];
-            
             const track = document.getElementById('track-events');
             collectionData.forEach(ev => {
                 const card = document.createElement('div');
