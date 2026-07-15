@@ -3,187 +3,960 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ROSE | Premium Luxury Celebrations</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:ital,wght@0,200;0,400;1,200&display=swap" rel="stylesheet">
+    <title>ROSE | Premium Luxury Gifts & Events (OS Edition)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { 
-            --gold: #D4AF37; 
-            --black: #050505; 
-            --white: #FFFFFF; 
-            --rose-glow: rgba(139, 0, 0, 0.4);
-            --warm-burgundy: #1a0505;
-            --ease-lux: cubic-bezier(0.23, 1, 0.32, 1);
+        :root {
+            /* Apple Dark Mode OS Palette */
+            --bg-base: #000000;
+            --bg-surface: #1c1c1e;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent-color: #D4AF37; 
+            --accent-light: #F3E5AB;
+            
+            /* Enhanced Apple OS Glassmorphism */
+            --glass-bg: rgba(30, 30, 30, 0.45);
+            --glass-bg-hover: rgba(50, 50, 50, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-light: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --blur-heavy: blur(30px) saturate(200%);
+            --blur-light: blur(15px) saturate(150%);
+            
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            
+            /* Apple Native Typography */
+            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* --- LUXURY LOADING --- */
-        #welcome { 
-            position: fixed; inset: 0; background: var(--black); z-index: 10000; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 2.5s var(--ease-lux); pointer-events: none;
-        }
-        .logo-loader {
-            width: 180px; filter: drop-shadow(0 0 20px #ff4d4d);
-            animation: logoHeartbeat 1.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-            margin-bottom: 40px;
-        }
-        @keyframes logoHeartbeat {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff4d4d); }
-            15% { transform: scale(1.15); filter: drop-shadow(0 0 40px #ff4d4d); }
-            45% { transform: scale(1.25); filter: drop-shadow(0 0 50px #ff4d4d); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            font-family: var(--font-stack);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- LUXURY PETALS --- */
-        #petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.4; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03), transparent 25%);
+            background-attachment: fixed;
+        }
 
-        /* --- NAVIGATION --- */
-        nav { position: fixed; top: 0; width: 100%; z-index: 9000; background: linear-gradient(to bottom, rgba(26,5,5,0.9), transparent); display: flex; flex-direction: column; align-items: center; }
-        .nav-links { display: flex; gap: clamp(15px, 5vw, 40px); padding: 30px 0 15px; }
-        .nav-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 3px; opacity: 0.7; transition: 0.5s var(--ease-lux); cursor: pointer; }
-        .nav-links a:hover { opacity: 1; letter-spacing: 5px; text-shadow: 0 0 15px var(--gold); }
+        html { scroll-behavior: smooth; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
+        .section-title { 
+            font-size: 3rem; 
+            text-align: center; 
+            margin-bottom: 4rem; 
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title span { 
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        section { padding: 8rem 5%; position: relative; }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+            background-color: rgba(255,255,255,0.9); border-radius: 50%;
+            transform: translate(-50%, -50%); z-index: 9999; pointer-events: none;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .cursor-outline {
+            position: fixed; top: 0; left: 0; width: 32px; height: 32px;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+            transform: translate(-50%, -50%); z-index: 9998; pointer-events: none;
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+        .cursor-outline.hover {
+            width: 48px; height: 48px;
+            background-color: var(--glass-bg);
+            backdrop-filter: var(--blur-light);
+            border-color: var(--accent-color);
+        }
+
+        /* Apple OS Glass Components */
+        .os-glass {
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur-heavy);
+            -webkit-backdrop-filter: var(--blur-heavy);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Modern User-Friendly Close Buttons (VisionOS / iOS Style) */
+        .close-btn-modern {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            z-index: 50;
+            transition: var(--transition);
+            outline: none;
+        }
+        .close-btn-modern:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            color: var(--accent-color);
+        }
+        @media (min-width: 768px) {
+            .close-btn-modern {
+                width: 40px; height: 40px; top: 20px; right: 20px;
+            }
+        }
+
+        /* OS Style Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 28px; border-radius: 999px;
+            font-size: 0.95rem; font-weight: 500; text-decoration: none;
+            transition: var(--transition); border: 1px solid var(--glass-border);
+            background: var(--glass-bg); color: var(--text-primary);
+            backdrop-filter: var(--blur-light);
+            min-height: 48px;
+        }
+        .btn:hover { background: var(--glass-bg-hover); transform: scale(1.02); border-color: var(--glass-border-light); }
+        .btn-primary { background: var(--text-primary); color: var(--bg-base); border: none; }
+        .btn-primary:hover { background: var(--accent-color); color: var(--bg-base); transform: scale(1.02); }
+
+        /* WhatsApp Specific Styling */
+        .wa-btn {
+            background-color: #25D366; 
+            color: #ffffff;
+            border: none;
+        }
+        .wa-btn:hover {
+            background-color: #1ebd5a;
+            transform: scale(1.02);
+            color: #ffffff;
+        }
+        .wa-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .wa-link:hover {
+            color: #25D366;
+        }
+
+        /* Floating Apple OS Navigation */
+        nav {
+            position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; padding: 1rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 100px; z-index: 2000;
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            top: 0.5rem; width: 95%; padding: 0.8rem 1.5rem;
+            background: rgba(20, 20, 20, 0.7); border-color: rgba(255,255,255,0.15);
+        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); text-decoration: none; letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
+        .nav-icons { display: flex; gap: 1rem; align-items: center; }
+        .nav-icons i { font-size: 1.2rem; color: var(--text-primary); transition: color 0.3s; padding: 5px; }
+        .nav-icons i:hover { color: var(--accent-color); }
+        .nav-icons a:hover i { color: #25D366; }
         
-        #tagline-bar { width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(139, 0, 0, 0.15); border-bottom: 1px solid rgba(212, 175, 55, 0.1); backdrop-filter: blur(8px); }
-        .tagline { font-family: 'Montserrat'; font-weight: 200; font-size: 0.6rem; color: #ffb3b3; letter-spacing: 4px; text-transform: uppercase; }
+        .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; padding: 5px; }
 
-        /* --- HERO --- */
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; background: radial-gradient(circle, #200505 0%, #050505 80%); }
-        header h1 { font-family: 'Cinzel'; font-size: clamp(4.5rem, 18vw, 12rem); color: var(--white); letter-spacing: clamp(10px, 4vw, 30px); text-shadow: 0 0 60px rgba(255,77,77,0.3); line-height: 1; }
-        #brand-quote { font-family: 'Montserrat'; font-style: italic; font-weight: 200; font-size: 1.1rem; color: #ffcccc; transition: opacity 2s ease; opacity: 0; margin-top: 20px; }
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed; inset: 0; background: var(--glass-bg);
+            backdrop-filter: var(--blur-heavy); -webkit-backdrop-filter: var(--blur-heavy);
+            z-index: 1900; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: var(--transition); gap: 2rem;
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: color 0.3s; }
+        .mobile-menu a:hover, .mobile-menu a:active { color: var(--accent-color); }
 
-        /* --- COLLECTION CAROUSEL --- */
-        .section-gap { padding: 120px 0; position: relative; z-index: 2; }
-        .section-title { font-family: 'Cinzel'; color: var(--gold); font-size: 1.1rem; letter-spacing: 12px; text-transform: uppercase; margin-bottom: 80px; text-align: center; }
-        .carousel-window { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 10%; width: 100%; }
-        .carousel-window::-webkit-scrollbar { display: none; }
-        .track { display: flex; gap: 40px; }
-        .card { min-width: 340px; height: 500px; border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; position: relative; overflow: hidden; scroll-snap-align: center; cursor: pointer; transition: 0.8s var(--ease-lux); background: #000; }
-        .card:hover { border-color: #ff4d4d; transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-        .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 1.5s var(--ease-lux); }
-        .card:hover img { opacity: 0.6; transform: scale(1.1); }
-        .card h3 { position: absolute; bottom: 0; width: 100%; padding: 40px; background: linear-gradient(transparent, rgba(26,5,5,0.95)); font-family: 'Cinzel'; color: var(--gold); font-size: 0.85rem; letter-spacing: 4px; }
+        /* OS Drawers & Modals */
+        .drawer {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh;
+            border-radius: 0; z-index: 2100;
+            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 4rem 1.5rem 1.5rem; /* Extra top padding for absolute close button */
+            display: flex; flex-direction: column;
+            border-left: 1px solid var(--glass-border);
+        }
+        @media (min-width: 768px) {
+            .drawer { top: 1rem; height: calc(100vh - 2rem); border-radius: var(--radius-lg); right: -420px; border: 1px solid var(--glass-border); }
+            .drawer.active { right: 1rem; }
+        }
+        .drawer.active { right: 0; }
+        
+        .overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            z-index: 1500; opacity: 0; pointer-events: none; transition: opacity 0.5s;
+        }
+        .overlay.active { opacity: 1; pointer-events: all; }
 
-        /* --- ARCHITECTS VAULT (Hidden Overlay) --- */
-        #about-overlay { position: fixed; inset: 0; background: rgba(5,0,0,0.99); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10005; padding: 30px; backdrop-filter: blur(20px); }
-        .creator-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; width: 90%; max-width: 1000px; }
-        .creator-card { text-align: center; }
-        .creator-img { width: 160px; height: 160px; border-radius: 50%; border: 2px solid #ff4d4d; margin: 0 auto 15px; background-size: cover; background-position: center; box-shadow: 0 0 15px rgba(255,77,77,0.2); }
+        .modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -45%) scale(0.95);
+            width: 95%; max-width: 900px; max-height: 90vh; border-radius: var(--radius-lg);
+            z-index: 2500; display: flex; opacity: 0; visibility: hidden; transition: var(--transition);
+            overflow-y: auto; padding: 3rem 1.5rem 1.5rem; /* Extra top padding for absolute close button */
+            flex-direction: column;
+            scrollbar-width: none; 
+        }
+        .modal::-webkit-scrollbar { display: none; }
+        .modal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        
+        .modal-body { display: flex; gap: 2rem; flex-direction: column; }
+        @media (min-width: 768px) { .modal-body { flex-direction: row; } .modal { padding: 2rem; } }
+        
+        .modal-img { width: 100%; border-radius: var(--radius-md); overflow: hidden; }
+        @media (min-width: 768px) { .modal-img { width: 50%; } }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1; }
+        
+        .modal-info { width: 100%; display: flex; flex-direction: column; }
+        @media (min-width: 768px) { .modal-info { width: 50%; } }
+        
+        .os-input-group {
+            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm); padding: 1rem; margin-top: 1rem;
+        }
+        .os-input {
+            width: 100%; background: transparent; border: none; color: var(--text-primary);
+            font-size: 1rem; outline: none; margin-top: 0.5rem;
+            min-height: 30px;
+        }
 
-        /* --- MODAL --- */
-        #modal { position: fixed; inset: 0; background: rgba(5,0,0,0.98); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10010; padding: 30px; backdrop-filter: blur(20px); }
-        .modal-content { background: var(--warm-burgundy); border: 1px solid var(--gold); padding: 80px 50px; border-radius: 40px; max-width: 700px; width: 95%; text-align: center; }
-        .close-btn { border: 1px solid var(--gold); padding: 15px 45px; color: var(--gold); font-family: 'Cinzel'; cursor: pointer; display: inline-block; border-radius: 50px; font-size: 0.8rem; letter-spacing: 3px; }
+        /* Hero Section */
+        #hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 0 5%;
+            background: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+            position: relative;
+        }
+        #hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, var(--bg-base) 100%);
+        }
+        .hero-content { position: relative; z-index: 10; width: 100%; max-width: 900px; margin-top: 2rem; }
+        .hero-subtitle { font-size: 1.1rem; font-weight: 500; color: var(--accent-light); margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 2px;}
+        .hero-title { font-size: 3.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+        @media (min-width: 768px) { .hero-title { font-size: 5.5rem; } }
+        .hero-actions { display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; }
+        @media (min-width: 480px) { .hero-actions { flex-direction: row; } }
 
-        .reserve-btn { position: fixed; bottom: 40px; right: 40px; z-index: 9999; background: #ff4d4d; color: #fff; font-family: 'Cinzel'; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; box-shadow: 0 10px 40px rgba(255,77,77,0.4); }
+        /* Bento Box Grid */
+        .bento-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 600px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .bento-grid { grid-template-columns: repeat(4, 1fr); } }
 
-        @media (max-width: 900px) { .creator-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .card { min-width: 85vw; } }
+        .os-widget {
+            border-radius: var(--radius-lg); padding: 1.2rem;
+            display: flex; flex-direction: column; position: relative;
+            transition: var(--transition);
+        }
+        .os-widget:hover, .os-widget:active { border-color: rgba(212, 175, 55, 0.4); }
+        .widget-img-wrap {
+            width: 100%; aspect-ratio: 1; border-radius: var(--radius-md);
+            overflow: hidden; position: relative; margin-bottom: 1.5rem;
+        }
+        .widget-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        @media (hover: hover) { .os-widget:hover .widget-img-wrap img { transform: scale(1.05); } }
+        
+        .widget-actions {
+            position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%) translateY(20px);
+            display: flex; gap: 0.8rem; opacity: 0; transition: var(--transition); z-index: 10;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); padding: 8px 16px; border-radius: 30px;
+        }
+        @media (hover: none) { .widget-actions { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @media (hover: hover) { .os-widget:hover .widget-actions { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        
+        .widget-action-btn { background: none; border: none; color: white; font-size: 1.2rem; padding: 5px 10px; text-decoration: none;}
+        .widget-action-btn:hover { color: #25D366; }
+        .widget-info { display: flex; flex-direction: column; flex-grow: 1; }
+        .widget-title { font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .widget-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4; }
+        .widget-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .widget-rating { font-size: 0.85rem; color: var(--accent-color); }
+        .wishlist-icon { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 10; color: white; font-size: 1.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); padding: 10px; }
+
+        /* Bento Showcase Panels */
+        .bento-showcase { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media (min-width: 768px) { .bento-showcase { grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, 300px); gap: 1.5rem; } }
+        
+        .bento-card {
+            border-radius: var(--radius-lg); position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; min-height: 350px;
+        }
+        .bento-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.8s; }
+        .bento-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%); z-index: 1; }
+        .bento-content { position: relative; z-index: 2; }
+        @media (min-width: 768px) { .bento-card.large { grid-row: span 2; } }
+
+        /* Segmented Control */
+        .segmented-control {
+            display: flex; overflow-x: auto; gap: 0.5rem; padding: 0.5rem; margin-bottom: 2rem;
+            background: rgba(0,0,0,0.3); border-radius: 99px; scrollbar-width: none;
+            border: 1px solid var(--glass-border); width: 100%; -webkit-overflow-scrolling: touch;
+        }
+        @media (min-width: 768px) { .segmented-control { width: fit-content; margin-left: auto; margin-right: auto; margin-bottom: 3rem; } }
+        .segmented-control::-webkit-scrollbar { display: none; }
+        .segment {
+            padding: 10px 20px; border-radius: 99px; font-size: 0.9rem; font-weight: 500;
+            color: var(--text-secondary); white-space: nowrap; flex-shrink: 0;
+        }
+        .segment.active { background: var(--glass-border-light); color: var(--text-primary); }
+
+        /* Sections */
+        #return-gifts { background: var(--bg-surface); margin: 0; padding: 4rem 5%; border-radius: 0; }
+        @media (min-width: 768px) { #return-gifts { margin: 2rem 5%; padding: 6rem 5%; border-radius: var(--radius-lg); } }
+
+        #events { padding-top: 4rem; padding-bottom: 4rem; }
+
+        /* Lookbook */
+        .os-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+        @media (min-width: 768px) { .os-gallery { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+        .gallery-item { border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 4/5; position: relative; border: 1px solid var(--glass-border); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        @media (min-width: 768px) { 
+            .gallery-item { border-radius: var(--radius-md); }
+            .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+            .gallery-item:last-child { grid-column: span 2; }
+        }
+
+        /* Testimonials */
+        .os-slider { display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 0; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .os-slider::-webkit-scrollbar { display: none; }
+        .testimonial-widget { min-width: 300px; scroll-snap-align: center; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        @media (min-width: 768px) { .testimonial-widget { min-width: 380px; padding: 2rem; gap: 1.5rem; } .os-slider{ gap: 1.5rem; padding: 2rem 0;} }
+        .user-profile { display: flex; align-items: center; gap: 1rem; }
+        .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--glass-border); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; }
+
+        /* Newsletter */
+        #newsletter { text-align: center; padding: 6rem 5%; }
+        .dynamic-island-form {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #000; border: 1px solid var(--glass-border);
+            border-radius: 99px; padding: 0.5rem;
+            width: 100%; max-width: 450px; margin: 2rem auto 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .dynamic-island-form input { background: transparent; border: none; color: white; font-size: 1rem; flex-grow: 1; outline: none; padding-left: 1rem; min-width: 0; }
+        .dynamic-island-form button { background: var(--text-primary); color: #000; border-radius: 99px; padding: 12px 20px; font-weight: 600; border: none; white-space: nowrap; }
+
+        /* Footer */
+        footer { padding: 4rem 5% 2rem; border-top: 1px solid var(--glass-border); background: var(--bg-base); }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        @media (min-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; } }
+        .footer-col h4 { font-size: 1.1rem; margin-bottom: 1.2rem; color: var(--text-primary); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; display: block; padding: 4px 0; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .social-icons a { width: 44px; height: 44px; border-radius: 50%; background: var(--glass-bg); display: flex; align-items: center; justify-content: center; color: var(--text-primary); border: 1px solid var(--glass-border); text-decoration: none; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed; inset: 0; background: var(--bg-base); z-index: 10000;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .apple-spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--text-primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            section { padding: 5rem 5%; }
+            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
+        }
+
+        /* Disable custom cursor entirely on touch devices for better UX */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            .btn:hover, .os-widget:hover { transform: none; }
+        }
     </style>
 </head>
 <body>
 
-    <canvas id="petal-canvas"></canvas>
-    
-    <div id="welcome">
-        <img src="3.png" class="logo-loader" alt="ROSE">
-        <div id="loading-msg" style="font-family:'Cinzel'; color:var(--gold); letter-spacing:5px;">Architecting Hope...</div>
+    <!-- OS Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="apple-spinner"></div>
     </div>
 
-    <a href="https://forms.gle/Nszf5mUb15LAwMqw7" class="reserve-btn" target="_blank">RESERVE HOPE</a>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
-    <nav>
-        <div class="nav-links">
-            <a href="#events">COLLECTION</a>
-            <a onclick="openAbout()">ARCHITECTS</a>
-            <a href="https://youtube.com/@RoseGnapakaalu" target="_blank">YOUTUBE</a>
-            <a href="https://instagram.com/celebratewithroses" target="_blank">INSTAGRAM</a>
+    <!-- Floating OS Navigation -->
+    <nav class="os-glass" id="navbar">
+        <a href="#" class="logo hover-target">ROSE</a>
+        <ul class="nav-links">
+            <li><a href="#featured" class="hover-target">Featured</a></li>
+            <li><a href="#return-gifts" class="hover-target">Gifts</a></li>
+            <li><a href="#events" class="hover-target">Events</a></li>
+            <li><a href="#lookbook" class="hover-target">Lookbook</a></li>
+            <li><a href="#about" class="hover-target">About</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass hover-target"></i>
+            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="hover-target" style="text-decoration: none;" aria-label="WhatsApp Us">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <button class="mobile-toggle hover-target" id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
         </div>
-        <div id="tagline-bar"><p class="tagline">ప్రతిక్షణం ఒక వేడుక • REDEFINING THE ART OF SURPRISE</p></div>
     </nav>
 
-    <header>
-        <h1>ROSE</h1>
-        <p id="brand-quote">Where your love story becomes a cinematic masterpiece.</p>
-    </header>
-
-    <section id="events" class="section-gap">
-        <h2 class="section-title">THE ARCHIVE OF HOPE</h2>
-        <div class="carousel-window"><div class="track" id="track-events"></div></div>
-    </section>
-
-    <div id="about-overlay">
-        <h2 style="font-family:'Cinzel'; color:var(--gold); letter-spacing: 12px; margin-bottom: 50px;">THE ARCHITECTS OF HOPE</h2>
-        <div class="creator-grid" id="track-creators"></div>
-        <div class="close-btn" onclick="closeAbout()" style="margin-top:50px;">BACK TO MAIN</div>
+    <!-- Mobile Fullscreen Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#featured" class="mobile-link">Featured</a>
+        <a href="#return-gifts" class="mobile-link">Return Gifts</a>
+        <a href="#events" class="mobile-link">Special Events</a>
+        <a href="#lookbook" class="mobile-link">Lookbook</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="mobile-link" style="color: #25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
     </div>
 
-    <div id="modal">
-        <div class="modal-content">
-            <h2 id="m-title" style="font-family:'Cinzel'; color:var(--gold); margin-bottom:20px;"></h2>
-            <p id="m-desc" style="color:#ffe6e6; line-height:2; margin-bottom:40px;"></p>
-            <div class="close-btn" onclick="document.getElementById('modal').style.display='none'">BACK TO DISCOVERY</div>
+    <!-- Shopping Cart Drawer (With new User-Friendly Close) -->
+    <div class="drawer os-glass" id="cart-drawer">
+        <button class="close-btn-modern hover-target" id="close-cart" aria-label="Close Drawer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <h3 style="margin: 0 0 2rem; font-size: 1.5rem;">Your Bag</h3>
+        <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-align: center; padding: 1rem;">
+            Your luxury bag is empty.
+        </div>
+        <a href="#" class="btn btn-primary hover-target" style="width: 100%;">Continue Shopping</a>
+    </div>
+
+    <!-- Quick View Modal (With new User-Friendly Close) -->
+    <div class="modal os-glass" id="quick-view-modal">
+        <button class="close-btn-modern hover-target" id="close-modal" aria-label="Close Modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <div class="modal-body">
+            <div class="modal-img">
+                <img src="https://images.unsplash.com/photo-1599643478514-4a734bc422fa?auto=format&fit=crop&q=80&w=800" alt="Product">
+            </div>
+            <div class="modal-info">
+                <h2 id="mv-title" style="font-size: 2rem; margin-bottom: 0.5rem; padding-right: 2rem;">The Royal Box</h2>
+                <div class="widget-rating" style="margin-bottom: 1rem;">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <span style="color: var(--text-secondary); margin-left: 8px;">(128)</span>
+                </div>
+                
+                <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">An exquisite handcrafted velvet box featuring gold-leaf detailing and a curated selection of premium truffles and exotic teas.</p>
+                
+                <div class="os-input-group">
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;"><i class="fa-solid fa-pen-nib"></i> Personalization Note</label>
+                    <input type="text" id="mv-personalize" class="os-input hover-target" placeholder="Any special requests? (Optional)">
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <a href="#" id="modal-wa-btn" target="_blank" class="btn btn-primary wa-btn hover-target" style="flex: 1;">
+                        <i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> Inquire via WhatsApp
+                    </a>
+                    <a href="#" class="btn hover-target" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></a>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Fullscreen Hero -->
+    <section id="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle reveal">Precision Meets Elegance</span>
+            <h1 class="hero-title reveal" style="transition-delay: 0.1s;">Pure Luxury.<br>Pure Rose.</h1>
+            <p class="reveal" style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2.5rem; transition-delay: 0.2s;">Discover the finest handcrafted return gifts and flawlessly executed events.</p>
+            <div class="hero-actions reveal" style="transition-delay: 0.3s;">
+                <a href="#featured" class="btn btn-primary hover-target" style="width: 100%; max-width: 280px;">Shop Collection</a>
+                <a href="https://wa.me/918247553115?text=Hello,%20I'm%20looking%20to%20plan%20an%20event%20with%20ROSE." target="_blank" class="btn hover-target" style="width: 100%; max-width: 280px;">
+                    <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Plan an Event
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section id="featured">
+        <h2 class="section-title reveal">Featured <span>Excellence</span></h2>
+        <div class="bento-grid">
+            <!-- Product 1 -->
+            <div class="os-widget os-glass reveal hover-target">
+                <i class="fa-regular fa-heart wishlist-icon"></i>
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1599643477874-5af3f4f1ce4c?auto=format&fit=crop&q=80&w=600" alt="Golden Legacy Box">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="Golden Legacy Box" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                        <span style="color: var(--glass-border);">|</span>
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Golden%20Legacy%20Box" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">Golden Legacy Box</h3>
+                    <p class="widget-desc">Premium 24k gold detailing.</p>
+                    <div class="widget-meta">
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Golden%20Legacy%20Box" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.1s;">
+                <i class="fa-regular fa-heart wishlist-icon"></i>
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1611077543781-a7b2cb1eeb5c?auto=format&fit=crop&q=80&w=600" alt="Aura Perfume Set">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="Aura Perfume Set" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                        <span style="color: var(--glass-border);">|</span>
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Aura%20Perfume%20Set" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">Aura Perfume Set</h3>
+                    <p class="widget-desc">Bespoke fragrance collection.</p>
+                    <div class="widget-meta">
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Aura%20Perfume%20Set" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.2s;">
+                <i class="fa-regular fa-heart wishlist-icon"></i>
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=600" alt="Imperial Hamper">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="Imperial Hamper" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                        <span style="color: var(--glass-border);">|</span>
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Imperial%20Hamper" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">Imperial Hamper</h3>
+                    <p class="widget-desc">Grand festival gifting experience.</p>
+                    <div class="widget-meta">
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Imperial%20Hamper" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.3s;">
+                <i class="fa-regular fa-heart wishlist-icon"></i>
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1607344645866-eea33a4ca5b6?auto=format&fit=crop&q=80&w=600" alt="Eco-Luxe Collection">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="Eco-Luxe Collection" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                        <span style="color: var(--glass-border);">|</span>
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Eco-Luxe%20Collection" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">Eco-Luxe Collection</h3>
+                    <p class="widget-desc">Sustainable opulent return gifts.</p>
+                    <div class="widget-meta">
+                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Eco-Luxe%20Collection" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Return Gifts Section -->
+    <section id="return-gifts">
+        <h2 class="section-title reveal" style="margin-bottom: 2rem;">Occasion <span>Gifting</span></h2>
+        
+        <div class="segmented-control reveal">
+            <div class="segment hover-target active">All</div>
+            <div class="segment hover-target">Wedding</div>
+            <div class="segment hover-target">Corporate</div>
+            <div class="segment hover-target">Birthday</div>
+            <div class="segment hover-target">Anniversary</div>
+            <div class="segment hover-target">Baby Shower</div>
+        </div>
+
+        <div class="bento-showcase">
+            <div class="bento-card large reveal hover-target">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1000" alt="Wedding">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Wedding Returns</h4>
+                    <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">A Memory to Keep.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Wedding%20Return%20Gifts." target="_blank" class="btn btn-primary hover-target"><i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Inquire Now</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" alt="Corporate">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Corporate</h4>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Leave a Mark.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Corporate%20Gifting." target="_blank" class="btn hover-target" style="padding: 10px 20px; font-size: 0.85rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Inquire</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600" alt="Festive">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Festive Hampers</h4>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Celebrate Joy.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Festive%20Hampers." target="_blank" class="btn hover-target" style="padding: 10px 20px; font-size: 0.85rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Events Section -->
+    <section id="events">
+        <h2 class="section-title reveal" style="margin-bottom: 1rem;">Memorable <span>Moments</span></h2>
+        <p class="reveal" style="text-align: center; color: var(--text-secondary); max-width: 650px; margin: 0 auto 3rem; font-size: 1.1rem; line-height: 1.6;">
+            Beyond exquisite gifts, we orchestrate unforgettable experiences. We make moments memorable with flawless planning for surprises, birthdays, weddings, and grand anniversaries.
+        </p>
+
+        <div class="bento-showcase">
+            <div class="bento-card large reveal hover-target">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000" alt="Weddings & Anniversaries">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Weddings & Anniversaries</h4>
+                    <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">Timeless Celebrations.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20am%20looking%20to%20plan%20a%20Wedding/Anniversary%20event." target="_blank" class="btn btn-primary wa-btn hover-target"><i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Talk to our Planners</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=600" alt="Surprise Plannings">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Surprise Plannings</h4>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">The Perfect Reveal.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20a%20Surprise%20Event." target="_blank" class="btn hover-target" style="padding: 10px 20px; font-size: 0.85rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Let's Plan</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=600" alt="Birthday Events">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Birthday Events</h4>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Milestones Mastered.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20need%20help%20planning%20a%20Birthday%20Event." target="_blank" class="btn hover-target" style="padding: 10px 20px; font-size: 0.85rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Let's Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lookbook -->
+    <section id="lookbook" style="padding-top: 2rem;">
+        <h2 class="section-title reveal">Gallery <span>View</span></h2>
+        <div class="os-gallery reveal">
+            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1513884923967-4b182ef167ab?auto=format&fit=crop&q=80&w=800" alt="Lookbook 1"></div>
+            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?auto=format&fit=crop&q=80&w=400" alt="Lookbook 2"></div>
+            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400" alt="Lookbook 3"></div>
+            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=800" alt="Lookbook 4"></div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" style="padding-bottom: 4rem;">
+        <h2 class="section-title reveal" style="margin-bottom: 2rem;">Client <span>Stories</span></h2>
+        <div class="os-slider reveal">
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">E</div>
+                    <div>
+                        <h4 style="font-size: 1rem;">Elena & James</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.5; font-size: 0.95rem;">"The bespoke hampers for our wedding were nothing short of breathtaking. The gold detailing left our guests in absolute awe."</p>
+            </div>
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">M</div>
+                    <div>
+                        <h4 style="font-size: 1rem;">Marcus V., CEO</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.5; font-size: 0.95rem;">"ROSE handled our corporate gifting flawlessly. The eco-luxe collection perfectly aligned with our brand values."</p>
+            </div>
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">S</div>
+                    <div>
+                        <h4 style="font-size: 1rem;">Sarah Jenkins</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.5; font-size: 0.95rem;">"Not only did they provide exquisite gifts, but their team also orchestrated the most magical surprise 50th birthday for my husband."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter">
+        <h2 class="section-title reveal" style="margin-bottom: 1rem;">Stay <span>Updated</span></h2>
+        <p class="reveal" style="color: var(--text-secondary);">Subscribe for exclusive access to limited collections and event packages.</p>
+        <form class="dynamic-island-form reveal hover-target" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Email Address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 1rem; display: inline-block;">ROSE</a>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Elevating the art of giving and celebrating through meticulous craftsmanship, seamless event planning, and OS-inspired timeless design.</p>
+                <div class="social-icons">
+                    <a href="https://wa.me/918247553115" target="_blank" class="hover-target" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="hover-target" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover-target" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Store</h4>
+                <ul>
+                    <li><a href="#" class="hover-target">Wedding Returns</a></li>
+                    <li><a href="#" class="hover-target">Corporate Hampers</a></li>
+                    <li><a href="#" class="hover-target">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#" class="hover-target">Event Planning</a></li>
+                    <li><a href="#" class="hover-target">Surprise Orchestration</a></li>
+                    <li><a href="#" class="hover-target">Personalization</a></li>
+                    <li><a href="#" class="hover-target">Consultation</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul style="color: var(--text-secondary); font-size: 0.95rem; line-height: 2;">
+                    <li>1 Infinite Luxury Loop, NY</li>
+                    <li><i class="fa-brands fa-whatsapp" style="margin-right: 5px; color: #25D366;"></i> +91 8247553115</li>
+                    <li>support@rosegifts.com</li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+            Copyright © 2026 ROSE Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
-        function openAbout() { document.getElementById('about-overlay').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeAbout() { document.getElementById('about-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
+            }, 800);
+        });
 
-        // PETALS
-        const canvas = document.getElementById('petal-canvas');
-        const ctx = canvas.getContext('2d');
-        let petals = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
-        class Petal {
-            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.w = Math.random() * 10 + 5; this.h = this.w * 1.2; this.opacity = Math.random() * 0.4; this.speed = Math.random() * 0.5 + 0.2; this.rot = Math.random() * Math.PI; }
-            draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rot); ctx.globalAlpha = this.opacity; ctx.fillStyle = '#8b0000'; ctx.beginPath(); ctx.ellipse(0, 0, this.w, this.h, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
-            update() { this.y += this.speed; this.rot += 0.01; if (this.y > canvas.height) this.y = -20; }
-        }
-        for(let i=0; i<35; i++) petals.push(new Petal());
-        function animate() { ctx.clearRect(0,0,canvas.width, canvas.height); petals.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-        animate();
+        // Desktop OS Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input');
 
-        const collectionData = [
-            { name: "WEDDING RECREATIONS", img: "WEDDING RECREATION.jpg", desc: "Your unique vision, executed with luxury. We are the architects of your imagination." },
-            { name: "CUSTOM CELEBRATIONS", img: "CUSTOM.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
-            { name: "SPECIAL SURPRISE", img: "SURPRISE.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." },
-            { name: "DATE NIGHT PLANS", img: "DATE NIGHT.jpg", desc: "Relive the heartbeat of your wedding day with high-end recreations at Kakinada's finest shores." },
-            { name: "ANNIVERSARIES", img: "anniversary.jpeg", desc: "An intimate evening designed for connection. Luxury dining and curated ambiance where time stands still." },
-            { name: "PROPOSAL PLANS", img: "special.jpeg", desc: "The ultimate 'Yes' experience. We design the cinematic stage for your life's most significant question." },
-            { name: "BIRTHDAY CELEBRATIONS", img: "BIRTHDAY.jpg", desc: "The power of hope lies in the unexpected. From midnight reveals to elaborate grand gestures." }
-        ];
-
-        const creators = [ 
-            {name:"ZAY", img:"zay.jpg", role: "Creative Director"}, 
-            {name:"AKSHITH", img:"akshith.jpg", role: "Lead Architect"}, 
-            {name:"NAGASAI", img:"nagasai.jpg", role: "Cinematic Stylist"}, 
-            {name:"AZAD", img:"azad.jpg", role: "Experience Designer"} 
-        ];
-
-        function init() {
-            const track = document.getElementById('track-events');
-            collectionData.forEach(ev => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<img src="${ev.img}"><h3>${ev.name}</h3>`;
-                card.onclick = () => { document.getElementById('m-title').innerText = ev.name; document.getElementById('m-desc').innerText = ev.desc; document.getElementById('modal').style.display = 'flex'; };
-                track.appendChild(card);
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 150, fill: "forwards" });
             });
 
-            const creatorTrack = document.getElementById('track-creators');
-            creators.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'creator-card';
-                div.innerHTML = `<div class="creator-img" style="background-image: url('${p.img}')"></div><h4 style="font-family:'Cinzel'; color:var(--gold);">${p.name}</h4><p style="font-size:0.65rem; color:#ffb3b3;">${p.role}</p>`;
-                creatorTrack.appendChild(div);
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+                target.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
             });
-
-            setTimeout(() => document.getElementById('brand-quote').style.opacity = 1, 1500);
-            setTimeout(() => document.getElementById('welcome').style.opacity = '0', 4500);
-            setTimeout(() => document.getElementById('welcome').remove(), 6500);
         }
-        window.onload = init;
+
+        // Navigation Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if(menuOpen) {
+                mobileMenu.classList.add('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // OS Modals & User-Friendly Close Mechanisms
+        const overlay = document.getElementById('overlay');
+        const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+        const modal = document.getElementById('quick-view-modal');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartBtn = document.getElementById('cart-btn');
+        
+        // New Close Buttons
+        const closeModalBtn = document.getElementById('close-modal');
+        const closeCartBtn = document.getElementById('close-cart');
+        
+        const mvTitle = document.getElementById('mv-title');
+        const mvPersonalize = document.getElementById('mv-personalize');
+        const modalWaBtn = document.getElementById('modal-wa-btn');
+
+        function openOverlay() { 
+            overlay.classList.add('active'); 
+            document.body.style.overflow = 'hidden'; 
+        }
+        
+        function closeAll() {
+            modal.classList.remove('active');
+            cartDrawer.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cart Drawer Logic
+        cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartDrawer.classList.add('active');
+            openOverlay();
+        });
+
+        // Close Event Listeners (Overlay tap & 'X' buttons)
+        overlay.addEventListener('click', closeAll);
+        closeModalBtn.addEventListener('click', closeAll);
+        closeCartBtn.addEventListener('click', closeAll);
+        
+        // Enable closing with ESC key for better accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") { closeAll(); }
+        });
+
+        // Realtime WA link update based on input
+        function updateWaLink(title) {
+            let note = mvPersonalize.value.trim();
+            let baseText = `Hello ROSE, I'm interested in the ${title}.`;
+            if (note) {
+                baseText += ` My personalization note is: "${note}".`;
+            }
+            modalWaBtn.href = `https://wa.me/918247553115?text=${encodeURIComponent(baseText)}`;
+        }
+
+        quickViewBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const title = btn.getAttribute('data-title');
+                mvTitle.textContent = title;
+                mvPersonalize.value = ""; // Reset input
+                updateWaLink(title); // Initial link creation
+                
+                // Update dynamically if they type
+                mvPersonalize.oninput = () => updateWaLink(title);
+
+                modal.classList.add('active');
+                openOverlay();
+            });
+        });
+
+        // Segmented Control (UI Mockup)
+        const segments = document.querySelectorAll('.segment');
+        segments.forEach(segment => {
+            segment.addEventListener('click', () => {
+                segments.forEach(s => s.classList.remove('active'));
+                segment.classList.add('active');
+            });
+        });
+
     </script>
 </body>
 </html>
