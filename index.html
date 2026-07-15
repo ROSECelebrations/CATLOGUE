@@ -104,84 +104,43 @@
             box-shadow: var(--glass-shadow);
         }
 
-        /* Modern User-Friendly Close Buttons (VisionOS / iOS Style) */
+        /* Modern User-Friendly Close Buttons */
         .close-btn-modern {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            z-index: 50;
-            transition: var(--transition);
-            outline: none;
+            position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; z-index: 50; transition: var(--transition); outline: none;
         }
-        .close-btn-modern:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
-            color: var(--accent-color);
-        }
-        @media (min-width: 768px) {
-            .close-btn-modern {
-                width: 40px; height: 40px; top: 20px; right: 20px;
-            }
-        }
+        .close-btn-modern:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.05); color: var(--accent-color); }
+        @media (min-width: 768px) { .close-btn-modern { width: 40px; height: 40px; top: 20px; right: 20px; } }
 
         /* OS Style Buttons */
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
             padding: 14px 28px; border-radius: 999px;
-            font-size: 0.95rem; font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; font-weight: 500; text-decoration: none; border: none; cursor: none;
             transition: var(--transition); border: 1px solid var(--glass-border);
             background: var(--glass-bg); color: var(--text-primary);
-            backdrop-filter: var(--blur-light);
-            min-height: 48px;
+            backdrop-filter: var(--blur-light); min-height: 48px;
         }
         .btn:hover { background: var(--glass-bg-hover); transform: scale(1.02); border-color: var(--glass-border-light); }
         .btn-primary { background: var(--text-primary); color: var(--bg-base); border: none; }
         .btn-primary:hover { background: var(--accent-color); color: var(--bg-base); transform: scale(1.02); }
 
         /* WhatsApp Specific Styling */
-        .wa-btn {
-            background-color: #25D366; 
-            color: #ffffff;
-            border: none;
-        }
-        .wa-btn:hover {
-            background-color: #1ebd5a;
-            transform: scale(1.02);
-            color: #ffffff;
-        }
-        .wa-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .wa-link:hover {
-            color: #25D366;
-        }
+        .wa-btn { background-color: #25D366; color: #ffffff; border: none; }
+        .wa-btn:hover { background-color: #1ebd5a; transform: scale(1.02); color: #ffffff; }
+        .wa-link { color: var(--accent-color); text-decoration: none; font-size: 1.1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
+        .wa-link:hover { color: #25D366; }
 
         /* Floating Apple OS Navigation */
         nav {
             position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 1200px; padding: 1rem 1.5rem;
             display: flex; justify-content: space-between; align-items: center;
-            border-radius: 100px; z-index: 2000;
-            transition: var(--transition);
+            border-radius: 100px; z-index: 2000; transition: var(--transition);
         }
         nav.scrolled {
             top: 0.5rem; width: 95%; padding: 0.8rem 1.5rem;
@@ -191,10 +150,20 @@
         .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--accent-color); }
-        .nav-icons { display: flex; gap: 1rem; align-items: center; }
-        .nav-icons i { font-size: 1.2rem; color: var(--text-primary); transition: color 0.3s; padding: 5px; }
+        .nav-icons { display: flex; gap: 1.2rem; align-items: center; }
+        .nav-icons i { font-size: 1.2rem; color: var(--text-primary); transition: color 0.3s; }
         .nav-icons i:hover { color: var(--accent-color); }
         .nav-icons a:hover i { color: #25D366; }
+        
+        /* Dynamic Cart Badge */
+        .cart-wrapper { position: relative; display: flex; align-items: center; }
+        .cart-badge {
+            position: absolute; top: -6px; right: -8px; background: var(--accent-color);
+            color: #000; font-size: 0.65rem; font-weight: bold; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: var(--transition); pointer-events: none;
+        }
+        .cart-badge.active { opacity: 1; transform: scale(1.1); }
         
         .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; padding: 5px; }
 
@@ -212,11 +181,9 @@
         /* OS Drawers & Modals */
         .drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh;
-            border-radius: 0; z-index: 2100;
-            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 4rem 1.5rem 1.5rem; /* Extra top padding for absolute close button */
-            display: flex; flex-direction: column;
-            border-left: 1px solid var(--glass-border);
+            border-radius: 0; z-index: 2100; transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 4rem 1.5rem 1.5rem; display: flex; flex-direction: column;
+            border-left: 1px solid var(--glass-border); background: rgba(20,20,22,0.85);
         }
         @media (min-width: 768px) {
             .drawer { top: 1rem; height: calc(100vh - 2rem); border-radius: var(--radius-lg); right: -420px; border: 1px solid var(--glass-border); }
@@ -224,19 +191,29 @@
         }
         .drawer.active { right: 0; }
         
-        .overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
-            z-index: 1500; opacity: 0; pointer-events: none; transition: opacity 0.5s;
+        /* Dynamic Cart Items */
+        .cart-items-container { flex-grow: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 1rem; scrollbar-width: none; }
+        .cart-items-container::-webkit-scrollbar { display: none; }
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem; margin-bottom: 0.5rem; background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm); border: 1px solid var(--glass-border);
         }
+        .cart-item-title { font-size: 0.95rem; font-weight: 500; }
+        .cart-item-remove { background: none; border: none; color: #ff453a; font-size: 0.8rem; padding: 5px; opacity: 0.7; transition: var(--transition); }
+        .cart-item-remove:hover { opacity: 1; transform: scale(1.1); }
+        .empty-cart-msg { text-align: center; color: var(--text-secondary); margin-top: 2rem; display: none; }
+        .empty-cart-msg.active { display: block; }
+        
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1500; opacity: 0; pointer-events: none; transition: opacity 0.5s; }
         .overlay.active { opacity: 1; pointer-events: all; }
 
         .modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -45%) scale(0.95);
             width: 95%; max-width: 900px; max-height: 90vh; border-radius: var(--radius-lg);
             z-index: 2500; display: flex; opacity: 0; visibility: hidden; transition: var(--transition);
-            overflow-y: auto; padding: 3rem 1.5rem 1.5rem; /* Extra top padding for absolute close button */
-            flex-direction: column;
-            scrollbar-width: none; 
+            overflow-y: auto; padding: 3rem 1.5rem 1.5rem; flex-direction: column;
+            background: rgba(25,25,28,0.9); scrollbar-width: none; 
         }
         .modal::-webkit-scrollbar { display: none; }
         .modal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
@@ -251,27 +228,16 @@
         .modal-info { width: 100%; display: flex; flex-direction: column; }
         @media (min-width: 768px) { .modal-info { width: 50%; } }
         
-        .os-input-group {
-            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            border-radius: var(--radius-sm); padding: 1rem; margin-top: 1rem;
-        }
-        .os-input {
-            width: 100%; background: transparent; border: none; color: var(--text-primary);
-            font-size: 1rem; outline: none; margin-top: 0.5rem;
-            min-height: 30px;
-        }
+        .os-input-group { background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 1rem; margin-top: 1rem; }
+        .os-input { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 1rem; outline: none; margin-top: 0.5rem; min-height: 30px; }
 
         /* Hero Section */
         #hero {
             height: 100vh; display: flex; align-items: center; justify-content: center;
             text-align: center; padding: 0 5%;
-            background: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
-            position: relative;
+            background: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat; position: relative;
         }
-        #hero::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, var(--bg-base) 100%);
-        }
+        #hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, var(--bg-base) 100%); }
         .hero-content { position: relative; z-index: 10; width: 100%; max-width: 900px; margin-top: 2rem; }
         .hero-subtitle { font-size: 1.1rem; font-weight: 500; color: var(--accent-light); margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 2px;}
         .hero-title { font-size: 3.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
@@ -284,16 +250,9 @@
         @media (min-width: 600px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .bento-grid { grid-template-columns: repeat(4, 1fr); } }
 
-        .os-widget {
-            border-radius: var(--radius-lg); padding: 1.2rem;
-            display: flex; flex-direction: column; position: relative;
-            transition: var(--transition);
-        }
+        .os-widget { border-radius: var(--radius-lg); padding: 1.2rem; display: flex; flex-direction: column; position: relative; transition: var(--transition); }
         .os-widget:hover, .os-widget:active { border-color: rgba(212, 175, 55, 0.4); }
-        .widget-img-wrap {
-            width: 100%; aspect-ratio: 1; border-radius: var(--radius-md);
-            overflow: hidden; position: relative; margin-bottom: 1.5rem;
-        }
+        .widget-img-wrap { width: 100%; aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; position: relative; margin-bottom: 1.5rem; }
         .widget-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         @media (hover: hover) { .os-widget:hover .widget-img-wrap img { transform: scale(1.05); } }
         
@@ -306,22 +265,18 @@
         @media (hover: hover) { .os-widget:hover .widget-actions { opacity: 1; transform: translateX(-50%) translateY(0); } }
         
         .widget-action-btn { background: none; border: none; color: white; font-size: 1.2rem; padding: 5px 10px; text-decoration: none;}
-        .widget-action-btn:hover { color: #25D366; }
+        .widget-action-btn:hover { color: var(--accent-light); }
         .widget-info { display: flex; flex-direction: column; flex-grow: 1; }
         .widget-title { font-size: 1.3rem; margin-bottom: 0.3rem; }
         .widget-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4; }
         .widget-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
         .widget-rating { font-size: 0.85rem; color: var(--accent-color); }
-        .wishlist-icon { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 10; color: white; font-size: 1.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); padding: 10px; }
 
         /* Bento Showcase Panels */
         .bento-showcase { display: grid; grid-template-columns: 1fr; gap: 1rem; }
         @media (min-width: 768px) { .bento-showcase { grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, 300px); gap: 1.5rem; } }
         
-        .bento-card {
-            border-radius: var(--radius-lg); position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; min-height: 350px;
-        }
+        .bento-card { border-radius: var(--radius-lg); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; min-height: 350px; }
         .bento-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.8s; }
         .bento-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%); z-index: 1; }
         .bento-content { position: relative; z-index: 2; }
@@ -335,28 +290,31 @@
         }
         @media (min-width: 768px) { .segmented-control { width: fit-content; margin-left: auto; margin-right: auto; margin-bottom: 3rem; } }
         .segmented-control::-webkit-scrollbar { display: none; }
-        .segment {
-            padding: 10px 20px; border-radius: 99px; font-size: 0.9rem; font-weight: 500;
-            color: var(--text-secondary); white-space: nowrap; flex-shrink: 0;
-        }
+        .segment { padding: 10px 20px; border-radius: 99px; font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap; flex-shrink: 0; }
         .segment.active { background: var(--glass-border-light); color: var(--text-primary); }
 
         /* Sections */
         #return-gifts { background: var(--bg-surface); margin: 0; padding: 4rem 5%; border-radius: 0; }
         @media (min-width: 768px) { #return-gifts { margin: 2rem 5%; padding: 6rem 5%; border-radius: var(--radius-lg); } }
-
         #events { padding-top: 4rem; padding-bottom: 4rem; }
 
-        /* Lookbook */
-        .os-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-        @media (min-width: 768px) { .os-gallery { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
-        .gallery-item { border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 4/5; position: relative; border: 1px solid var(--glass-border); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        @media (min-width: 768px) { 
-            .gallery-item { border-radius: var(--radius-md); }
-            .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
-            .gallery-item:last-child { grid-column: span 2; }
+        /* Portfolio / Case Studies */
+        .case-study {
+            display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem;
+            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg); padding: 2rem; overflow: hidden;
+            transition: var(--transition);
         }
+        .case-study:hover { border-color: var(--glass-border-light); background: rgba(25,25,28,0.6); }
+        @media(min-width: 768px) { .case-study { grid-template-columns: 1fr 1fr; align-items: center; padding: 0; gap: 0; } }
+        .case-study-img { width: 100%; height: 100%; min-height: 300px; position: relative; }
+        .case-study-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-md); }
+        @media(min-width: 768px) { .case-study-img img { border-radius: 0; } }
+        .case-study-content { padding: 1rem 0; display: flex; flex-direction: column; justify-content: center; }
+        @media(min-width: 768px) { .case-study-content { padding: 3rem 4rem; } }
+        .case-study-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-light); margin-bottom: 1rem; display: block; font-weight: 600;}
+        .case-study-content h3 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+        .case-study-content p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1.05rem; }
 
         /* Testimonials */
         .os-slider { display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 0; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -371,11 +329,10 @@
         .dynamic-island-form {
             display: flex; align-items: center; justify-content: space-between;
             background: #000; border: 1px solid var(--glass-border);
-            border-radius: 99px; padding: 0.5rem;
-            width: 100%; max-width: 450px; margin: 2rem auto 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 99px; padding: 0.5rem; width: 100%; max-width: 450px; margin: 2rem auto 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .dynamic-island-form input { background: transparent; border: none; color: white; font-size: 1rem; flex-grow: 1; outline: none; padding-left: 1rem; min-width: 0; }
-        .dynamic-island-form button { background: var(--text-primary); color: #000; border-radius: 99px; padding: 12px 20px; font-weight: 600; border: none; white-space: nowrap; }
+        .dynamic-island-form button { background: var(--text-primary); color: #000; border-radius: 99px; padding: 12px 20px; font-weight: 600; border: none; white-space: nowrap; cursor: none; }
 
         /* Footer */
         footer { padding: 4rem 5% 2rem; border-top: 1px solid var(--glass-border); background: var(--bg-base); }
@@ -385,20 +342,18 @@
         .footer-col h4 { font-size: 1.1rem; margin-bottom: 1.2rem; color: var(--text-primary); }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 0.8rem; }
-        .footer-col ul a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; display: block; padding: 4px 0; }
+        .footer-col ul a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; display: block; padding: 4px 0; transition: color 0.3s; }
+        .footer-col ul a:hover { color: var(--accent-light); }
         .social-icons { display: flex; gap: 1rem; margin-top: 1.5rem; }
-        .social-icons a { width: 44px; height: 44px; border-radius: 50%; background: var(--glass-bg); display: flex; align-items: center; justify-content: center; color: var(--text-primary); border: 1px solid var(--glass-border); text-decoration: none; }
+        .social-icons a { width: 44px; height: 44px; border-radius: 50%; background: var(--glass-bg); display: flex; align-items: center; justify-content: center; color: var(--text-primary); border: 1px solid var(--glass-border); text-decoration: none; transition: var(--transition); }
+        .social-icons a:hover { background: var(--text-primary); color: var(--bg-base); transform: translateY(-3px); }
 
         /* Animations */
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* Loading Screen */
-        .loader {
-            position: fixed; inset: 0; background: var(--bg-base); z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
+        .loader { position: fixed; inset: 0; background: var(--bg-base); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s; }
         .apple-spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--text-primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -410,7 +365,7 @@
             .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
         }
 
-        /* Disable custom cursor entirely on touch devices for better UX */
+        /* Disable custom cursor entirely on touch devices */
         @media (hover: none) and (pointer: coarse) {
             .cursor-dot, .cursor-outline { display: none !important; }
             * { cursor: auto !important; }
@@ -420,61 +375,70 @@
 </head>
 <body>
 
-    <!-- OS Custom Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="apple-spinner"></div>
     </div>
 
-    <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Floating OS Navigation -->
     <nav class="os-glass" id="navbar">
         <a href="#" class="logo hover-target">ROSE</a>
         <ul class="nav-links">
             <li><a href="#featured" class="hover-target">Featured</a></li>
             <li><a href="#return-gifts" class="hover-target">Gifts</a></li>
             <li><a href="#events" class="hover-target">Events</a></li>
-            <li><a href="#lookbook" class="hover-target">Lookbook</a></li>
+            <li><a href="#portfolio" class="hover-target">Portfolio</a></li>
             <li><a href="#about" class="hover-target">About</a></li>
         </ul>
         <div class="nav-icons">
             <i class="fa-solid fa-magnifying-glass hover-target"></i>
-            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="hover-target" style="text-decoration: none;" aria-label="WhatsApp Us">
+            <div class="cart-wrapper hover-target">
+                <a href="#" id="cart-nav-btn" style="color: inherit; text-decoration: none;" aria-label="Open Bag">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </a>
+            </div>
+            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="hover-target" style="text-decoration: none; display: flex; align-items: center;" aria-label="WhatsApp Us">
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
             <button class="mobile-toggle hover-target" id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
         </div>
     </nav>
 
-    <!-- Mobile Fullscreen Menu -->
     <div class="mobile-menu" id="mobile-menu">
-        <a href="#featured" class="mobile-link">Featured</a>
-        <a href="#return-gifts" class="mobile-link">Return Gifts</a>
-        <a href="#events" class="mobile-link">Special Events</a>
-        <a href="#lookbook" class="mobile-link">Lookbook</a>
-        <a href="#about" class="mobile-link">About</a>
-        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="mobile-link" style="color: #25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+        <a href="#featured" class="mobile-link hover-target">Featured</a>
+        <a href="#return-gifts" class="mobile-link hover-target">Return Gifts</a>
+        <a href="#events" class="mobile-link hover-target">Special Events</a>
+        <a href="#portfolio" class="mobile-link hover-target">Portfolio</a>
+        <a href="#about" class="mobile-link hover-target">About</a>
+        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="mobile-link hover-target" style="color: #25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
     </div>
 
-    <!-- Shopping Cart Drawer (With new User-Friendly Close) -->
     <div class="drawer os-glass" id="cart-drawer">
         <button class="close-btn-modern hover-target" id="close-cart" aria-label="Close Drawer">
             <i class="fa-solid fa-xmark"></i>
         </button>
         
-        <h3 style="margin: 0 0 2rem; font-size: 1.5rem;">Your Bag</h3>
-        <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-align: center; padding: 1rem;">
+        <h3 style="margin: 0 0 1.5rem; font-size: 1.5rem;">Your Bag</h3>
+        
+        <div class="cart-items-container" id="cart-items-list">
+            </div>
+        
+        <div class="empty-cart-msg active" id="empty-cart-msg">
             Your luxury bag is empty.
         </div>
-        <a href="#" class="btn btn-primary hover-target" style="width: 100%;">Continue Shopping</a>
+        
+        <div style="margin-top: auto; padding-top: 1rem;">
+            <button id="cart-checkout-btn" class="btn btn-primary wa-btn hover-target" style="width: 100%; display: none;">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Inquire About Bag
+            </button>
+            <button id="cart-continue-btn" class="btn hover-target" style="width: 100%; margin-top: 1rem;">Continue Shopping</button>
+        </div>
     </div>
 
-    <!-- Quick View Modal (With new User-Friendly Close) -->
     <div class="modal os-glass" id="quick-view-modal">
         <button class="close-btn-modern hover-target" id="close-modal" aria-label="Close Modal">
             <i class="fa-solid fa-xmark"></i>
@@ -482,7 +446,7 @@
         
         <div class="modal-body">
             <div class="modal-img">
-                <img src="https://images.unsplash.com/photo-1599643478514-4a734bc422fa?auto=format&fit=crop&q=80&w=800" alt="Product">
+                <img id="mv-img" src="https://images.unsplash.com/photo-1599643478514-4a734bc422fa?auto=format&fit=crop&q=80&w=800" alt="Product" loading="lazy">
             </div>
             <div class="modal-info">
                 <h2 id="mv-title" style="font-size: 2rem; margin-bottom: 0.5rem; padding-right: 2rem;">The Royal Box</h2>
@@ -499,16 +463,17 @@
                 </div>
                 
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <a href="#" id="modal-wa-btn" target="_blank" class="btn btn-primary wa-btn hover-target" style="flex: 1;">
-                        <i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> Inquire via WhatsApp
+                    <button id="modal-add-to-cart-btn" class="btn btn-primary hover-target" style="flex: 1.5;">
+                        <i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Add to Bag
+                    </button>
+                    <a href="#" id="modal-wa-btn" target="_blank" class="btn hover-target" aria-label="Direct WhatsApp Inquiry">
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
                     </a>
-                    <a href="#" class="btn hover-target" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Fullscreen Hero -->
     <section id="hero">
         <div class="hero-content">
             <span class="hero-subtitle reveal">Precision Meets Elegance</span>
@@ -523,89 +488,72 @@
         </div>
     </section>
 
-    <!-- Featured Collection -->
     <section id="featured">
         <h2 class="section-title reveal">Featured <span>Excellence</span></h2>
         <div class="bento-grid">
-            <!-- Product 1 -->
             <div class="os-widget os-glass reveal hover-target">
-                <i class="fa-regular fa-heart wishlist-icon"></i>
                 <div class="widget-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1599643477874-5af3f4f1ce4c?auto=format&fit=crop&q=80&w=600" alt="Golden Legacy Box">
+                    <img src="https://images.unsplash.com/photo-1599643477874-5af3f4f1ce4c?auto=format&fit=crop&q=80&w=600" alt="Golden Legacy Box" loading="lazy">
                     <div class="widget-actions">
                         <button class="widget-action-btn quick-view-btn hover-target" data-title="Golden Legacy Box" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
-                        <span style="color: var(--glass-border);">|</span>
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Golden%20Legacy%20Box" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="widget-info">
                     <h3 class="widget-title">Golden Legacy Box</h3>
                     <p class="widget-desc">Premium 24k gold detailing.</p>
                     <div class="widget-meta">
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Golden%20Legacy%20Box" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <button class="btn hover-target direct-add-btn" data-title="Golden Legacy Box" style="padding: 8px 16px; min-height: 36px; font-size: 0.85rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
                         <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Product 2 -->
             <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.1s;">
-                <i class="fa-regular fa-heart wishlist-icon"></i>
                 <div class="widget-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1611077543781-a7b2cb1eeb5c?auto=format&fit=crop&q=80&w=600" alt="Aura Perfume Set">
+                    <img src="https://images.unsplash.com/photo-1611077543781-a7b2cb1eeb5c?auto=format&fit=crop&q=80&w=600" alt="Aura Perfume Set" loading="lazy">
                     <div class="widget-actions">
                         <button class="widget-action-btn quick-view-btn hover-target" data-title="Aura Perfume Set" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
-                        <span style="color: var(--glass-border);">|</span>
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Aura%20Perfume%20Set" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="widget-info">
                     <h3 class="widget-title">Aura Perfume Set</h3>
                     <p class="widget-desc">Bespoke fragrance collection.</p>
                     <div class="widget-meta">
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Aura%20Perfume%20Set" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <button class="btn hover-target direct-add-btn" data-title="Aura Perfume Set" style="padding: 8px 16px; min-height: 36px; font-size: 0.85rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
                         <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.8</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 3 -->
             <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.2s;">
-                <i class="fa-regular fa-heart wishlist-icon"></i>
                 <div class="widget-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=600" alt="Imperial Hamper">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=600" alt="Imperial Hamper" loading="lazy">
                     <div class="widget-actions">
                         <button class="widget-action-btn quick-view-btn hover-target" data-title="Imperial Hamper" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
-                        <span style="color: var(--glass-border);">|</span>
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Imperial%20Hamper" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="widget-info">
                     <h3 class="widget-title">Imperial Hamper</h3>
                     <p class="widget-desc">Grand festival gifting experience.</p>
                     <div class="widget-meta">
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Imperial%20Hamper" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <button class="btn hover-target direct-add-btn" data-title="Imperial Hamper" style="padding: 8px 16px; min-height: 36px; font-size: 0.85rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
                         <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 4 -->
             <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.3s;">
-                <i class="fa-regular fa-heart wishlist-icon"></i>
                 <div class="widget-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1607344645866-eea33a4ca5b6?auto=format&fit=crop&q=80&w=600" alt="Eco-Luxe Collection">
+                    <img src="https://images.unsplash.com/photo-1607344645866-eea33a4ca5b6?auto=format&fit=crop&q=80&w=600" alt="Eco-Luxe Collection" loading="lazy">
                     <div class="widget-actions">
                         <button class="widget-action-btn quick-view-btn hover-target" data-title="Eco-Luxe Collection" aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
-                        <span style="color: var(--glass-border);">|</span>
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Eco-Luxe%20Collection" target="_blank" class="widget-action-btn hover-target" aria-label="WhatsApp Inquiry"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="widget-info">
                     <h3 class="widget-title">Eco-Luxe Collection</h3>
                     <p class="widget-desc">Sustainable opulent return gifts.</p>
                     <div class="widget-meta">
-                        <a href="https://wa.me/918247553115?text=Hello,%20I'm%20interested%20in%20the%20Eco-Luxe%20Collection" target="_blank" class="wa-link hover-target"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+                        <button class="btn hover-target direct-add-btn" data-title="Eco-Luxe Collection" style="padding: 8px 16px; min-height: 36px; font-size: 0.85rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
                         <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.9</div>
                     </div>
                 </div>
@@ -613,7 +561,6 @@
         </div>
     </section>
 
-    <!-- Return Gifts Section -->
     <section id="return-gifts">
         <h2 class="section-title reveal" style="margin-bottom: 2rem;">Occasion <span>Gifting</span></h2>
         
@@ -628,7 +575,7 @@
 
         <div class="bento-showcase">
             <div class="bento-card large reveal hover-target">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1000" alt="Wedding">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1000" alt="Wedding" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Wedding Returns</h4>
                     <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">A Memory to Keep.</h3>
@@ -636,7 +583,7 @@
                 </div>
             </div>
             <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" alt="Corporate">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" alt="Corporate" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Corporate</h4>
                     <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Leave a Mark.</h3>
@@ -644,7 +591,7 @@
                 </div>
             </div>
             <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600" alt="Festive">
+                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600" alt="Festive" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Festive Hampers</h4>
                     <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Celebrate Joy.</h3>
@@ -654,7 +601,6 @@
         </div>
     </section>
 
-    <!-- Special Events Section -->
     <section id="events">
         <h2 class="section-title reveal" style="margin-bottom: 1rem;">Memorable <span>Moments</span></h2>
         <p class="reveal" style="text-align: center; color: var(--text-secondary); max-width: 650px; margin: 0 auto 3rem; font-size: 1.1rem; line-height: 1.6;">
@@ -663,7 +609,7 @@
 
         <div class="bento-showcase">
             <div class="bento-card large reveal hover-target">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000" alt="Weddings & Anniversaries">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000" alt="Weddings & Anniversaries" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Weddings & Anniversaries</h4>
                     <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">Timeless Celebrations.</h3>
@@ -671,7 +617,7 @@
                 </div>
             </div>
             <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
-                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=600" alt="Surprise Plannings">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=600" alt="Surprise Plannings" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Surprise Plannings</h4>
                     <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">The Perfect Reveal.</h3>
@@ -679,7 +625,7 @@
                 </div>
             </div>
             <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=600" alt="Birthday Events">
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=600" alt="Birthday Events" loading="lazy">
                 <div class="bento-content">
                     <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Birthday Events</h4>
                     <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Milestones Mastered.</h3>
@@ -689,18 +635,34 @@
         </div>
     </section>
 
-    <!-- Lookbook -->
-    <section id="lookbook" style="padding-top: 2rem;">
-        <h2 class="section-title reveal">Gallery <span>View</span></h2>
-        <div class="os-gallery reveal">
-            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1513884923967-4b182ef167ab?auto=format&fit=crop&q=80&w=800" alt="Lookbook 1"></div>
-            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?auto=format&fit=crop&q=80&w=400" alt="Lookbook 2"></div>
-            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400" alt="Lookbook 3"></div>
-            <div class="gallery-item hover-target"><img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=800" alt="Lookbook 4"></div>
+    <section id="portfolio" style="padding-top: 2rem;">
+        <h2 class="section-title reveal">Past <span>Orchestrations</span></h2>
+        
+        <div class="case-study reveal hover-target">
+            <div class="case-study-img">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=1000" alt="Beach Event" loading="lazy">
+            </div>
+            <div class="case-study-content">
+                <span class="case-study-tag">Surprise Concierge</span>
+                <h3>The Coastal Reveal</h3>
+                <p>A cinematic surprise orchestration tailored for Valentine's Day. The timeline was meticulously crafted: beginning with a candid, street-photography-style photoshoot at the beach first, before transitioning to a breathtaking grand reveal dinner setup near the Vivekanandha memorial.</p>
+                <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20a%20surprise%20similar%20to%20The%20Coastal%20Reveal." target="_blank" class="btn hover-target" style="align-self: flex-start;">Inquire About This Concept</a>
+            </div>
+        </div>
+
+        <div class="case-study reveal hover-target" style="transition-delay: 0.1s;">
+            <div class="case-study-img" style="order: -1;">
+                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1000" alt="Velvet Gala" loading="lazy">
+            </div>
+            <div class="case-study-content" style="order: 1;">
+                <span class="case-study-tag">Corporate Milestone</span>
+                <h3>The Velvet Gala</h3>
+                <p>An immersive evening designed for a leading firm's 10th anniversary. Combining eco-luxe aesthetics with high-end execution, we transformed an industrial space into a sanctuary of elegance, complete with personalized concierge gifting for 200 attendees.</p>
+                <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20a%20corporate%20milestone%20event." target="_blank" class="btn hover-target" style="align-self: flex-start;">Plan Your Milestone</a>
+            </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section id="testimonials" style="padding-bottom: 4rem;">
         <h2 class="section-title reveal" style="margin-bottom: 2rem;">Client <span>Stories</span></h2>
         <div class="os-slider reveal">
@@ -737,7 +699,6 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
     <section id="newsletter">
         <h2 class="section-title reveal" style="margin-bottom: 1rem;">Stay <span>Updated</span></h2>
         <p class="reveal" style="color: var(--text-secondary);">Subscribe for exclusive access to limited collections and event packages.</p>
@@ -747,7 +708,6 @@
         </form>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -755,9 +715,8 @@
                 <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Elevating the art of giving and celebrating through meticulous craftsmanship, seamless event planning, and OS-inspired timeless design.</p>
                 <div class="social-icons">
                     <a href="https://wa.me/918247553115" target="_blank" class="hover-target" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="#" class="hover-target" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover-target" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                </div>
+                    <a href="https://instagram.com" target="_blank" class="hover-target" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
             </div>
             <div class="footer-col">
                 <h4>Store</h4>
@@ -790,7 +749,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Loading Screen
         window.addEventListener('load', () => {
@@ -879,20 +837,29 @@
 
         revealElements.forEach(el => revealOnScroll.observe(el));
 
-        // OS Modals & User-Friendly Close Mechanisms
+        // UI Variables for Modals & Cart
         const overlay = document.getElementById('overlay');
         const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+        const directAddBtns = document.querySelectorAll('.direct-add-btn');
         const modal = document.getElementById('quick-view-modal');
         const cartDrawer = document.getElementById('cart-drawer');
-        const cartBtn = document.getElementById('cart-btn');
+        const cartNavBtn = document.getElementById('cart-nav-btn');
         
-        // New Close Buttons
         const closeModalBtn = document.getElementById('close-modal');
         const closeCartBtn = document.getElementById('close-cart');
+        const cartContinueBtn = document.getElementById('cart-continue-btn');
         
         const mvTitle = document.getElementById('mv-title');
         const mvPersonalize = document.getElementById('mv-personalize');
         const modalWaBtn = document.getElementById('modal-wa-btn');
+        const modalAddBtn = document.getElementById('modal-add-to-cart-btn');
+
+        // Dynamic Cart State
+        let cart = [];
+        const cartBadge = document.getElementById('cart-badge');
+        const cartItemsList = document.getElementById('cart-items-list');
+        const emptyCartMsg = document.getElementById('empty-cart-msg');
+        const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
 
         function openOverlay() { 
             overlay.classList.add('active'); 
@@ -907,29 +874,104 @@
         }
 
         // Cart Drawer Logic
-        cartBtn.addEventListener('click', (e) => {
+        cartNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
             cartDrawer.classList.add('active');
             openOverlay();
         });
 
-        // Close Event Listeners (Overlay tap & 'X' buttons)
         overlay.addEventListener('click', closeAll);
         closeModalBtn.addEventListener('click', closeAll);
         closeCartBtn.addEventListener('click', closeAll);
+        cartContinueBtn.addEventListener('click', closeAll);
         
-        // Enable closing with ESC key for better accessibility
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") { closeAll(); }
         });
 
-        // Realtime WA link update based on input
+        // Add to Cart Functionality
+        function addToCart(title, personalization = "") {
+            const item = {
+                id: Date.now(),
+                title: title,
+                note: personalization
+            };
+            cart.push(item);
+            updateCartUI();
+            
+            // Provide feedback
+            const originalText = modalAddBtn.innerHTML;
+            modalAddBtn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+            modalAddBtn.style.background = "#25D366";
+            
+            // Pop the badge
+            cartBadge.style.transform = "scale(1.4)";
+            setTimeout(() => {
+                modalAddBtn.innerHTML = originalText;
+                modalAddBtn.style.background = "";
+                cartBadge.style.transform = "scale(1)";
+            }, 1000);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            // Update Badge
+            cartBadge.textContent = cart.length;
+            if (cart.length > 0) {
+                cartBadge.classList.add('active');
+                emptyCartMsg.classList.remove('active');
+                cartCheckoutBtn.style.display = 'inline-flex';
+            } else {
+                cartBadge.classList.remove('active');
+                emptyCartMsg.classList.add('active');
+                cartCheckoutBtn.style.display = 'none';
+            }
+
+            // Update List
+            cartItemsList.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                
+                let titleHtml = `<span class="cart-item-title">${item.title}</span>`;
+                if(item.note) {
+                    titleHtml = `<div><span class="cart-item-title">${item.title}</span><div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;"><i class="fa-solid fa-pen-nib" style="font-size: 0.6rem;"></i> ${item.note}</div></div>`;
+                }
+
+                div.innerHTML = `
+                    ${titleHtml}
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})" aria-label="Remove Item"><i class="fa-solid fa-trash"></i></button>
+                `;
+                cartItemsList.appendChild(div);
+            });
+        }
+
+        // Checkout to WhatsApp
+        cartCheckoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            const baseNumber = "918247553115";
+            let intro = "Hello ROSE, I would like to inquire about the following items in my bag:\n\n";
+            
+            cart.forEach((item, index) => {
+                intro += `${index + 1}. ${item.title}`;
+                if (item.note) intro += ` (Note: ${item.note})`;
+                intro += "\n";
+            });
+            
+            const whatsappURL = `https://wa.me/${baseNumber}?text=${encodeURIComponent(intro)}`;
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Quick View Modal Initialization
         function updateWaLink(title) {
             let note = mvPersonalize.value.trim();
             let baseText = `Hello ROSE, I'm interested in the ${title}.`;
-            if (note) {
-                baseText += ` My personalization note is: "${note}".`;
-            }
+            if (note) baseText += ` My personalization note is: "${note}".`;
             modalWaBtn.href = `https://wa.me/918247553115?text=${encodeURIComponent(baseText)}`;
         }
 
@@ -937,14 +979,36 @@
             btn.addEventListener('click', (e) => {
                 const title = btn.getAttribute('data-title');
                 mvTitle.textContent = title;
-                mvPersonalize.value = ""; // Reset input
-                updateWaLink(title); // Initial link creation
+                mvPersonalize.value = ""; 
+                updateWaLink(title); 
                 
-                // Update dynamically if they type
                 mvPersonalize.oninput = () => updateWaLink(title);
+
+                // Setup Add to Bag button for this specific item
+                modalAddBtn.onclick = () => {
+                    addToCart(title, mvPersonalize.value.trim());
+                };
 
                 modal.classList.add('active');
                 openOverlay();
+            });
+        });
+
+        // Direct Add to Bag Buttons on Grid Cards
+        directAddBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const title = btn.getAttribute('data-title');
+                addToCart(title, "");
+                
+                // Visual feedback on the button itself
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                btn.style.color = "#25D366";
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.style.color = "";
+                }, 1000);
             });
         });
 
