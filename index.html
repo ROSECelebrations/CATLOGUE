@@ -3,170 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rose Celebrations | Events & Premium Gifts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>ROSE Celebrations | Bespoke Events & Gifting</title>
+    
     <style>
+        /* Apple-Inspired Luminous Dark OS Palette */
         :root {
-            /* Apple Dark Mode OS Palette with Rose Gold Accents */
             --bg-base: #000000;
-            --bg-surface: #1c1c1e;
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
+            --text-primary: #F5F5F7;
+            --text-secondary: #86868B;
+            --accent-gold: #D4AF37;
             
-            /* Rose Celebrations Branding */
-            --accent-color: #e0a3ad; /* Rose Gold / Soft Pink */
-            --accent-light: #f4d5d9;
-            --accent-dark: #b86b77;
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(30, 30, 32, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(24px) saturate(180%);
             
-            /* Apple OS Glassmorphism */
-            --glass-bg: rgba(30, 30, 30, 0.45);
-            --glass-bg-hover: rgba(50, 50, 50, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-border-light: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --blur-heavy: blur(30px) saturate(200%);
-            --blur-light: blur(15px) saturate(150%);
-            
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 32px;
-            
-            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            
-            /* Apple Native Typography */
-            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            
-            /* WhatsApp Color */
-            --wa-color: #25D366;
+            /* System Typography */
+            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-stack);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--bg-base);
             color: var(--text-primary);
+            font-family: var(--font-stack);
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            /* Subtle rose-tinted mesh background */
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(224, 163, 173, 0.08), transparent 35%),
-                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03), transparent 25%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        }
+
+        /* Subtle Ambient Background */
+        body::before {
+            content: '';
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(212, 175, 55, 0.05), transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.03), transparent 40%);
+            pointer-events: none; z-index: -1;
         }
 
         /* Typography */
-        h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
-        .section-title { 
-            font-size: 2.5rem; 
-            text-align: center; 
-            margin-bottom: 3rem; 
-            font-weight: 700;
-        }
-        @media (min-width: 768px) { .section-title { font-size: 3.5rem; margin-bottom: 4rem; } }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-accent {
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        h1 { font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: -0.03em; line-height: 1.05; font-weight: 600; margin-bottom: 24px; }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.02em; font-weight: 600; margin-bottom: 16px; }
+        h3 { font-size: 1.4rem; font-weight: 500; margin-bottom: 8px; }
+        p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.5; margin-bottom: 24px; }
 
-        /* Glass Utility */
-        .os-glass {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-heavy);
-            -webkit-backdrop-filter: var(--blur-heavy);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+        /* Dynamic Island Navigation */
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 22, 0.65);
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border); border-radius: 100px;
+            display: flex; align-items: center; padding: 10px 24px; gap: 24px;
+            z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
+        .nav-brand { font-weight: 700; letter-spacing: 2px; color: var(--text-primary); text-decoration: none; margin-right: 16px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
+        .nav-link:hover, .nav-link.active { color: var(--text-primary); }
 
         /* Buttons */
         .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 14px 28px; border-radius: 999px;
-            font-size: 0.95rem; font-weight: 500; text-decoration: none;
-            transition: var(--transition); border: 1px solid var(--glass-border);
-            background: var(--glass-bg); color: var(--text-primary);
-            backdrop-filter: var(--blur-light);
-            cursor: pointer;
+            background: var(--text-primary); color: #000; border: none;
+            padding: 14px 28px; border-radius: 999px; font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
         }
-        .btn:hover { background: var(--glass-bg-hover); transform: scale(1.02); border-color: var(--glass-border-light); }
-        .btn-primary { background: var(--text-primary); color: var(--bg-base); border: none; }
-        .btn-primary:hover { background: var(--accent-color); color: var(--bg-base); }
-        .btn-wa { background: var(--wa-color); color: white; border: none; font-weight: 600; }
-        .btn-wa:hover { background: #1ebd5a; color: white; transform: scale(1.03); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        .btn:hover { transform: scale(1.03); }
+        .btn-wa { background: #25D366; color: #fff; width: 100%; justify-content: center; }
+        .btn-wa:hover { background: #20BA56; }
+        .btn-secondary { background: var(--glass-bg); color: var(--text-primary); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        /* Navigation */
-        nav {
-            position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1000px; padding: 0.8rem 1.5rem;
-            display: flex; justify-content: space-between; align-items: center;
-            border-radius: 100px; z-index: 2000;
-            transition: var(--transition);
+        /* SPA Page Logic */
+        .page-view { display: none; opacity: 0; padding: 140px 0 80px; min-height: 100vh; transition: opacity 0.5s var(--ease); }
+        .page-view.active { display: block; opacity: 1; }
+
+        /* Bento Grid Catalog */
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
+        .bento-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 28px; overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
         }
-        nav.scrolled {
-            top: 0.5rem; width: 95%; padding: 0.6rem 1.5rem;
-            background: rgba(20, 20, 20, 0.8); border-color: rgba(255,255,255,0.15);
-        }
-        .logo { 
-            font-size: 1.4rem; font-weight: 700; color: var(--text-primary); 
-            text-decoration: none; letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
-        }
-        .logo i { color: var(--accent-color); }
+        .bento-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
         
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { 
-            color: var(--text-primary); text-decoration: none; font-size: 0.9rem; 
-            font-weight: 500; transition: color 0.3s; cursor: pointer;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); }
+        .card-img-wrap { width: 100%; height: 260px; background: #111; overflow: hidden; position: relative; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+        .bento-card:hover .card-img-wrap img { transform: scale(1.05); }
         
-        .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; padding: 5px; cursor: pointer; }
+        .card-body { padding: 32px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-body p { flex-grow: 1; }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed; inset: 0; background: var(--glass-bg);
-            backdrop-filter: var(--blur-heavy); -webkit-backdrop-filter: var(--blur-heavy);
-            z-index: 1900; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: var(--transition); gap: 2rem;
+        /* About Section Layout */
+        .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 40px; }
+        @media (max-width: 768px) {
+            .about-layout { grid-template-columns: 1fr; }
+            nav { width: 90%; gap: 16px; padding: 10px 16px; justify-content: space-between; }
+            .nav-brand { margin-right: 0; }
         }
-        .mobile-menu.active { opacity: 1; pointer-events: all; }
-        .mobile-menu a { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: color 0.3s; }
-        .mobile-menu a:hover, .mobile-menu a.active { color: var(--accent-color); }
+    </style>
+</head>
+<body>
 
-        /* Page Routing System (SPA) */
-        main { flex: 1; position: relative; }
-        .page {
-            display: none;
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-            padding: 8rem 5% 4rem;
-            min-height: 100vh;
-        }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    <nav>
+        <a href="#" class="nav-brand" onclick="switchPage('home')">ROSE</a>
+        <a class="nav-link active" onclick="switchPage('home')">Home</a>
+        <a class="nav-link" onclick="switchPage('events')">Events</a>
+        <a class="nav-link" onclick="switchPage('gifts')">Gifts</a>
+        <a class="nav-link" onclick="switchPage('about')">About</a>
+    </nav>
 
-        /* Hero Section (Home) */
-        .hero {
-            height: calc(100vh - 8rem);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; position: relative;
+    <main id="home" class="page-view active">
+        <div class="container" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
+            <span style="color: var(--accent-gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 24px; font-weight: 500;">Premium Celebrations</span>
+            <h1>Cinematic moments.<br>Flawless execution.</h1>
+            <p style="max-width: 580px; margin: 0 auto 40px;">From masterfully orchestrated surprise proposals to purely artisanal return gifts, ROSE operates as the invisible hand behind your most unforgettable experiences.</p>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+                <button class="btn" onclick="switchPage('events')">Explore Orchestration</button>
+                <button class="btn btn-secondary" onclick="switchPage('gifts')">View Gifting</button>
+            </div>
+        </div>
+    </main>
+
+    <main id="events" class="page-view">
+        <div class="container">
+            <h2>Event Orchestration</h2>
+            <p style="max-width: 650px;">We handle the aesthetics, logistics, and flow to ensure your celebration feels timeless. Select a concept to connect with our concierge planners.</p>
+
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" alt="Weddings">
+                    </div>
+                    <div class="card-body">
+                        <h3>Weddings & Anniversaries</h3>
+                        <p>End-to-end luxury event planning. We transform venues into immersive, cinematic spaces tailored to your narrative.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Wedding / Anniversary Event')">Plan Your Event</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8892bc952f?auto=format&fit=crop&q=80&w=800" alt="Birthdays">
+                    </div>
+                    <div class="card-body">
+                        <h3>Milestone Birthdays</h3>
+                        <p>Curated private dinners and grand birthday galas designed specifically around the celebrated individual's milestones.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Milestone Birthday Celebration')">Plan Your Event</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800" alt="Surprises">
+                    </div>
+                    <div class="card-body">
+                        <h3>Surprise Concierge</h3>
+                        <p>Untraceable logistics for the perfect proposal or celebration. We manage the details discreetly so the reveal is absolute perfection.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Surprise Event Concierge')">Plan Your Event</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=800" alt="Photography">
+                    </div>
+                    <div class="card-body">
+                        <h3>Candid Stranger Experience</h3>
+                        <p>A deeply personal photography journey. The narrative begins with a covert capture at the beach, culminating perfectly at Vivekanandha.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Stranger Photography Journey')">Plan Your Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="gifts" class="page-view">
+        <div class="container">
+            <h2>Luxury Gifting</h2>
+            <p style="max-width: 650px;">Physical artifacts of appreciation. Browse our curated packages or request a completely custom creation tailored to your guests.</p>
+
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1599643478514-4a734bc422fa?auto=format&fit=crop&q=80&w=800" alt="Packages">
+                    </div>
+                    <div class="card-body">
+                        <h3>Curated Gift Packages</h3>
+                        <p>Premium hampers featuring bespoke fragrances, artisanal goods, and high-end packaging. Perfect for corporate gifting or bridal parties.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Curated Gift Package')">Order Details</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800" alt="Return Gifts">
+                    </div>
+                    <div class="card-body">
+                        <h3>Elegant Return Gifts</h3>
+                        <p>Ensure your guests leave with a lasting memory. We design bulk return gifts that match the exact aesthetic and theme of your event.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Event Return Gifts')">Order Details</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" alt="Custom Gifts">
+                    </div>
+                    <div class="card-body">
+                        <h3>Special Custom Gifts</h3>
+                        <p>One-of-a-kind creations engineered from scratch. Whether it’s a personalized puzzle box or a sentimental artifact, we craft it to your vision.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Special Custom Gift')">Order Details</button>
+                    </div>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800" alt="Confection">
+                    </div>
+                    <div class="card-body">
+                        <h3>The Signature Confection</h3>
+                        <p>An artisanal, edible milk-based delicacy. Meticulously formulated without the use of millets, and finished delicately with pure gold leaf.</p>
+                        <button class="btn btn-wa" onclick="openWhatsApp('Signature Milk Confection')">Order Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="about" class="page-view">
+        <div class="container">
+            <div class="about-layout">
+                <div>
+                    <h2 style="font-size: 3rem; margin-bottom: 24px;">The ROSE Philosophy.</h2>
+                    <p style="font-size: 1.15rem;">We believe that luxury lies in the details that most people never see. ROSE Celebrations was founded on the principle that true event orchestration should feel like cinematic magic—effortless, beautiful, and deeply personal.</p>
+                    <p style="font-size: 1.15rem;">Whether we are formulating a completely custom gift or plotting the logistics of a high-end surprise event, our team operates with absolute discretion and extreme precision to bring your vision to reality.</p>
+                    <button class="btn btn-secondary" style="margin-top: 16px;" onclick="openWhatsApp('General Consultation')">Speak with a Planner</button>
+                </div>
+                <div style="border-radius: 32px; overflow: hidden; height: 100%; min-height: 500px; background: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1000') center/cover;">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Store your business WhatsApp number here (include country code, no + or spaces)
+        const businessPhone = "918247553115";
+
+        function switchPage(pageId) {
+            // 1. Trigger fade out
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.style.opacity = '0';
+            });
+
+            // 2. Wait for fade, then switch display state
+            setTimeout(() => {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    page.style.display = 'none';
+                });
+
+                // 3. Prepare new page
+                const targetPage = document.getElementById(pageId);
+                targetPage.style.display = 'block';
+                
+                // 4. Force browser reflow to enable CSS transition
+                void targetPage.offsetWidth; 
+                
+                // 5. Fade in new page
+                targetPage.classList.add('active');
+                targetPage.style.opacity = '1';
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300); // 300ms matches the visual feeling of the CSS transition
+
+            // Update Navigation active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
-        .hero-img {
-            position: absolute; inset: 0; z-index: -1; border-radius: var(--radius-lg); overflow: hidden;
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            -webkit-mask-image: linear
+
+        // Dynamic WhatsApp Redirect
+        function openWhatsApp(itemName) {
+            const message = encodeURIComponent(`Hello ROSE Celebrations, I would like to get detailed information and inquire about: ${itemName}. Please advise on the next steps.`);
+            window.open(`https://wa.me/${businessPhone}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
