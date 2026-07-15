@@ -1,65 +1,1084 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROSE | Bespoke Orchestration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ROSE | Premium Luxury Gifts & Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Premium Editorial Font Integration: Added lighter weights for luxury feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #050505; --text: #fff; --gold: #D4AF37; }
-        * { box-sizing: border-box; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; }
-        
-        /* Glass Navbar */
-        header { 
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: min(90%, 600px); padding: 12px 24px; z-index: 100;
-            background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 99px;
-            display: flex; justify-content: space-between; align-items: center;
+        :root {
+            /* Apple Dark Mode OS Palette */
+            --bg-base: #000000;
+            --bg-surface: #111113;
+            --text-primary: #f5f5f7; /* Apple's off-white */
+            --text-secondary: #86868b;
+            --accent-color: #D6B075; /* Softer, expensive Champagne Gold */
+            --accent-light: #F3E5AB;
+            
+            /* VisionOS Style True Glassmorphism */
+            --glass-bg: rgba(25, 25, 28, 0.25); /* More transparent */
+            --glass-bg-hover: rgba(40, 40, 45, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-light: rgba(255, 255, 255, 0.2);
+            /* Soft drop shadow + subtle inner white glow for edge lighting */
+            --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+            --blur-heavy: blur(45px) saturate(180%);
+            --blur-light: blur(20px) saturate(150%);
+            
+            --radius-sm: 14px;
+            --radius-md: 24px;
+            --radius-lg: 36px;
+            
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            /* Typography Hybrid System */
+            --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-serif: "Cormorant Garamond", Georgia, serif;
         }
 
-        /* Hero */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 300; margin-bottom: 1rem; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            /* Subtle ambient light to make the glassmorphism visible */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 176, 117, 0.04), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.03), transparent 30%);
+            background-attachment: fixed;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Premium Minimalist Typography Hierarchy */
+        h1, h2, h3, h4 { font-weight: 400; letter-spacing: -0.01em; }
         
-        /* Bento Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: 0 auto; }
-        .card { padding: 40px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 30px; }
+        .section-title { 
+            font-family: var(--font-serif);
+            font-size: 3.8rem; 
+            text-align: center; 
+            margin-bottom: 5rem; 
+            font-weight: 300; /* Ultra-light luxury */
+            letter-spacing: 0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #a6a6a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title span { 
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        section { padding: 9rem 5%; position: relative; }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed; top: 0; left: 0; width: 5px; height: 5px;
+            background-color: rgba(255,255,255,1); border-radius: 50%;
+            transform: translate(-50%, -50%); z-index: 9999; pointer-events: none;
+        }
+        .cursor-outline {
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+            transform: translate(-50%, -50%); z-index: 9998; pointer-events: none;
+            transition: width 0.4s, height 0.4s, background-color 0.4s, border-color 0.4s;
+        }
+        .cursor-outline.hover {
+            width: 56px; height: 56px;
+            background-color: rgba(214, 176, 117, 0.05);
+            backdrop-filter: var(--blur-light);
+            border-color: var(--accent-color);
+        }
+
+        /* Apple OS Glass Components */
+        .os-glass {
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur-heavy);
+            -webkit-backdrop-filter: var(--blur-heavy);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Modern Close Buttons */
+        .close-btn-modern {
+            position: absolute; top: 20px; right: 20px; width: 38px; height: 38px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border); color: var(--text-primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; z-index: 50; transition: var(--transition); outline: none;
+        }
+        .close-btn-modern:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.05); color: var(--accent-color); }
+
+        /* Premium Minimalist Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 15px 32px; border-radius: 999px;
+            font-size: 0.85rem; font-weight: 500; text-decoration: none; border: none; cursor: none;
+            transition: var(--transition); border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.03); color: var(--text-primary);
+            letter-spacing: 0.08em; text-transform: uppercase;
+            backdrop-filter: var(--blur-light); min-height: 50px;
+        }
+        .btn:hover { 
+            background: rgba(255,255,255,0.08); 
+            transform: translateY(-2px); 
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .btn-primary { background: var(--text-primary); color: var(--bg-base); border: none; }
+        .btn-primary:hover { 
+            background: var(--accent-color); 
+            color: var(--bg-base); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(214, 176, 117, 0.2);
+        }
+
+        /* WhatsApp Call to Action */
+        .wa-btn { background-color: #25D366; color: #ffffff; border: none; }
+        .wa-btn:hover { background-color: #20b858; color: #ffffff; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.25); }
+
+        /* Floating Nav Bar */
+        nav {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; padding: 1.2rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 100px; z-index: 2000; transition: var(--transition);
+        }
+        nav.scrolled {
+            top: 1rem; padding: 1rem 2.5rem;
+            background: rgba(10, 10, 12, 0.5); border-color: rgba(255,255,255,0.1);
+        }
+        .logo { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 300; color: var(--text-primary); text-decoration: none; letter-spacing: 0.15em; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 400; transition: color 0.4s; text-transform: uppercase; letter-spacing: 0.1em; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-icons { display: flex; gap: 1.8rem; align-items: center; }
+        .nav-icons i { font-size: 1.1rem; color: var(--text-secondary); transition: color 0.4s; }
+        .nav-icons i:hover { color: var(--text-primary); }
         
-        .btn { padding: 12px 30px; border-radius: 99px; background: var(--text); color: #000; border: none; font-weight: 600; cursor: pointer; }
+        /* Premium Subtle Cart Counter Badge */
+        .cart-wrapper { position: relative; display: flex; align-items: center; }
+        .cart-badge {
+            position: absolute; top: -6px; right: -8px; background: var(--accent-color);
+            color: #000; font-size: 0.6rem; font-weight: 600; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: var(--transition); pointer-events: none;
+        }
+        .cart-badge.active { opacity: 1; transform: scale(1.1); }
+        
+        .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 1.3rem; padding: 5px; }
+
+        /* Mobile Layout Menu overlay */
+        .mobile-menu {
+            position: fixed; inset: 0; background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: var(--blur-heavy); -webkit-backdrop-filter: var(--blur-heavy);
+            z-index: 1900; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: var(--transition); gap: 2.5rem;
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; color: var(--text-secondary); text-decoration: none; transition: var(--transition); letter-spacing: 0.05em; }
+        .mobile-menu a:hover, .mobile-menu a:active { color: var(--text-primary); padding-left: 15px; }
+
+        /* Drawer Layout */
+        .drawer {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100vh;
+            border-radius: 0; z-index: 2100; transition: right 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 5rem 2.5rem 2.5rem; display: flex; flex-direction: column;
+            border-left: 1px solid var(--glass-border); background: rgba(10,10,12,0.6);
+        }
+        @media (min-width: 768px) {
+            .drawer { top: 1.5rem; height: calc(100vh - 3rem); border-radius: var(--radius-lg); right: -450px; border: 1px solid var(--glass-border); }
+            .drawer.active { right: 1.5rem; }
+        }
+        .drawer.active { right: 0; }
+        
+        /* Dynamic Drawer Product listings */
+        .cart-items-container { flex-grow: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 1rem; scrollbar-width: none; }
+        .cart-items-container::-webkit-scrollbar { display: none; }
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem; margin-bottom: 1rem; background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm); border: 1px solid var(--glass-border);
+        }
+        .cart-item-title { font-size: 0.9rem; font-weight: 500; letter-spacing: 0.03em; }
+        .cart-item-remove { background: none; border: none; color: #ff453a; font-size: 0.85rem; padding: 5px; opacity: 0.5; transition: var(--transition); }
+        .cart-item-remove:hover { opacity: 1; transform: scale(1.1); }
+        .empty-cart-msg { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 300; text-align: center; color: var(--text-secondary); margin-top: 3rem; display: none; }
+        .empty-cart-msg.active { display: block; }
+        
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1500; opacity: 0; pointer-events: none; transition: opacity 0.6s; }
+        .overlay.active { opacity: 1; pointer-events: all; }
+
+        /* Window Modal Configuration */
+        .modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -45%) scale(0.97);
+            width: 95%; max-width: 950px; max-height: 90vh; border-radius: var(--radius-lg);
+            z-index: 2500; display: flex; opacity: 0; visibility: hidden; transition: var(--transition);
+            overflow-y: auto; padding: 3rem 2rem 2rem; flex-direction: column;
+            background: rgba(15,15,18,0.7); scrollbar-width: none; 
+        }
+        .modal::-webkit-scrollbar { display: none; }
+        .modal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        
+        .modal-body { display: flex; gap: 3rem; flex-direction: column; }
+        @media (min-width: 768px) { .modal-body { flex-direction: row; } .modal { padding: 3.5rem; } }
+        
+        .modal-img { width: 100%; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        @media (min-width: 768px) { .modal-img { width: 45%; } }
+        .modal-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1; }
+        
+        .modal-info { width: 100%; display: flex; flex-direction: column; justify-content: center; }
+        @media (min-width: 768px) { .modal-info { width: 55%; } }
+        
+        .os-input-group { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 1.2rem; margin-top: 2rem; }
+        .os-input { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 0.95rem; outline: none; margin-top: 0.8rem; min-height: 30px; font-weight: 300;}
+
+        /* Hero Frame */
+        #hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 0 5%;
+            background: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat; position: relative;
+        }
+        #hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, var(--bg-base) 100%); }
+        .hero-content { position: relative; z-index: 10; width: 100%; max-width: 1000px; margin-top: 4rem; }
+        .hero-subtitle { font-size: 0.8rem; font-weight: 500; color: var(--accent-light); margin-bottom: 2rem; display: block; text-transform: uppercase; letter-spacing: 0.3em;}
+        .hero-title { font-family: var(--font-serif); font-weight: 300; font-size: 4.5rem; line-height: 1.1; letter-spacing: 0.02em; margin-bottom: 2.5rem; }
+        @media (min-width: 768px) { .hero-title { font-size: 7rem; } }
+        .hero-actions { display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; align-items: center; }
+        @media (min-width: 480px) { .hero-actions { flex-direction: row; } }
+
+        /* Premium Bento Cards */
+        .bento-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        @media (min-width: 600px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .bento-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .os-widget { 
+            border-radius: var(--radius-lg); padding: 1.8rem; display: flex; flex-direction: column; position: relative; 
+            transition: var(--transition);
+        }
+        .os-widget:hover, .os-widget:active { 
+            border-color: rgba(214, 176, 117, 0.3); 
+            background: rgba(25, 25, 28, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+        .widget-img-wrap { width: 100%; aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; position: relative; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.05); }
+        .widget-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        @media (hover: hover) { .os-widget:hover .widget-img-wrap img { transform: scale(1.05); } }
+        
+        .widget-actions {
+            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
+            display: flex; gap: 0.8rem; opacity: 0; transition: var(--transition); z-index: 10;
+            background: rgba(5,5,5,0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 10px 20px; border-radius: 99px; border: 1px solid var(--glass-border);
+        }
+        @media (hover: none) { .widget-actions { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @media (hover: hover) { .os-widget:hover .widget-actions { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        
+        .widget-action-btn { background: none; border: none; color: var(--text-secondary); font-size: 1.1rem; padding: 5px 10px; transition: color 0.4s; }
+        .widget-action-btn:hover { color: var(--text-primary); }
+        .widget-info { display: flex; flex-direction: column; flex-grow: 1; }
+        .widget-title { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .widget-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.8rem; line-height: 1.6; font-weight: 300; }
+        .widget-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .widget-rating { font-size: 0.8rem; color: var(--accent-color); letter-spacing: 0.1em; }
+
+        /* Bento Showcase Large Panels */
+        .bento-showcase { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .bento-showcase { grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, 350px); gap: 2.5rem; } }
+        
+        .bento-card { border-radius: var(--radius-lg); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem; min-height: 400px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
+        .bento-card:hover { border-color: rgba(214, 176, 117, 0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        .bento-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        @media (hover: hover) { .bento-card:hover img { transform: scale(1.05); } }
+        .bento-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 100%); z-index: 1; }
+        .bento-content { position: relative; z-index: 2; }
+        @media (min-width: 768px) { .bento-card.large { grid-row: span 2; } }
+
+        /* Filter Segmented Control */
+        .segmented-control {
+            display: flex; overflow-x: auto; gap: 0.8rem; padding: 0.6rem; margin-bottom: 3rem;
+            background: rgba(255,255,255,0.03); border-radius: 99px; scrollbar-width: none;
+            border: 1px solid var(--glass-border); width: 100%; -webkit-overflow-scrolling: touch;
+            backdrop-filter: blur(20px);
+        }
+        @media (min-width: 768px) { .segmented-control { width: fit-content; margin-left: auto; margin-right: auto; margin-bottom: 5rem; } }
+        .segmented-control::-webkit-scrollbar { display: none; }
+        .segment { padding: 12px 28px; border-radius: 99px; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; transition: var(--transition); }
+        .segment.active { background: rgba(255, 255, 255, 0.1); color: var(--text-primary); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* Sections Adjustment for Breathability */
+        #return-gifts { margin: 0; padding: 8rem 5%; border-radius: 0; }
+        @media (min-width: 768px) { #return-gifts { margin: 4rem 3%; padding: 10rem 7%; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.03); background: rgba(15,15,18,0.3); } }
+        #events { padding-top: 8rem; padding-bottom: 8rem; }
+
+        /* Premium Case Studies Portfolio Blocks */
+        .case-study {
+            display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 4.5rem;
+            background: rgba(20,20,22,0.3); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg); padding: 3rem; overflow: hidden;
+            transition: var(--transition);
+        }
+        .case-study:hover { 
+            border-color: rgba(214, 176, 117, 0.25); 
+            background: rgba(25,25,28,0.5); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+        @media(min-width: 768px) { .case-study { grid-template-columns: 1.2fr 0.8fr; align-items: center; padding: 0; gap: 0; } }
+        .case-study-img { width: 100%; height: 100%; min-height: 450px; position: relative; overflow: hidden; }
+        .case-study-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-md); transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        @media(min-width: 768px) { .case-study-img img { border-radius: 0; } }
+        @media (hover: hover) { .case-study:hover .case-study-img img { transform: scale(1.04); } }
+        
+        .case-study-content { padding: 1rem 0; display: flex; flex-direction: column; justify-content: center; }
+        @media(min-width: 768px) { .case-study-content { padding: 5rem 6rem; } }
+        .case-study-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-light); margin-bottom: 1.5rem; display: block; font-weight: 500;}
+        .case-study-content h3 { font-family: var(--font-serif); font-weight: 300; font-size: 3rem; margin-bottom: 2rem; letter-spacing: 0.02em; line-height: 1.1; }
+        .case-study-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem; font-size: 0.95rem; font-weight: 300; }
+
+        /* Testimonial slider */
+        .os-slider { display: flex; gap: 2rem; overflow-x: auto; padding: 2rem 0 4rem; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .os-slider::-webkit-scrollbar { display: none; }
+        .testimonial-widget { min-width: 340px; scroll-snap-align: center; padding: 2.5rem; display: flex; flex-direction: column; gap: 2rem; background: rgba(25,25,28,0.3); }
+        @media (min-width: 768px) { .testimonial-widget { min-width: 440px; padding: 3.5rem; } .os-slider{ gap: 3rem; padding: 2rem 0 5rem;} }
+        .user-profile { display: flex; align-items: center; gap: 1.5rem; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-weight: 300; font-size: 1.3rem; color: var(--accent-light); font-family: var(--font-serif); }
+
+        /* Newsletter Subscription */
+        #newsletter { text-align: center; padding: 10rem 5%; }
+        .dynamic-island-form {
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(15,15,18,0.8); border: 1px solid var(--glass-border);
+            border-radius: 99px; padding: 0.8rem; width: 100%; max-width: 520px; margin: 3.5rem auto 0; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+        }
+        .dynamic-island-form input { background: transparent; border: none; color: white; font-size: 0.9rem; flex-grow: 1; outline: none; padding-left: 1.5rem; min-width: 0; font-weight: 300; }
+        .dynamic-island-form button { background: var(--text-primary); color: #000; border-radius: 99px; padding: 16px 28px; font-weight: 500; font-size: 0.8rem; border: none; white-space: nowrap; cursor: none; text-transform: uppercase; letter-spacing: 0.08em; transition: var(--transition); }
+        .dynamic-island-form button:hover { background: var(--accent-color); }
+
+        /* Footer */
+        footer { padding: 8rem 5% 3rem; border-top: 1px solid rgba(255,255,255,0.05); background: #030303; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 5rem; }
+        @media (min-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 5rem; } }
+        .footer-col h4 { font-size: 0.75rem; font-weight: 500; margin-bottom: 2rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.15em; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 1.2rem; }
+        .footer-col ul a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; display: block; padding: 2px 0; transition: color 0.4s; font-weight: 300; }
+        .footer-col ul a:hover { color: var(--accent-light); }
+        .social-icons { display: flex; gap: 1.2rem; margin-top: 2.5rem; }
+        .social-icons a { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); border: 1px solid var(--glass-border); text-decoration: none; transition: var(--transition); }
+        .social-icons a:hover { background: var(--text-primary); color: var(--bg-base); border-color: transparent; transform: translateY(-5px); }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Spinner Page loader */
+        .loader { position: fixed; inset: 0; background: var(--bg-base); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease, visibility 1s; }
+        .apple-spinner { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.05); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Mobile Breakpoint Overrides */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            section { padding: 7rem 5%; }
+            .section-title { font-size: 3rem; margin-bottom: 4rem; }
+            .hero-title { font-size: 3.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div style="font-weight: 700; letter-spacing: 2px;">ROSE</div>
-        <button class="btn" onclick="openWA()">Concierge</button>
-    </header>
+    <!-- OS Custom Cursor Wrapper -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-    <section class="hero">
-        <h1>Bespoke Moments.</h1>
-        <p>Luxury event orchestration and curated gifting.</p>
+    <!-- Page Loading Mask overlay -->
+    <div class="loader" id="loader">
+        <div class="apple-spinner"></div>
+    </div>
+
+    <!-- Modal Backdrop Layout element -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Floating Top Nav Dock -->
+    <nav class="os-glass" id="navbar">
+        <a href="#" class="logo hover-target">ROSE</a>
+        <ul class="nav-links">
+            <li><a href="#featured" class="hover-target">Featured</a></li>
+            <li><a href="#return-gifts" class="hover-target">Gifts</a></li>
+            <li><a href="#events" class="hover-target">Events</a></li>
+            <li><a href="#portfolio" class="hover-target">Portfolio</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass hover-target"></i>
+            <div class="cart-wrapper hover-target">
+                <a href="#" id="cart-nav-btn" style="color: inherit; text-decoration: none;" aria-label="Open Bag">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </a>
+            </div>
+            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="hover-target" style="text-decoration: none; display: flex; align-items: center;" aria-label="WhatsApp Us">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <button class="mobile-toggle hover-target" id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Navigation screen for dynamic smaller viewports -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#featured" class="mobile-link hover-target">Featured</a>
+        <a href="#return-gifts" class="mobile-link hover-target">Return Gifts</a>
+        <a href="#events" class="mobile-link hover-target">Special Events</a>
+        <a href="#portfolio" class="mobile-link hover-target">Portfolio</a>
+        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20connect%20with%20a%20concierge." target="_blank" class="mobile-link hover-target" style="color: #25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+    </div>
+
+    <!-- Integrated Dynamic Bag Canvas Drawer -->
+    <div class="drawer os-glass" id="cart-drawer">
+        <button class="close-btn-modern hover-target" id="close-cart" aria-label="Close Drawer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <h3 style="margin: 0 0 2.5rem; font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-primary);">Your Bag</h3>
+        
+        <div class="cart-items-container" id="cart-items-list">
+            <!-- Items injected by JS -->
+        </div>
+        
+        <div class="empty-cart-msg active" id="empty-cart-msg">
+            Your luxury bag is empty.
+        </div>
+        
+        <div style="margin-top: auto; padding-top: 2rem;">
+            <button id="cart-checkout-btn" class="btn btn-primary wa-btn hover-target" style="width: 100%; display: none;">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Inquire About Bag
+            </button>
+            <button id="cart-continue-btn" class="btn hover-target" style="width: 100%; margin-top: 1rem;">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Extended Focus Frame overlay modal screen -->
+    <div class="modal os-glass" id="quick-view-modal">
+        <button class="close-btn-modern hover-target" id="close-modal" aria-label="Close Modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <div class="modal-body">
+            <div class="modal-img">
+                <img id="mv-img" src="https://images.unsplash.com/photo-1599643478514-4a734bc422fa?auto=format&fit=crop&q=80&w=800" alt="Product" loading="lazy">
+            </div>
+            <div class="modal-info">
+                <h2 id="mv-title" style="font-family: var(--font-serif); font-size: 2.8rem; font-weight: 300; margin-bottom: 0.75rem; padding-right: 2rem; letter-spacing: 0.02em;">Item View</h2>
+                <div class="widget-rating" style="margin-bottom: 2rem;">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <span style="color: var(--text-secondary); margin-left: 8px; font-size: 0.8rem; letter-spacing: 0.05em;">(128)</span>
+                </div>
+                
+                <p id="mv-desc" style="color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; font-weight: 300;">An exquisite handcrafted luxury piece detailing bespoke craftsmanship.</p>
+                
+                <div class="os-input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;"><i class="fa-solid fa-pen-nib"></i> Personalization Note</label>
+                    <input type="text" id="mv-personalize" class="os-input hover-target" placeholder="Any special requests? (Optional)">
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2.5rem;">
+                    <button id="modal-add-to-cart-btn" class="btn btn-primary hover-target" style="flex: 1.5;">
+                        <i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Add to Bag
+                    </button>
+                    <a href="#" id="modal-wa-btn" target="_blank" class="btn hover-target" aria-label="Direct WhatsApp Inquiry">
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Structural Section: Hero Frame -->
+    <section id="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle reveal">Precision Meets Elegance</span>
+            <h1 class="hero-title reveal" style="transition-delay: 0.1s;">Pure Luxury.<br>Pure Rose.</h1>
+            <p class="reveal" style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 4rem; font-weight: 300; transition-delay: 0.2s;">Discover the finest handcrafted return gifts and flawlessly executed events.</p>
+            <div class="hero-actions reveal" style="transition-delay: 0.3s;">
+                <a href="#featured" class="btn btn-primary hover-target" style="width: 100%; max-width: 280px;">Shop Collection</a>
+                <a href="https://wa.me/918247553115?text=Hello,%20I'm%20looking%20to%20plan%20an%20event%20with%20ROSE." target="_blank" class="btn hover-target" style="width: 100%; max-width: 280px;">
+                    <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Plan an Event
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section class="grid">
-        <div class="card">
-            <h3>Confections</h3>
-            <p>Grain-free, milk-based artistry with gold leaf.</p>
-        </div>
-        <div class="card">
-            <h3>Surprise Events</h3>
-            <p>Masterful, invisible orchestration.</p>
-        </div>
-        <div class="card">
-            <h3>Photography</h3>
-            <p>Candid narratives, from beach to reveal.</p>
+    <!-- Structural Section: Product Showcase grid cards -->
+    <section id="featured">
+        <h2 class="section-title reveal">Featured <span>Excellence</span></h2>
+        <div class="bento-grid">
+            
+            <div class="os-widget os-glass reveal hover-target">
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1599643477874-5af3f4f1ce4c?auto=format&fit=crop&q=80&w=600" alt="The Heritage Confection Box" loading="lazy">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="The Heritage Confection Box" data-desc="A highly curated selection of artisanal, milk-based edible sweets. Grain-free and infused with rose petals, 24k edible gold leaf, and saffron, presented in a temperature-controlled matte-black magnetic box." aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">The Heritage Confection Box</h3>
+                    <p class="widget-desc">Artisanal, grain-free milk confections infused with 24k gold and rose petals.</p>
+                    <div class="widget-meta">
+                        <button class="btn hover-target direct-add-btn" data-title="The Heritage Confection Box" style="padding: 10px 22px; min-height: 40px; font-size: 0.75rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.1s;">
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600" alt="The Cinematic Memoir Folio" loading="lazy">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="The Cinematic Memoir Folio" data-desc="A beautifully bound, miniature coffee-table folio containing high-art, candid street-style photography captured during the event itself. A tactile piece of art for your guests to display." aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">The Cinematic Memoir Folio</h3>
+                    <p class="widget-desc">A beautifully bound folio of candid, high-art event photography.</p>
+                    <div class="widget-meta">
+                        <button class="btn hover-target direct-add-btn" data-title="The Cinematic Memoir Folio" style="padding: 10px 22px; min-height: 40px; font-size: 0.75rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.2s;">
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1611077543781-a7b2cb1eeb5c?auto=format&fit=crop&q=80&w=600" alt="The Concierge Reveal Cache" loading="lazy">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="The Concierge Reveal Cache" data-desc="A beautifully crafted, multi-tiered puzzle box. Guests slide specific panels to unlock hidden compartments containing bespoke vials of artisanal perfume, rare tea blends, or engraved keepsakes." aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">The Concierge Reveal Cache</h3>
+                    <p class="widget-desc">A multi-tiered puzzle box unlocking bespoke fragrances and keepsakes.</p>
+                    <div class="widget-meta">
+                        <button class="btn hover-target direct-add-btn" data-title="The Concierge Reveal Cache" style="padding: 10px 22px; min-height: 40px; font-size: 0.75rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="os-widget os-glass reveal hover-target" style="transition-delay: 0.3s;">
+                <div class="widget-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=600" alt="The Preserved Aura Crystal" loading="lazy">
+                    <div class="widget-actions">
+                        <button class="widget-action-btn quick-view-btn hover-target" data-title="The Preserved Aura Crystal" data-desc="A flawless botanical element, like a deep red rose, suspended perfectly within a clear, heavy resin or crystal sphere. Serving as a striking desktop paperweight with subtle milestone engravings." aria-label="Quick View"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="widget-info">
+                    <h3 class="widget-title">The Preserved Aura Crystal</h3>
+                    <p class="widget-desc">A flawless botanical element suspended in a heavy crystal sphere.</p>
+                    <div class="widget-meta">
+                        <button class="btn hover-target direct-add-btn" data-title="The Preserved Aura Crystal" style="padding: 10px 22px; min-height: 40px; font-size: 0.75rem;"><i class="fa-solid fa-plus" style="margin-right: 6px;"></i> Bag</button>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Structural Section: Occasion Specific Segment Filter view -->
+    <section id="return-gifts">
+        <h2 class="section-title reveal" style="margin-bottom: 3rem;">Occasion <span>Gifting</span></h2>
+        
+        <div class="segmented-control reveal">
+            <div class="segment hover-target active">All</div>
+            <div class="segment hover-target">Wedding</div>
+            <div class="segment hover-target">Corporate</div>
+            <div class="segment hover-target">Birthday</div>
+            <div class="segment hover-target">Anniversary</div>
+            <div class="segment hover-target">Baby Shower</div>
+        </div>
+
+        <div class="bento-showcase">
+            <div class="bento-card large reveal hover-target">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1000" alt="Wedding" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Wedding Returns</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 3.2rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 0.02em;">A Memory to Keep.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Wedding%20Return%20Gifts." target="_blank" class="btn btn-primary hover-target"><i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Inquire Now</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" alt="Corporate" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Corporate</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; margin-bottom: 1.5rem;">Leave a Mark.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Corporate%20Gifting." target="_blank" class="btn hover-target" style="padding: 12px 26px; font-size: 0.75rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Inquire</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600" alt="Festive" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Festive Hampers</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; margin-bottom: 1.5rem;">Celebrate Joy.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20would%20like%20to%20discuss%20Festive%20Hampers." target="_blank" class="btn hover-target" style="padding: 12px 26px; font-size: 0.75rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Inquire</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Section: Moments / Experience offerings -->
+    <section id="events">
+        <h2 class="section-title reveal" style="margin-bottom: 2rem;">Memorable <span>Moments</span></h2>
+        <p class="reveal" style="text-align: center; color: var(--text-secondary); max-width: 650px; margin: 0 auto 5rem; font-size: 1.05rem; line-height: 1.8; font-weight: 300;">
+            Beyond exquisite gifts, we orchestrate unforgettable experiences. We make moments memorable with flawless planning for surprises, birthdays, weddings, and grand anniversaries.
+        </p>
+
+        <div class="bento-showcase">
+            <div class="bento-card large reveal hover-target">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000" alt="Weddings & Anniversaries" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Weddings & Anniversaries</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 3.2rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 0.02em;">Timeless Celebrations.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20am%20looking%20to%20plan%20a%20Wedding/Anniversary%20event." target="_blank" class="btn btn-primary wa-btn hover-target"><i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Talk to our Planners</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=600" alt="Surprise Plannings" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Surprise Plannings</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; margin-bottom: 1.5rem;">The Perfect Reveal.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20a%20Surprise%20Event." target="_blank" class="btn hover-target" style="padding: 12px 26px; font-size: 0.75rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Let's Plan</a>
+                </div>
+            </div>
+            <div class="bento-card reveal hover-target" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=600" alt="Birthday Events" loading="lazy">
+                <div class="bento-content">
+                    <h4 style="color: var(--accent-light); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 0.8rem; font-weight:500;">Birthday Events</h4>
+                    <h3 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; margin-bottom: 1.5rem;">Milestones Mastered.</h3>
+                    <a href="https://wa.me/918247553115?text=Hello,%20I%20need%20help%20planning%20a%20Birthday%20Event." target="_blank" class="btn hover-target" style="padding: 12px 26px; font-size: 0.75rem;"><i class="fa-brands fa-whatsapp" style="margin-right: 6px;"></i> Let's Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Section: Editorial Case Study Projects Portfolio (SURPRISE EVENTS) -->
+    <section id="portfolio" style="padding-top: 2rem;">
+        <h2 class="section-title reveal">Past <span>Orchestrations</span></h2>
+        
+        <div class="case-study reveal hover-target">
+            <div class="case-study-img">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=1000" alt="The Candid Stranger Reveal" loading="lazy">
+            </div>
+            <div class="case-study-content">
+                <span class="case-study-tag">Surprise Concierge</span>
+                <h3>The Candid Stranger Reveal</h3>
+                <p>A cinematic surprise orchestration beginning with a covert, street-photography-style photoshoot at the beach. As the couple views the "candid" portrait, a customized text bubble overlay reveals the surprise message in real-time, just before transitioning to a breathtaking grand reveal dinner setup near the Vivekanandha memorial.</p>
+                <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20a%20surprise%20similar%20to%20The%20Candid%20Stranger%20Reveal." target="_blank" class="btn hover-target" style="align-self: flex-start;">Inquire About This Concept</a>
+            </div>
+        </div>
+
+        <div class="case-study reveal hover-target" style="transition-delay: 0.1s;">
+            <div class="case-study-img" style="order: -1;">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=1000" alt="The Protagonist's Narrative" loading="lazy">
+            </div>
+            <div class="case-study-content" style="order: 1;">
+                <span class="case-study-tag">Milestone Dramatics</span>
+                <h3>The Protagonist’s Narrative</h3>
+                <p>Scripted like a high-end dramatic thriller, the recipient unravels their surprise over the course of an evening. Guided through a series of curated locations via a meticulously planned chronological timeline, they are met with pieces of a larger story, culminating in a grand reveal at an exclusive venue.</p>
+                <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20plan%20The%20Protagonist's%20Narrative." target="_blank" class="btn hover-target" style="align-self: flex-start;">Script Your Milestone</a>
+            </div>
+        </div>
+
+        <div class="case-study reveal hover-target" style="transition-delay: 0.2s;">
+            <div class="case-study-img">
+                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1000" alt="The Anonymous Benefactor Gala" loading="lazy">
+            </div>
+            <div class="case-study-content">
+                <span class="case-study-tag">Corporate Scale</span>
+                <h3>The Anonymous Benefactor Gala</h3>
+                <p>Taking the traditional Secret Santa exchange and elevating it to a black-tie luxury affair. At a stunning venue, impeccably dressed concierge staff discreetly deliver bespoke gifts to specific guests on silver platters, complete with elegantly typed notes, creating an atmosphere of suspense and delight.</p>
+                <a href="https://wa.me/918247553115?text=Hello,%20I%20want%20to%20host%20an%20Anonymous%20Benefactor%20Gala." target="_blank" class="btn hover-target" style="align-self: flex-start;">Plan Your Gala</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Section: Client Social Proof Slider -->
+    <section id="testimonials" style="padding-bottom: 6rem;">
+        <h2 class="section-title reveal" style="margin-bottom: 3rem;">Client <span>Stories</span></h2>
+        <div class="os-slider reveal">
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">E</div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;">Elena & James</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; font-weight: 300;">"The bespoke hampers for our wedding were nothing short of breathtaking. The gold detailing left our guests in absolute awe."</p>
+            </div>
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">M</div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;">Marcus V., CEO</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; font-weight: 300;">"ROSE handled our corporate gifting flawlessly. The eco-luxe collection perfectly aligned with our brand values."</p>
+            </div>
+            <div class="testimonial-widget os-glass hover-target">
+                <div class="user-profile">
+                    <div class="avatar">S</div>
+                    <div>
+                        <h4 style="font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;">Sarah Jenkins</h4>
+                        <div class="widget-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; font-weight: 300;">"Not only did they provide exquisite gifts, but their team also orchestrated the most magical surprise 50th birthday for my husband."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Section: Mailing signup Block -->
+    <section id="newsletter">
+        <h2 class="section-title reveal" style="margin-bottom: 1.5rem;">Stay <span>Updated</span></h2>
+        <p class="reveal" style="color: var(--text-secondary); font-weight: 300; font-size: 1.05rem;">Subscribe for exclusive access to limited collections and event packages.</p>
+        <form class="dynamic-island-form reveal hover-target" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Email Address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Global Layout Block: Footer Links -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 1.5rem; display: inline-block;">ROSE</a>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; font-weight: 300;">Elevating the art of giving and celebrating through meticulous craftsmanship, seamless event planning, and OS-inspired timeless design.</p>
+                <div class="social-icons">
+                    <a href="https://wa.me/918247553115" target="_blank" class="hover-target" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/celebrationwithroses" target="_blank" class="hover-target" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Store</h4>
+                <ul>
+                    <li><a href="#" class="hover-target">Wedding Returns</a></li>
+                    <li><a href="#" class="hover-target">Corporate Hampers</a></li>
+                    <li><a href="#" class="hover-target">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#" class="hover-target">Event Planning</a></li>
+                    <li><a href="#" class="hover-target">Surprise Orchestration</a></li>
+                    <li><a href="#" class="hover-target">Personalization</a></li>
+                    <li><a href="#" class="hover-target">Consultation</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 2.2; font-weight: 300;">
+                    <li>1 Infinite Luxury Loop, NY</li>
+                    <li><i class="fa-brands fa-whatsapp" style="margin-right: 5px; color: #25D366;"></i> +91 8247553115</li>
+                    <li>support@rosegifts.com</li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; font-weight: 300; text-transform: uppercase;">
+            Copyright © 2026 ROSE Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Execution Logic Script Engine -->
     <script>
-        function openWA() {
-            window.open('https://wa.me/918247553115?text=Hello ROSE, I would like to inquire about your services.');
+        // Init viewport asset loader mask handling
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.visibility = 'hidden'; }, 1000);
+            }, 800);
+        });
+
+        // Desktop Pointer Engine Configuration
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, .segment');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 250, fill: "forwards" });
+            });
+
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+                target.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+            });
         }
+
+        // Navigation Bar State Engine on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Fullscreen Menu Toggle Controls
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if(menuOpen) {
+                mobileMenu.classList.add('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Smooth Viewport Entry Intersection Observers
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // Global Layout Frame Component Nodes
+        const overlay = document.getElementById('overlay');
+        const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+        const directAddBtns = document.querySelectorAll('.direct-add-btn');
+        const modal = document.getElementById('quick-view-modal');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartNavBtn = document.getElementById('cart-nav-btn');
+        
+        const closeModalBtn = document.getElementById('close-modal');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartContinueBtn = document.getElementById('cart-continue-btn');
+        
+        const mvTitle = document.getElementById('mv-title');
+        const mvDesc = document.getElementById('mv-desc');
+        const mvPersonalize = document.getElementById('mv-personalize');
+        const modalWaBtn = document.getElementById('modal-wa-btn');
+        const modalAddBtn = document.getElementById('modal-add-to-cart-btn');
+
+        // Bag Management Global State Arrays
+        let cart = [];
+        const cartBadge = document.getElementById('cart-badge');
+        const cartItemsList = document.getElementById('cart-items-list');
+        const emptyCartMsg = document.getElementById('empty-cart-msg');
+        const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+
+        function openOverlay() { 
+            overlay.classList.add('active'); 
+            document.body.style.overflow = 'hidden'; 
+        }
+        
+        function closeAll() {
+            modal.classList.remove('active');
+            cartDrawer.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        cartNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartDrawer.classList.add('active');
+            openOverlay();
+        });
+
+        overlay.addEventListener('click', closeAll);
+        closeModalBtn.addEventListener('click', closeAll);
+        closeCartBtn.addEventListener('click', closeAll);
+        cartContinueBtn.addEventListener('click', closeAll);
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") { closeAll(); }
+        });
+
+        // Bag Insertion/Extraction Pipeline Engines
+        function addToCart(title, personalization = "") {
+            const item = {
+                id: Date.now(),
+                title: title,
+                note: personalization
+            };
+            cart.push(item);
+            updateCartUI();
+            
+            const originalText = modalAddBtn.innerHTML;
+            modalAddBtn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+            modalAddBtn.style.background = "#D6B075";
+            modalAddBtn.style.color = "#000000";
+            
+            cartBadge.style.transform = "scale(1.4)";
+            setTimeout(() => {
+                modalAddBtn.innerHTML = originalText;
+                modalAddBtn.style.background = "";
+                modalAddBtn.style.color = "";
+                cartBadge.style.transform = "scale(1)";
+            }, 1000);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            cartBadge.textContent = cart.length;
+            if (cart.length > 0) {
+                cartBadge.classList.add('active');
+                emptyCartMsg.classList.remove('active');
+                cartCheckoutBtn.style.display = 'inline-flex';
+            } else {
+                cartBadge.classList.remove('active');
+                emptyCartMsg.classList.add('active');
+                cartCheckoutBtn.style.display = 'none';
+            }
+
+            cartItemsList.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                
+                let titleHtml = `<span class="cart-item-title">${item.title}</span>`;
+                if(item.note) {
+                    titleHtml = `<div><span class="cart-item-title">${item.title}</span><div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 6px; font-weight: 300;"><i class="fa-solid fa-pen-nib" style="font-size: 0.6rem;"></i> ${item.note}</div></div>`;
+                }
+
+                div.innerHTML = `
+                    ${titleHtml}
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})" aria-label="Remove Item"><i class="fa-solid fa-trash"></i></button>
+                `;
+                cartItemsList.appendChild(div);
+            });
+        }
+
+        // Consolidated String Generation via WhatsApp Channel
+        cartCheckoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            const baseNumber = "918247553115";
+            let intro = "Hello ROSE, I would like to inquire about the following items in my bag:\n\n";
+            
+            cart.forEach((item, index) => {
+                intro += `${index + 1}. ${item.title}`;
+                if (item.note) intro += ` (Note: ${item.note})`;
+                intro += "\n";
+            });
+            
+            const whatsappURL = `https://wa.me/${baseNumber}?text=${encodeURIComponent(intro)}`;
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Quick View Interactive Parameter Binding Engine
+        function updateWaLink(title) {
+            let note = mvPersonalize.value.trim();
+            let baseText = `Hello ROSE, I'm interested in the ${title}.`;
+            if (note) baseText += ` My personalization note is: "${note}".`;
+            modalWaBtn.href = `https://wa.me/918247553115?text=${encodeURIComponent(baseText)}`;
+        }
+
+        quickViewBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const title = btn.getAttribute('data-title');
+                const desc = btn.getAttribute('data-desc');
+                
+                mvTitle.textContent = title;
+                if(mvDesc && desc) { mvDesc.textContent = desc; }
+                
+                mvPersonalize.value = ""; 
+                updateWaLink(title); 
+                
+                mvPersonalize.oninput = () => updateWaLink(title);
+
+                modalAddBtn.onclick = () => {
+                    addToCart(title, mvPersonalize.value.trim());
+                };
+
+                modal.classList.add('active');
+                openOverlay();
+            });
+        });
+
+        // Grid Card Primary Action Hook bindings
+        directAddBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const title = btn.getAttribute('data-title');
+                addToCart(title, "");
+                
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                btn.style.color = "#D6B075";
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.style.color = "";
+                }, 1000);
+            });
+        });
+
+        // Interface Segment Control Selection States
+        const segments = document.querySelectorAll('.segment');
+        segments.forEach(segment => {
+            segment.addEventListener('click', () => {
+                segments.forEach(s => s.classList.remove('active'));
+                segment.classList.add('active');
+            });
+        });
+
     </script>
 </body>
 </html>
