@@ -61,7 +61,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            align-items: center; /* Center body contents */
+            align-items: center;
             width: 100%;
         }
 
@@ -126,7 +126,7 @@
         /* Floating Dynamic Island Navigation */
         nav {
             position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 800px; padding: 0.75rem 1.5rem;
+            width: 90%; max-width: 900px; padding: 0.75rem 1.5rem;
             display: flex; justify-content: space-between; align-items: center;
             border-radius: var(--radius-pill); z-index: 9999;
             background: rgba(20, 20, 22, 0.75);
@@ -135,13 +135,13 @@
             transition: var(--transition-smooth);
         }
         nav.scrolled {
-            top: 0.75rem; width: 95%; max-width: 900px;
+            top: 0.75rem; width: 95%; max-width: 1000px;
             background: rgba(10, 10, 12, 0.9);
         }
         .logo { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;}
         .logo i { color: var(--rose-deep); font-size: 1.4rem; }
         
-        .nav-links { display: flex; gap: 2rem; list-style: none; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; justify-content: center; align-items: center; margin-left: auto; margin-right: 2rem;}
         .nav-links a { 
             color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; 
             font-weight: 500; transition: var(--transition-fast); cursor: pointer;
@@ -152,6 +152,11 @@
         
         .nav-actions { display: flex; align-items: center; gap: 1rem; justify-content: flex-end; }
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; padding: 5px; }
+
+        /* Cart Icon */
+        .cart-icon-wrapper { position: relative; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); transition: var(--transition-fast); border: 1px solid var(--glass-border); }
+        .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
         /* Fullscreen Mobile Menu */
         .mobile-menu {
@@ -166,7 +171,43 @@
         .mobile-menu a:hover, .mobile-menu a.active { color: var(--text-primary); transform: scale(1.05); }
 
         /* ==========================================================================
-           SPA ROUTING & PAGE LAYOUT (PERFECT CENTERING)
+           CART DRAWER
+           ========================================================================== */
+        .cart-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            z-index: 10000; opacity: 0; pointer-events: none; transition: var(--transition-smooth);
+        }
+        .cart-overlay.active { opacity: 1; pointer-events: all; }
+
+        .cart-drawer {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px; height: 100vh;
+            background: rgba(20, 20, 22, 0.95); backdrop-filter: var(--blur-md); -webkit-backdrop-filter: var(--blur-md);
+            border-left: 1px solid var(--glass-border); z-index: 10001; transition: right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex; flex-direction: column; padding: 2rem;
+        }
+        .cart-drawer.active { right: 0; }
+        
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; }
+        .cart-header h2 { font-size: 1.8rem; font-weight: 600; }
+        .close-cart { background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: var(--transition-fast); width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+        .close-cart:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); color: var(--rose-light); }
+
+        .cart-items { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem; padding-right: 10px; }
+        .cart-items::-webkit-scrollbar { width: 6px; }
+        .cart-items::-webkit-scrollbar-thumb { background: var(--glass-border-strong); border-radius: 10px; }
+        
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); }
+        .cart-item-info h4 { font-size: 1rem; margin-bottom: 8px; color: var(--text-primary); }
+        .cart-item-controls { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: var(--radius-pill); width: fit-content; border: 1px solid var(--glass-border); }
+        .cart-item-controls button { background: none; border: none; color: var(--text-primary); font-size: 1.2rem; cursor: pointer; width: 24px; transition: color 0.2s; }
+        .cart-item-controls button:hover { color: var(--rose-light); }
+        .cart-item-remove { background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); color: #ff4d4d; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition-fast); }
+        .cart-item-remove:hover { background: rgba(255,0,0,0.2); transform: scale(1.1); }
+
+        .cart-footer { margin-top: 2rem; border-top: 1px solid var(--glass-border); padding-top: 1.5rem; }
+        
+        /* ==========================================================================
+           SPA ROUTING & PAGE LAYOUT
            ========================================================================== */
         main { flex: 1; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
@@ -175,11 +216,10 @@
             width: 100%; max-width: 1400px;
             padding: 8rem 5% 4rem;
             animation: viewFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            /* Flex properties for perfect internal centering */
             flex-direction: column;
             align-items: center;
         }
-        .page-view.active { display: flex; } /* Changed to flex for reliable center alignment */
+        .page-view.active { display: flex; }
         @keyframes viewFadeIn { from { opacity: 0; transform: translateY(15px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
         /* ==========================================================================
@@ -187,7 +227,7 @@
            ========================================================================== */
         #page-home { padding-top: 0; max-width: 100%; width: 100%; }
         .hero {
-            height: 120vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; position: relative; padding: 0 5%;
         }
         .hero-bg {
@@ -195,7 +235,7 @@
             mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
-        .hero-bg img { width: 120%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.05); animation: slowPan 30s linear infinite alternate;}
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.05); animation: slowPan 30s linear infinite alternate;}
         @keyframes slowPan { from { transform: scale(1.05) translateY(0); } to { transform: scale(1.1) translateY(-2%); } }
         
         .hero-content { position: relative; z-index: 10; max-width: 1000px; display: flex; flex-direction: column; align-items: center; }
@@ -209,12 +249,12 @@
             display: grid; grid-template-columns: 1fr; gap: 2rem; 
             width: 100%; max-width: 1000px; 
             margin: -10vh auto 0; padding: 0 5% 6rem; position: relative; z-index: 20;
-            justify-items: center; /* Perfect horizontal center for cards */
+            justify-items: center;
         }
         @media (min-width: 768px) { .highlight-grid { grid-template-columns: repeat(2, 1fr); margin-top: -15vh; } }
         
         .bento-card {
-            width: 100%; max-width: 450px; /* Constrain max-width for balance */
+            width: 100%; max-width: 450px;
             border-radius: var(--radius-lg); position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
             aspect-ratio: 1; transition: var(--transition-smooth); cursor: pointer;
@@ -233,21 +273,21 @@
         .bento-card:hover .bento-btn { background: var(--text-primary); color: var(--bg-base); transform: translateY(-5px); }
 
         /* ==========================================================================
-           CATALOG LAYOUTS (EVENTS & GIFTS) - PERFECT GRID
+           CATALOG LAYOUTS
            ========================================================================== */
         .catalog-grid {
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 2.5rem; width: 100%; max-width: 1200px;
-            margin: 0 auto; justify-items: center; /* Center cards in their columns */
+            margin: 0 auto; justify-items: center;
         }
 
         .item-card {
             background: var(--bg-elevated); border-radius: var(--radius-md); overflow: hidden;
             border: 1px solid var(--glass-border); transition: var(--transition-smooth);
             display: flex; flex-direction: column; position: relative;
-            width: 100%; max-width: 380px; /* Constrain card width for visual harmony */
-            text-align: center; /* Center inner text */
+            width: 100%; max-width: 380px;
+            text-align: center;
         }
         .item-card:hover { transform: translateY(-6px); border-color: rgba(183, 110, 121, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         .item-img-wrapper { position: relative; aspect-ratio: 4/3; overflow: hidden; width: 100%; }
@@ -259,18 +299,35 @@
         .item-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.2; text-align: center;}
         .item-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem; flex-grow: 1; text-align: center;}
         
+        /* New Action Layout (WhatsApp + Cart) */
         .item-action { 
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
             padding-top: 1.5rem; border-top: 1px solid var(--glass-border); width: 100%;
         }
-        .item-wa-btn {
-            background: rgba(37, 211, 102, 0.1); color: var(--wa-color);
-            padding: 12px 24px; border-radius: var(--radius-pill); font-weight: 600;
+        
+        .btn-get-quote {
+            flex-grow: 1;
+            background: rgba(37, 211, 102, 0.15); color: var(--wa-color);
+            padding: 12px 15px; border-radius: var(--radius-pill); font-weight: 600;
             text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: var(--transition-fast); border: 1px solid rgba(37, 211, 102, 0.2);
-            width: 100%;
+            transition: var(--transition-fast); border: 1px solid rgba(37, 211, 102, 0.3);
+            font-size: 0.95rem;
         }
-        .item-wa-btn:hover { background: var(--wa-color); color: white; }
+        .btn-get-quote:hover {
+            background: var(--wa-color); color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-icon-cart {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: var(--text-primary); color: var(--bg-base);
+            display: flex; align-items: center; justify-content: center;
+            border: none; cursor: pointer; transition: var(--transition-fast);
+            flex-shrink: 0; font-size: 1.1rem;
+        }
+        .btn-icon-cart:hover {
+            transform: scale(1.05); background: var(--rose-light);
+        }
 
         /* ==========================================================================
            ABOUT PAGE
@@ -387,12 +444,14 @@
             <li><a onclick="app.navigate('home')" id="link-home" class="active">Home</a></li>
             <li><a onclick="app.navigate('events')" id="link-events">Events</a></li>
             <li><a onclick="app.navigate('gifts')" id="link-gifts">Gifts</a></li>
+            <li><a onclick="app.navigate('specials')" id="link-specials">Specials</a></li>
             <li><a onclick="app.navigate('about')" id="link-about">About Us</a></li>
         </ul>
         <div class="nav-actions">
-            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="btn btn-wa nav-cta" style="padding: 8px 16px; font-size: 0.9rem; margin: 0; width: auto;">
-                <i class="fa-brands fa-whatsapp"></i> Let's Talk
-            </a>
+            <div class="cart-icon-wrapper" onclick="app.toggleCart()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-badge" class="cart-badge">0</span>
+            </div>
             <button class="mobile-menu-btn" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
         </div>
     </nav>
@@ -401,10 +460,26 @@
         <a onclick="app.navigate('home')">Home</a>
         <a onclick="app.navigate('events')">Events</a>
         <a onclick="app.navigate('gifts')">Gifts</a>
+        <a onclick="app.navigate('specials')">Specials</a>
         <a onclick="app.navigate('about')">About Us</a>
         <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" style="color: var(--wa-color); font-size: 1.2rem; margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
             <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
         </a>
+    </div>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Bag</h2>
+            <button class="close-cart" onclick="app.toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            </div>
+        <div class="cart-footer">
+            <button class="btn btn-wa" style="width: 100%; display: flex; justify-content: center; font-size: 1.1rem; padding: 16px;" onclick="app.checkoutViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Place Order via WhatsApp
+            </button>
+        </div>
     </div>
 
     <main id="app-content">
@@ -418,19 +493,19 @@
                     <h1 class="hero-title reveal"><span class="text-gradient">Design the perfect</span><br><span class="text-rose">Moment.</span></h1>
                     <p class="hero-desc reveal" style="transition-delay: 0.1s;">Masterpieces of event orchestration and premium gifting. From grand weddings to highly confidential concierge surprise plannings.</p>
                     <div class="hero-buttons reveal" style="transition-delay: 0.2s;">
-                        <button onclick="app.navigate('events')" class="btn btn-primary">Plan an Event</button>
-                        <button onclick="app.navigate('gifts')" class="btn btn-glass">Explore Gifts</button>
+                        <button onclick="app.navigate('specials')" class="btn btn-primary">Rose Specials</button>
+                        <button onclick="app.navigate('events')" class="btn btn-glass">Plan an Event</button>
                     </div>
                 </div>
             </div>
 
             <div class="highlight-grid reveal" style="transition-delay: 0.3s;">
-                <div class="bento-card" onclick="app.navigate('events')">
-                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=1000" alt="Surprise Event">
+                <div class="bento-card" onclick="app.navigate('specials')">
+                    <img src="https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?auto=format&fit=crop&q=80&w=1000" alt="Rose Specials">
                     <div class="bento-overlay"></div>
                     <div class="bento-content">
-                        <span class="bento-tag">Event Orchestration</span>
-                        <h2 class="bento-title">Celebrate<br>in Style.</h2>
+                        <span class="bento-tag">Unforgettable Moments</span>
+                        <h2 class="bento-title">Rose<br>Specials.</h2>
                         <div class="bento-btn"><i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </div>
@@ -449,62 +524,57 @@
         <section id="page-events" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Event</span> <span class="text-rose">Orchestration</span></h2>
-                <p class="section-subtitle">We design and execute flawless experiences. From large-scale celebrations to logistical mastery of private surprise plannings.</p>
+                <p class="section-subtitle">We design and execute flawless experiences. From large-scale celebrations to logistical mastery of private gatherings.</p>
             </div>
 
             <div class="catalog-grid">
                 <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/3936397/pexels-photo-3936397.jpeg?_gl=1*1mpz36t*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzg4MjYkajUwJGwwJGgw" alt="Weddings"></div>
+                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/1503520/pexels-photo-1503520.jpeg?_gl=1*k8rkse*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzY1NTgkajQ5JGwwJGgw" alt="Weddings"></div>
                     <div class="item-content">
                         <span class="item-tag">Weddings & Anniversaries</span>
                         <h3 class="item-title">Grand Celebrations</h3>
                         <p class="item-desc">Comprehensive end-to-end wedding planning. Venue styling, floral artistry, and flawless timeline execution.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Grand Wedding/Anniversary Planning">
-                                <i class="fa-brands fa-whatsapp"></i> Inquire to Plan
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Grand Celebrations">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Grand Celebrations')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/17823867/pexels-photo-17823867.jpeg?_gl=1*1v6crtr*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzkzNjYkajMkbDAkaDA." alt="Surprise Planning"></div>
-                    <div class="item-content">
-                        <span class="item-tag">Concierge & Logistics</span>
-                        <h3 class="item-title">Surprise Event Planning</h3>
-                        <p class="item-desc">Highly discreet orchestration of surprise birthdays, Secret Santa logistics, and private proposals executed to perfection.</p>
-                        <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Surprise Event & Concierge Planning">
-                                <i class="fa-brands fa-whatsapp"></i> Consult a Planner
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/14457430/pexels-photo-14457430.jpeg?_gl=1*1fjnvkh*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzk1MzQkajMyJGwwJGgw" alt="Birthdays"></div>
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1530103862676-de3c9de59f9e?auto=format&fit=crop&q=80&w=800" alt="Birthdays"></div>
                     <div class="item-content">
                         <span class="item-tag">Milestones</span>
                         <h3 class="item-title">Birthday Extravaganzas</h3>
                         <p class="item-desc">Themed setups, premium entertainment booking, and exquisite catering to celebrate life's annual milestones.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Birthday Event Planning">
-                                <i class="fa-brands fa-whatsapp"></i> Inquire to Plan
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Birthday Extravaganza">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Birthday Extravaganza')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/35042461/pexels-photo-35042461.jpeg?_gl=1*mto1nz*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzk2MzIkajIkbDAkaDA." alt="Custom Events"></div>
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/35042461/pexels-photo-35042461.jpeg?_gl=1*mto1nz*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzk2MzIkajIkbDAkaDA." alt="Custom Events"></div>
                     <div class="item-content">
                         <span class="item-tag">Bespoke Setup</span>
                         <h3 class="item-title">Custom Gatherings</h3>
                         <p class="item-desc">Corporate galas, private dinners, and unique concept events designed specifically around your requirements.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Custom Event Gathering">
-                                <i class="fa-brands fa-whatsapp"></i> Discuss Your Vision
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Custom Gathering">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Custom Gathering')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -519,15 +589,18 @@
 
             <div class="catalog-grid">
                 <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/37152394/pexels-photo-37152394.jpeg?_gl=1*kzghxw*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzQzODAkajkkbDAkaDA." alt="Signature Packages"></div>
+                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/37152394/pexels-photo-37152394.jpeg?_gl=1*kzghxw*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQzODAkajkkbDAkaDA." alt="Signature Packages"></div>
                     <div class="item-content">
                         <span class="item-tag">Curated Collections</span>
-                        <h3 class="item-title">Signature Gift Packages</h3>
+                        <h3 class="item-title">Signature Packages</h3>
                         <p class="item-desc">Pre-designed luxury hampers featuring artisanal chocolates, fine fragrances, and timeless keepsakes.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Signature Gift Packages">
-                                <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Signature Package">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Signature Package')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -539,23 +612,29 @@
                         <h3 class="item-title">Premium Return Gifts</h3>
                         <p class="item-desc">Elegant, unified tokens of gratitude for wedding guests, event attendees, or festival celebrations.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Bulk Return Gifts">
-                                <i class="fa-brands fa-whatsapp"></i> Request Catalog
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Bulk Return Gifts Set">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Bulk Return Gifts Set')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="item-card reveal" style="transition-delay: 0.2s;">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/13977737/pexels-photo-13977737.jpeg?_gl=1*b189yj*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzQzNTAkajM5JGwwJGgw" alt="Custom Hampers"></div>
+                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/13977737/pexels-photo-13977737.jpeg?_gl=1*b189yj*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQzNTAkajM5JGwwJGgw" alt="Custom Hampers"></div>
                     <div class="item-content">
                         <span class="item-tag">Personalized</span>
                         <h3 class="item-title">Custom Gift Hampers</h3>
                         <p class="item-desc">Build a completely unique box. Select specific items, personalized engravings, and bespoke packaging materials.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Custom Gift Hamper Creation">
-                                <i class="fa-brands fa-whatsapp"></i> Customize Now
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Custom Hamper">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Custom Hamper')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -567,23 +646,140 @@
                         <h3 class="item-title">Corporate Gifting</h3>
                         <p class="item-desc">Refined branded gifting solutions for client appreciation, employee onboarding, and holiday milestones.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Corporate Gifting Solutions">
-                                <i class="fa-brands fa-whatsapp"></i> Contact Sales
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Corporate Batch">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Corporate Batch')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/19376098/pexels-photo-19376098.jpeg?_gl=1*18dr5n*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzQ0MjckajYwJGwwJGgw" alt="Floral Arrangements"></div>
+                    <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/19376098/pexels-photo-19376098.jpeg?_gl=1*18dr5n*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQ0MjckajYwJGwwJGgw" alt="Floral Arrangements"></div>
                     <div class="item-content">
                         <span class="item-tag">Fresh & Preserved</span>
                         <h3 class="item-title">Luxury Florals</h3>
                         <p class="item-desc">Architectural floral designs and preserved eternal roses housed in premium acrylic or velvet boxes.</p>
                         <div class="item-action">
-                            <a href="#" class="item-wa-btn wa-dynamic" data-product="Luxury Floral Arrangements">
-                                <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Luxury Florals">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Luxury Florals')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-specials" class="page-view">
+            <div class="section-header reveal">
+                <h2 class="section-title"><span class="text-gradient">Rose</span> <span class="text-rose">Specials</span></h2>
+                <p class="section-subtitle">Out-of-the-box experiences, unique proposals, and heartwarming surprises crafted for those unforgettable moments.</p>
+            </div>
+
+            <div class="catalog-grid">
+                <div class="item-card reveal">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1489599874127-6f1dbaf779cb?auto=format&fit=crop&q=80&w=800" alt="Movie Theater Proposal"></div>
+                    <div class="item-content">
+                        <span class="item-tag">The Grand Reveal</span>
+                        <h3 class="item-title">Movie Theater Proposals</h3>
+                        <p class="item-desc">Surprise them on the big screen! Custom movie trailers, private screenings, and the ultimate movie proposal experience.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Movie Proposal">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Movie Proposal')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=800" alt="Date Night Surprise"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Intimate Romance</span>
+                        <h3 class="item-title">Date Night Surprise</h3>
+                        <p class="item-desc">Rooftop dinners, private cabanas, and candle-lit pathways arranged secretly for a flawless romantic evening.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Date Night Setup">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Date Night Setup')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800" alt="Fake Fight Surprise"></div>
+                    <div class="item-content">
+                        <span class="item-tag">The Prankster</span>
+                        <h3 class="item-title">The "Fake Fight" Surprise</h3>
+                        <p class="item-desc">A playful, carefully staged minor conflict that suddenly turns into a massive, unforgettable surprise or proposal.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Fake Fight Setup">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Fake Fight Setup')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card reveal">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?auto=format&fit=crop&q=80&w=800" alt="Long Drive Surprise"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Scenic Routes</span>
+                        <h3 class="item-title">Long Drive Celebrations</h3>
+                        <p class="item-desc">Decorated car trunks, midnight cake cuttings on scenic routes, and romantic getaways designed for two.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Long Drive Celebration">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Long Drive Celebration')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cafe Surprise"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Coffee & Magic</span>
+                        <h3 class="item-title">Cafe Surprises</h3>
+                        <p class="item-desc">Flash mobs, hidden musicians, or private bookings at their favorite coffee shop to catch them completely off guard.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Cafe Surprise">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Cafe Surprise')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513885055282-3fea2833111b?auto=format&fit=crop&q=80&w=800" alt="Away From Home Care"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Heartwarming</span>
+                        <h3 class="item-title">"Away From Home" Special</h3>
+                        <p class="item-desc">Perfect for students and expats. Midnight hostel deliveries, comforting care packages, and virtual-to-real surprise connections.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Away From Home Package">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Away From Home Package')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -610,7 +806,7 @@
                     </div>
                 </div>
                 <div class="about-img reveal" style="transition-delay: 0.2s;">
-                    <img src="https://images.pexels.com/photos/27086870/pexels-photo-27086870.jpeg?_gl=1*111oa43*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzcyMjIkajU5JGwwJGgw="Rose Celebrations Expertise">
+                    <img src="https://images.pexels.com/photos/27086870/pexels-photo-27086870.jpeg?_gl=1*111oa43*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzcyMjIkajU5JGwwJGgw" alt="Rose Celebrations Expertise">
                 </div>
             </div>
         </section>
@@ -634,7 +830,7 @@
             <div class="footer-nav">
                 <h4>Explore Catalog</h4>
                 <ul>
-                    <li><a onclick="app.navigate('events')">Surprise Plannings</a></li>
+                    <li><a onclick="app.navigate('specials')">Rose Specials</a></li>
                     <li><a onclick="app.navigate('events')">Wedding & Milestone Events</a></li>
                     <li><a onclick="app.navigate('gifts')">Custom Gift Hampers</a></li>
                     <li><a onclick="app.navigate('gifts')">Premium Return Gifts</a></li>
@@ -661,11 +857,13 @@
 
     <script>
         /**
-         * Core Application Logic (SPA Router, WhatsApp linking, Animations)
+         * Core Application Logic (SPA Router, Cart, WhatsApp linking, Animations)
          */
         const app = {
             whatsappNumber: "918247553115",
-            pages: ['home', 'events', 'gifts', 'about'],
+            pages: ['home', 'events', 'gifts', 'specials', 'about'],
+            cart: [],
+            cartOpen: false,
             
             init() {
                 this.setupRouter();
@@ -673,12 +871,14 @@
                 this.setupMobileMenu();
                 this.setupScrollEffects();
                 this.setupScrollReveal();
+                this.setupCartListeners();
                 
-                // Handle initial load based on hash
                 const hash = window.location.hash.replace('#', '');
                 if (this.pages.includes(hash)) {
                     this.navigate(hash, false);
                 }
+                
+                this.updateCartUI();
             },
 
             navigate(targetPage, pushState = true) {
@@ -724,7 +924,7 @@
                 const links = document.querySelectorAll('.wa-dynamic');
                 links.forEach(link => {
                     const product = link.getAttribute('data-product');
-                    const message = `Hello ROSE Celebrations, I would like to get detailed information and order: *${product}*.`;
+                    const message = `Hello ROSE Celebrations! 🌹 I would like to get a quotation and more details for: *${product}*.`;
                     link.href = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(message)}`;
                     // Open in new tab securely
                     link.setAttribute('target', '_blank');
@@ -781,6 +981,111 @@
                 }, observerOptions);
 
                 reveals.forEach(el => observer.observe(el));
+            },
+            
+            /* CART LOGIC */
+            setupCartListeners() {
+                document.getElementById('cart-overlay').addEventListener('click', () => {
+                    if (this.cartOpen) this.toggleCart();
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.cartOpen) {
+                        this.toggleCart();
+                    }
+                });
+            },
+
+            addToCart(productName) {
+                const existingItem = this.cart.find(item => item.name === productName);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    this.cart.push({ name: productName, quantity: 1 });
+                }
+                
+                this.updateCartUI();
+                
+                if (!this.cartOpen) this.toggleCart();
+            },
+
+            updateQuantity(index, change) {
+                if (this.cart[index]) {
+                    this.cart[index].quantity += change;
+                    if (this.cart[index].quantity <= 0) {
+                        this.cart.splice(index, 1);
+                    }
+                    this.updateCartUI();
+                }
+            },
+
+            removeFromCart(index) {
+                this.cart.splice(index, 1);
+                this.updateCartUI();
+            },
+
+            toggleCart() {
+                this.cartOpen = !this.cartOpen;
+                const drawer = document.getElementById('cart-drawer');
+                const overlay = document.getElementById('cart-overlay');
+                
+                if (this.cartOpen) {
+                    drawer.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    drawer.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            },
+
+            updateCartUI() {
+                const badge = document.getElementById('cart-badge');
+                const container = document.getElementById('cart-items-container');
+                
+                const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+                
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+
+                if (this.cart.length === 0) {
+                    container.innerHTML = `
+                        <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-secondary); text-align: center; height: 100%;">
+                            <i class="fa-solid fa-bag-shopping" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <p>Your bag is empty.</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = this.cart.map((item, index) => `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <div class="cart-item-controls">
+                                    <button onclick="app.updateQuantity(${index}, -1)">-</button>
+                                    <span style="font-weight: 600; min-width: 20px; text-align: center;">${item.quantity}</span>
+                                    <button onclick="app.updateQuantity(${index}, 1)">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" onclick="app.removeFromCart(${index})">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `).join('');
+                }
+            },
+
+            checkoutViaWhatsApp() {
+                if (this.cart.length === 0) return;
+                
+                let message = "Hello ROSE Celebrations! 🌹 I would like to request a quotation and place an order for the following items:\n\n";
+                this.cart.forEach((item, index) => {
+                    message += `${index + 1}. *${item.name}* (Qty: ${item.quantity})\n`;
+                });
+                message += "\nPlease let me know the next steps for customization and confirmation. Thank you!";
+                
+                const waUrl = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(message)}`;
+                window.open(waUrl, '_blank');
             }
         };
 
