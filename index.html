@@ -158,17 +158,78 @@
         .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
-        /* Fullscreen Mobile Menu */
+        /* Premium Fullscreen Mobile Menu */
         .mobile-menu {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-            backdrop-filter: var(--blur-md); -webkit-backdrop-filter: var(--blur-md);
-            z-index: 9998; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: var(--transition-smooth); gap: 2.5rem;
-            text-align: center;
+            position: fixed; inset: 0; 
+            background: rgba(10, 10, 12, 0.65);
+            backdrop-filter: blur(40px) saturate(200%); -webkit-backdrop-filter: blur(40px) saturate(200%);
+            z-index: 9998; display: flex; flex-direction: column; align-items: center; 
+            padding: 7rem 5% 3rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .mobile-menu.active { opacity: 1; pointer-events: all; }
-        .mobile-menu a { font-size: 1.8rem; font-weight: 600; color: var(--text-secondary); text-decoration: none; transition: var(--transition-fast); cursor: pointer; }
-        .mobile-menu a:hover, .mobile-menu a.active { color: var(--text-primary); transform: scale(1.05); }
+        
+        .mobile-menu-links {
+            display: flex; flex-direction: column; gap: 1.2rem; width: 100%; max-width: 400px;
+        }
+        
+        .mobile-menu .menu-item {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-pill);
+            padding: 1.2rem 1.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transform: translateY(20px) scale(1); opacity: 0;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .mobile-menu.active .menu-item {
+            transform: translateY(0) scale(1); opacity: 1;
+        }
+        
+        /* Staggered entry animation */
+        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.25s; }
+
+        .mobile-menu.active .menu-item.active, 
+        .mobile-menu.active .menu-item:hover {
+            background: var(--text-primary);
+            color: var(--bg-base);
+            transform: translateY(0) scale(1.03);
+            border-color: transparent;
+        }
+        
+        .menu-item i { opacity: 0.5; font-size: 1rem; transition: var(--transition-fast); }
+        .menu-item.active i, .menu-item:hover i { opacity: 1; color: var(--bg-base); }
+
+        .mobile-wa-pill {
+            margin-top: auto;
+            width: 100%; max-width: 400px;
+            background: rgba(37, 211, 102, 0.15); 
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: var(--wa-color); 
+            padding: 1.2rem; 
+            border-radius: var(--radius-pill);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-size: 1.2rem; font-weight: 600; text-decoration: none;
+            transform: translateY(20px); opacity: 0; 
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .mobile-menu.active .mobile-wa-pill {
+            transform: translateY(0); opacity: 1; transition-delay: 0.35s;
+        }
+        .mobile-wa-pill:hover { background: var(--wa-color); color: white; transform: scale(1.03); border-color: var(--wa-color); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.2);}
 
         /* ==========================================================================
            CART DRAWER
@@ -273,7 +334,7 @@
         .bento-card:hover .bento-btn { background: var(--text-primary); color: var(--bg-base); transform: translateY(-5px); }
 
         /* ==========================================================================
-           FLIPKART-INSPIRED DENSE DUAL TILE SYSTEM (MOBILE OPTIMIZED)
+           CATALOG LAYOUTS
            ========================================================================== */
         .catalog-grid {
             display: grid; 
@@ -299,6 +360,7 @@
         .item-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.2; text-align: center;}
         .item-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem; flex-grow: 1; text-align: center;}
         
+        /* New Action Layout (WhatsApp + Cart) */
         .item-action { 
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
             padding-top: 1.5rem; border-top: 1px solid var(--glass-border); width: 100%;
@@ -326,61 +388,6 @@
         }
         .btn-icon-cart:hover {
             transform: scale(1.05); background: var(--rose-light);
-        }
-
-        /* Mobile Layout Modifications inspired by Flipkart (Dense 2x2 multi-tile viewport view) */
-        @media (max-width: 768px) {
-            .catalog-grid { 
-                grid-template-columns: repeat(2, 1fr) !important; 
-                gap: 8px !important; 
-                padding: 0 4px;
-            }
-            .item-card { 
-                border-radius: var(--radius-sm); 
-                max-width: 100%;
-            }
-            .item-img-wrapper { aspect-ratio: 1; }
-            .item-content { 
-                padding: 8px !important; 
-            }
-            .item-tag { 
-                font-size: 0.65rem !important; 
-                margin-bottom: 2px !important; 
-                letter-spacing: 0px;
-            }
-            .item-title { 
-                font-size: 0.9rem !important; 
-                margin-bottom: 4px !important; 
-                white-space: nowrap; 
-                overflow: hidden; 
-                text-overflow: ellipsis; 
-                width: 100%;
-            }
-            .item-desc { 
-                font-size: 0.75rem !important; 
-                line-height: 1.3 !important; 
-                margin-bottom: 8px !important;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;  
-                overflow: hidden;
-                text-align: center;
-            }
-            .item-action { 
-                padding-top: 6px !important; 
-                gap: 4px !important;
-            }
-            .btn-get-quote { 
-                font-size: 0.75rem !important; 
-                padding: 6px 4px !important; 
-                border-radius: 6px !important;
-                gap: 3px !important;
-            }
-            .btn-icon-cart { 
-                width: 28px !important; 
-                height: 28px !important; 
-                font-size: 0.8rem !important; 
-            }
         }
 
         /* ==========================================================================
@@ -480,6 +487,7 @@
             .mobile-menu-btn { display: block; }
             .fab-wa { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.5rem; }
             .section-title { font-size: 2.2rem; }
+            .catalog-grid { grid-template-columns: 1fr; }
         }
         
         /* Reveal Animation Utility */
@@ -501,6 +509,7 @@
             <li><a onclick="app.navigate('about')" id="link-about">About Us</a></li>
         </ul>
         <div class="nav-actions">
+            <!-- Cart Icon -->
             <div class="cart-icon-wrapper" onclick="app.toggleCart()">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span id="cart-badge" class="cart-badge">0</span>
@@ -510,16 +519,19 @@
     </nav>
 
     <div class="mobile-menu" id="mobile-menu">
-        <a onclick="app.navigate('home')">Home</a>
-        <a onclick="app.navigate('events')">Events</a>
-        <a onclick="app.navigate('gifts')">Gifts</a>
-        <a onclick="app.navigate('specials')">Specials</a>
-        <a onclick="app.navigate('about')">About Us</a>
-        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" style="color: var(--wa-color); font-size: 1.2rem; margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <div class="mobile-menu-links">
+            <a onclick="app.navigate('home')" class="menu-item" id="mob-link-home">Home <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('events')" class="menu-item" id="mob-link-events">Events <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('gifts')" class="menu-item" id="mob-link-gifts">Gifts <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('specials')" class="menu-item" id="mob-link-specials">Specials <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('about')" class="menu-item" id="mob-link-about">About Us <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="mobile-wa-pill">
             <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
         </a>
     </div>
 
+    <!-- CART OVERLAY & DRAWER -->
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
         <div class="cart-header">
@@ -527,7 +539,8 @@
             <button class="close-cart" onclick="app.toggleCart()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="cart-items" id="cart-items-container">
-            </div>
+            <!-- Items injected by JS -->
+        </div>
         <div class="cart-footer">
             <button class="btn btn-wa" style="width: 100%; display: flex; justify-content: center; font-size: 1.1rem; padding: 16px;" onclick="app.checkoutViaWhatsApp()">
                 <i class="fa-brands fa-whatsapp"></i> Place Order via WhatsApp
@@ -537,6 +550,7 @@
 
     <main id="app-content">
 
+        <!-- ================= HOME ================= -->
         <section id="page-home" class="page-view active">
             <div class="hero">
                 <div class="hero-bg">
@@ -574,6 +588,7 @@
             </div>
         </section>
 
+        <!-- ================= EVENTS ================= -->
         <section id="page-events" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Event</span> <span class="text-rose">Orchestration</span></h2>
@@ -589,7 +604,7 @@
                         <p class="item-desc">Comprehensive end-to-end wedding planning. Venue styling, floral artistry, and flawless timeline execution.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Grand Celebrations">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Event: Grand Celebrations')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -606,7 +621,7 @@
                         <p class="item-desc">Themed setups, premium entertainment booking, and exquisite catering to celebrate life's annual milestones.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Birthday Extravaganza">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Event: Birthday Extravaganza')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -623,7 +638,7 @@
                         <p class="item-desc">Corporate galas, private dinners, and unique concept events designed specifically around your requirements.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Custom Gathering">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Event: Custom Gathering')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -634,6 +649,7 @@
             </div>
         </section>
 
+        <!-- ================= GIFTS ================= -->
         <section id="page-gifts" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Premium</span> <span class="text-rose">Gifting</span></h2>
@@ -649,7 +665,7 @@
                         <p class="item-desc">Pre-designed luxury hampers featuring artisanal chocolates, fine fragrances, and timeless keepsakes.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Signature Package">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Signature Package')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -666,7 +682,7 @@
                         <p class="item-desc">Elegant, unified tokens of gratitude for wedding guests, event attendees, or festival celebrations.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Bulk Return Gifts Set">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Bulk Return Gifts Set')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -683,7 +699,7 @@
                         <p class="item-desc">Build a completely unique box. Select specific items, personalized engravings, and bespoke packaging materials.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Custom Hamper">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Custom Hamper')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -700,7 +716,7 @@
                         <p class="item-desc">Refined branded gifting solutions for client appreciation, employee onboarding, and holiday milestones.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Corporate Batch">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Corporate Batch')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -717,7 +733,7 @@
                         <p class="item-desc">Architectural floral designs and preserved eternal roses housed in premium acrylic or velvet boxes.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Luxury Florals">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Luxury Florals')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -728,6 +744,7 @@
             </div>
         </section>
 
+        <!-- ================= SPECIALS ================= -->
         <section id="page-specials" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Rose</span> <span class="text-rose">Specials</span></h2>
@@ -736,6 +753,7 @@
 
             <div class="catalog-grid">
                 
+                <!-- Train Proposal -->
                 <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Train Proposal"></div>
                     <div class="item-content">
@@ -744,7 +762,7 @@
                         <p class="item-desc">Recreate the iconic, cinematic "Dude" movie train proposal. A fully orchestrated, breathtaking moment on a moving train or platform.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Dude Movie Train Proposal">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Dude Movie Train Proposal')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -753,6 +771,7 @@
                     </div>
                 </div>
 
+                <!-- Movie Proposal -->
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1489599874127-6f1dbaf779cb?auto=format&fit=crop&q=80&w=800" alt="Movie Theater Proposal"></div>
                     <div class="item-content">
@@ -761,7 +780,7 @@
                         <p class="item-desc">Surprise them on the big screen! Custom movie trailers, private screenings, and the ultimate movie proposal experience.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Movie Theater Proposal">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Movie Theater Proposal')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -770,6 +789,7 @@
                     </div>
                 </div>
 
+                <!-- Date Night Surprise -->
                 <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=800" alt="Date Night Surprise"></div>
                     <div class="item-content">
@@ -778,7 +798,7 @@
                         <p class="item-desc">Rooftop dinners, private cabanas, and candle-lit pathways arranged secretly for a flawless romantic evening.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Date Night Setup">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Date Night Setup')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -787,6 +807,7 @@
                     </div>
                 </div>
 
+                <!-- Fake Fight -->
                 <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800" alt="Fake Fight Surprise"></div>
                     <div class="item-content">
@@ -795,7 +816,7 @@
                         <p class="item-desc">A playful, carefully staged minor conflict that suddenly turns into a massive, unforgettable surprise or proposal.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Fake Fight Setup">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Fake Fight Setup')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -804,6 +825,7 @@
                     </div>
                 </div>
                 
+                <!-- Long Drive -->
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?auto=format&fit=crop&q=80&w=800" alt="Long Drive Surprise"></div>
                     <div class="item-content">
@@ -812,7 +834,7 @@
                         <p class="item-desc">Decorated car trunks, midnight cake cuttings on scenic routes, and romantic getaways designed for two.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Long Drive Celebration">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Long Drive Celebration')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -821,6 +843,7 @@
                     </div>
                 </div>
 
+                <!-- Cafe Surprise -->
                 <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cafe Surprise"></div>
                     <div class="item-content">
@@ -829,7 +852,7 @@
                         <p class="item-desc">Flash mobs, hidden musicians, or private bookings at their favorite coffee shop to catch them completely off guard.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Cafe Surprise">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Cafe Surprise')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -838,6 +861,7 @@
                     </div>
                 </div>
 
+                <!-- Away from Home / Students -->
                 <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513885055282-3fea2833111b?auto=format&fit=crop&q=80&w=800" alt="Away From Home Care"></div>
                     <div class="item-content">
@@ -846,7 +870,7 @@
                         <p class="item-desc">Perfect for students and expats. Midnight hostel deliveries, comforting care packages, and virtual-to-real surprise connections.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Away From Home Package">
-                                <i class="fa-brands fa-whatsapp"></i> Quote
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Special: Away From Home Package')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -857,6 +881,7 @@
             </div>
         </section>
 
+        <!-- ================= ABOUT ================= -->
         <section id="page-about" class="page-view">
             <div class="about-container">
                 <div class="about-content reveal">
@@ -958,6 +983,7 @@
                 // Hide all pages, remove active states
                 document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
                 document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.mobile-menu .menu-item').forEach(l => l.classList.remove('active'));
                 
                 // Show target page
                 document.getElementById(`page-${targetPage}`).classList.add('active');
@@ -965,6 +991,10 @@
                 // Update nav state
                 const navLink = document.getElementById(`link-${targetPage}`);
                 if (navLink) navLink.classList.add('active');
+                
+                // Update mobile nav state
+                const mobLink = document.getElementById(`mob-link-${targetPage}`);
+                if (mobLink) mobLink.classList.add('active');
 
                 // Close mobile menu if open
                 if (document.getElementById('mobile-menu').classList.contains('active')) {
