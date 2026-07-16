@@ -123,6 +123,10 @@
         .btn-wa { background: var(--wa-color); color: white; font-weight: 600; width: 100%; max-width: 300px; margin: 0 auto; }
         .btn-wa:hover { background: #1ebd5a; transform: scale(1.03); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); }
 
+        /* Add to Cart Specific Button */
+        .btn-cart { background: var(--text-primary); color: var(--bg-base); font-weight: 600; width: 100%; }
+        .btn-cart:hover { background: var(--rose-light); transform: scale(1.03); }
+
         /* Floating Dynamic Island Navigation */
         nav {
             position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
@@ -158,78 +162,95 @@
         .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
-        /* Premium Fullscreen Mobile Menu - Scaled down pills */
+        /* ==========================================================================
+           ULTRA-PREMIUM STRUCTURAL MOBILE MENU
+           ========================================================================== */
         .mobile-menu {
             position: fixed; inset: 0; 
-            background: rgba(10, 10, 12, 0.75);
-            backdrop-filter: blur(30px) saturate(200%); -webkit-backdrop-filter: blur(30px) saturate(200%);
-            z-index: 9998; display: flex; flex-direction: column; align-items: center; 
-            padding: 6rem 5% 3rem;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            background: rgba(5, 5, 7, 0.85);
+            backdrop-filter: blur(50px) saturate(200%); -webkit-backdrop-filter: blur(50px) saturate(200%);
+            z-index: 9998; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 5rem 5% 3rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .mobile-menu.active { opacity: 1; pointer-events: all; }
         
+        .mobile-menu-brand {
+            margin-bottom: 2.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rose-gold);
+            letter-spacing: 4px;
+            text-align: center;
+            display: flex; align-items: center; gap: 10px;
+            transform: translateY(20px); opacity: 0; transition: all 0.5s ease;
+        }
+        .mobile-menu.active .mobile-menu-brand { transform: translateY(0); opacity: 1; transition-delay: 0.1s; }
+
         .mobile-menu-links {
-            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 320px;
+            display: flex; flex-direction: column; width: 100%; max-width: 350px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         
         .mobile-menu .menu-item {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-pill);
-            padding: 0.8rem 1.4rem;
-            font-size: 1rem;
+            padding: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 500;
+            letter-spacing: 2px;
             color: var(--text-primary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transform: translateY(15px) scale(0.98); opacity: 0;
+            justify-content: center;
+            text-align: center;
+            text-transform: uppercase;
+            position: relative;
+            border-bottom: 1px solid var(--glass-border);
+            background: transparent;
+            transform: translateY(20px); opacity: 0;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+        .mobile-menu .menu-item:last-child { border-bottom: none; }
         
-        .mobile-menu.active .menu-item {
-            transform: translateY(0) scale(1); opacity: 1;
-        }
-        
-        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
-        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
-        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
-        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
-        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu.active .menu-item { transform: translateY(0); opacity: 1; }
+        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.15s; }
+        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.25s; }
+        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.3s; }
+        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.35s; }
 
-        .mobile-menu.active .menu-item.active, 
-        .mobile-menu.active .menu-item:hover {
-            background: var(--text-primary);
-            color: var(--bg-base);
-            transform: translateY(0) scale(1.02);
-            border-color: transparent;
-            font-weight: 600;
+        .mobile-menu .menu-item:hover,
+        .mobile-menu .menu-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--rose-light);
         }
-        
-        .menu-item i { opacity: 0.5; font-size: 0.9rem; transition: var(--transition-fast); }
-        .menu-item.active i, .menu-item:hover i { opacity: 1; color: var(--bg-base); }
+
+        .mobile-wa-container {
+            margin-top: 3rem;
+            transform: translateY(20px); opacity: 0; transition: all 0.5s ease;
+        }
+        .mobile-menu.active .mobile-wa-container { transform: translateY(0); opacity: 1; transition-delay: 0.45s; }
 
         .mobile-wa-pill {
-            margin-top: auto;
-            width: 100%; max-width: 320px;
-            background: rgba(37, 211, 102, 0.15); 
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            color: var(--wa-color); 
-            padding: 0.9rem; 
+            background: transparent;
+            border: 1px solid var(--wa-color);
+            color: var(--wa-color);
+            padding: 1rem 2.5rem;
             border-radius: var(--radius-pill);
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-size: 1rem; font-weight: 600; text-decoration: none;
-            transform: translateY(15px); opacity: 0; 
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            font-size: 1.1rem; font-weight: 500; text-decoration: none;
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
         }
-        .mobile-menu.active .mobile-wa-pill {
-            transform: translateY(0); opacity: 1; transition-delay: 0.35s;
+        .mobile-wa-pill:hover { 
+            background: var(--wa-color); color: var(--bg-base); 
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.2);
         }
-        .mobile-wa-pill:hover { background: var(--wa-color); color: white; transform: scale(1.02); border-color: var(--wa-color); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);}
 
         /* ==========================================================================
            CART DRAWER
@@ -360,7 +381,6 @@
         .item-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.2; text-align: center;}
         .item-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem; flex-grow: 1; text-align: center;}
         
-        /* New Action Layout (WhatsApp + Cart) */
         .item-action { 
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
             padding-top: 1.5rem; border-top: 1px solid var(--glass-border); width: 100%;
@@ -515,7 +535,7 @@
             
             /* Adjust buttons for tight mobile columns */
             .item-action {
-                flex-direction: column-reverse; /* Cart icon on top or stacked */
+                flex-direction: column-reverse; 
                 gap: 0.5rem;
                 padding-top: 0.8rem;
             }
@@ -561,7 +581,6 @@
             <li><a onclick="app.navigate('about')" id="link-about">About Us</a></li>
         </ul>
         <div class="nav-actions">
-            <!-- Cart Icon -->
             <div class="cart-icon-wrapper" onclick="app.toggleCart()">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span id="cart-badge" class="cart-badge">0</span>
@@ -571,16 +590,19 @@
     </nav>
 
     <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-brand"><i class="fa-solid fa-rose"></i> ROSE</div>
         <div class="mobile-menu-links">
-            <a onclick="app.navigate('home')" class="menu-item" id="mob-link-home">Home <i class="fa-solid fa-chevron-right"></i></a>
-            <a onclick="app.navigate('events')" class="menu-item" id="mob-link-events">Events <i class="fa-solid fa-chevron-right"></i></a>
-            <a onclick="app.navigate('gifts')" class="menu-item" id="mob-link-gifts">Gifts <i class="fa-solid fa-chevron-right"></i></a>
-            <a onclick="app.navigate('specials')" class="menu-item" id="mob-link-specials">Specials <i class="fa-solid fa-chevron-right"></i></a>
-            <a onclick="app.navigate('about')" class="menu-item" id="mob-link-about">About Us <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('home')" class="menu-item" id="mob-link-home">Home</a>
+            <a onclick="app.navigate('events')" class="menu-item" id="mob-link-events">Events</a>
+            <a onclick="app.navigate('gifts')" class="menu-item" id="mob-link-gifts">Gifts</a>
+            <a onclick="app.navigate('specials')" class="menu-item" id="mob-link-specials">Specials</a>
+            <a onclick="app.navigate('about')" class="menu-item" id="mob-link-about">About Us</a>
         </div>
-        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="mobile-wa-pill">
-            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-        </a>
+        <div class="mobile-wa-container">
+            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="mobile-wa-pill">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
     </div>
 
     <!-- CART OVERLAY & DRAWER -->
