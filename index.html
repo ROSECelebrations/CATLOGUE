@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rose Celebrations | Unforgettable Moments & Gifts</title>
+    <title>Rose Celebrations | Luxurious Events & Soul-Satisfying Surprises</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ==========================================================================
@@ -123,10 +123,6 @@
         .btn-wa { background: var(--wa-color); color: white; font-weight: 600; width: 100%; max-width: 300px; margin: 0 auto; }
         .btn-wa:hover { background: #1ebd5a; transform: scale(1.03); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); }
 
-        /* Add to Cart Specific Button */
-        .btn-cart { background: var(--text-primary); color: var(--bg-base); font-weight: 600; width: 100%; }
-        .btn-cart:hover { background: var(--rose-light); transform: scale(1.03); }
-
         /* Floating Dynamic Island Navigation */
         nav {
             position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
@@ -162,94 +158,80 @@
         .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
-        /* ==========================================================================
-           ULTRA-PREMIUM STRUCTURAL MOBILE MENU
-           ========================================================================== */
+        /* Premium Fullscreen Mobile Menu - Scaled down pills */
         .mobile-menu {
             position: fixed; inset: 0; 
-            background: rgba(5, 5, 7, 0.85);
-            backdrop-filter: blur(50px) saturate(200%); -webkit-backdrop-filter: blur(50px) saturate(200%);
-            z-index: 9998; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 5rem 5% 3rem;
-            opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            background: rgba(10, 10, 12, 0.75);
+            backdrop-filter: blur(30px) saturate(200%); -webkit-backdrop-filter: blur(30px) saturate(200%);
+            z-index: 9998; display: flex; flex-direction: column; align-items: center; 
+            padding: 6rem 5% 3rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .mobile-menu.active { opacity: 1; pointer-events: all; }
         
-        .mobile-menu-brand {
-            margin-bottom: 2.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--rose-gold);
-            letter-spacing: 4px;
-            text-align: center;
-            display: flex; align-items: center; gap: 10px;
-            transform: translateY(20px); opacity: 0; transition: all 0.5s ease;
-        }
-        .mobile-menu.active .mobile-menu-brand { transform: translateY(0); opacity: 1; transition-delay: 0.1s; }
-
         .mobile-menu-links {
-            display: flex; flex-direction: column; width: 100%; max-width: 350px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 320px; margin: auto 0;
         }
         
         .mobile-menu .menu-item {
             width: 100%;
-            padding: 1.5rem;
-            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-pill);
+            padding: 0.8rem 1.4rem;
+            font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 2px;
             color: var(--text-primary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            text-transform: uppercase;
-            position: relative;
-            border-bottom: 1px solid var(--glass-border);
-            background: transparent;
-            transform: translateY(20px); opacity: 0;
+            justify-content: space-between;
+            cursor: pointer;
+            transform: translateY(15px) scale(0.98); opacity: 0;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .mobile-menu .menu-item:last-child { border-bottom: none; }
         
-        .mobile-menu.active .menu-item { transform: translateY(0); opacity: 1; }
-        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.15s; }
-        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.25s; }
-        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.3s; }
-        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.35s; }
+        .mobile-menu.active .menu-item { transform: translateY(0) scale(1); opacity: 1; }
+        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.25s; }
 
-        .mobile-menu .menu-item:hover,
-        .mobile-menu .menu-item.active {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--rose-light);
+        .mobile-menu.active .menu-item.active, 
+        .mobile-menu.active .menu-item:hover {
+            background: var(--text-primary);
+            color: var(--bg-base);
+            transform: translateY(0) scale(1.02);
+            border-color: transparent;
+            font-weight: 600;
         }
-
-        .mobile-wa-container {
-            margin-top: 3rem;
-            transform: translateY(20px); opacity: 0; transition: all 0.5s ease;
-        }
-        .mobile-menu.active .mobile-wa-container { transform: translateY(0); opacity: 1; transition-delay: 0.45s; }
+        
+        .menu-item i { opacity: 0.5; font-size: 0.9rem; transition: var(--transition-fast); }
+        .menu-item.active i, .menu-item:hover i { opacity: 1; color: var(--bg-base); }
 
         .mobile-wa-pill {
-            background: transparent;
-            border: 1px solid var(--wa-color);
-            color: var(--wa-color);
-            padding: 1rem 2.5rem;
+            width: 100%; max-width: 320px;
+            background: rgba(37, 211, 102, 0.15); 
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: var(--wa-color); 
+            padding: 0.9rem; 
             border-radius: var(--radius-pill);
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            font-size: 1.1rem; font-weight: 500; text-decoration: none;
-            letter-spacing: 1px;
-            transition: var(--transition-fast);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 1rem; font-weight: 600; text-decoration: none;
+            transform: translateY(15px); opacity: 0; 
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .mobile-wa-pill:hover { 
-            background: var(--wa-color); color: var(--bg-base); 
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.2);
+        .mobile-menu.active .mobile-wa-pill { transform: translateY(0); opacity: 1; transition-delay: 0.35s; }
+        .mobile-wa-pill:hover { background: var(--wa-color); color: white; transform: scale(1.02); border-color: var(--wa-color); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);}
+
+        /* Location Badge Style */
+        .location-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 14px; border-radius: var(--radius-pill);
+            background: rgba(183, 110, 121, 0.15); border: 1px solid rgba(183, 110, 121, 0.3);
+            color: var(--rose-light); font-size: 0.85rem; font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
         }
 
         /* ==========================================================================
@@ -322,8 +304,8 @@
         
         .hero-content { position: relative; z-index: 10; max-width: 1000px; display: flex; flex-direction: column; align-items: center; }
         .hero-title { font-size: 3.5rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem; text-align: center; }
-        @media (min-width: 768px) { .hero-title { font-size: 7rem; } }
-        .hero-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 3rem; line-height: 1.6; font-weight: 400; text-align: center;}
+        @media (min-width: 768px) { .hero-title { font-size: 6.5rem; } }
+        .hero-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem; line-height: 1.6; font-weight: 400; text-align: center;}
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; width: 100%; }
 
         /* Highlight Grid (Home) */
@@ -381,6 +363,7 @@
         .item-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.8rem; line-height: 1.2; text-align: center;}
         .item-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; margin-bottom: 2rem; flex-grow: 1; text-align: center;}
         
+        /* Action Layout (WhatsApp + Cart) */
         .item-action { 
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
             padding-top: 1.5rem; border-top: 1px solid var(--glass-border); width: 100%;
@@ -439,6 +422,26 @@
         .stat-card { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--glass-border); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;}
         .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--rose-light); margin-bottom: 0.5rem; text-align: center;}
         .stat-text { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; text-align: center;}
+
+        /* Directors Section */
+        .directors-section { width: 100%; margin-top: 8rem; display: flex; flex-direction: column; align-items: center; }
+        .directors-title { font-size: 2.5rem; font-weight: 600; margin-bottom: 4rem; color: var(--text-primary); text-align: center; }
+        .directors-grid { display: flex; flex-wrap: wrap; gap: 3rem; justify-content: center; width: 100%; }
+        
+        .director-card { 
+            display: flex; flex-direction: column; align-items: center; 
+            text-align: center; transition: var(--transition-smooth); 
+            width: 100%; max-width: 250px;
+        }
+        .director-card:hover { transform: translateY(-10px); }
+        .director-card img { 
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover; 
+            border: 3px solid rgba(255,255,255,0.1); padding: 5px; margin-bottom: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: var(--transition-smooth);
+        }
+        .director-card:hover img { border-color: var(--rose-light); transform: scale(1.05); }
+        .director-card h4 { font-size: 1.3rem; margin-bottom: 0.3rem; color: var(--text-primary); }
+        .director-card p { font-size: 0.95rem; color: var(--rose-deep); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
 
         /* ==========================================================================
            FOOTER
@@ -514,52 +517,54 @@
             /* Grid specifically configured for 2 columns on mobile */
             .catalog-grid { 
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 1rem; 
+                gap: 10px; 
                 width: 100%;
                 padding: 0 5px;
             }
             
             /* Scale down items to fit 2 per row */
-            .item-card { max-width: 100%; }
-            .item-content { padding: 1rem 0.5rem; }
-            .item-title { font-size: 1rem; margin-bottom: 0.4rem; }
+            .item-card { max-width: 100%; border-radius: 12px; }
+            .item-content { padding: 12px 10px; }
+            .item-title { font-size: 0.9rem; margin-bottom: 0.4rem; }
             .item-desc { 
                 font-size: 0.75rem; 
                 margin-bottom: 0.8rem; 
                 display: -webkit-box;
-                -webkit-line-clamp: 3;
+                -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
-            .item-tag { font-size: 0.65rem; margin-bottom: 0.3rem; }
+            .item-tag { font-size: 0.6rem; margin-bottom: 0.3rem; }
             
             /* Adjust buttons for tight mobile columns */
             .item-action {
-                flex-direction: column-reverse; 
-                gap: 0.5rem;
-                padding-top: 0.8rem;
+                flex-direction: row; 
+                gap: 5px;
+                padding-top: 10px;
             }
             .btn-get-quote { 
-                width: 100%; 
-                font-size: 0.75rem; 
-                padding: 8px; 
+                width: auto; 
+                font-size: 0.7rem; 
+                padding: 6px; 
+                gap: 4px;
             }
             .btn-icon-cart {
                 width: 32px; height: 32px; 
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             
             /* Adjust Bento Grid on Home too */
             .highlight-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-                padding: 0 3% 4rem;
+                gap: 10px;
+                padding: 0 10px 4rem;
                 margin-top: -5vh;
             }
-            .bento-content { padding: 1.2rem; }
-            .bento-title { font-size: 1.4rem; }
-            .bento-tag { font-size: 0.65rem; }
-            .bento-btn { width: 30px; height: 30px; font-size: 0.8rem; }
+            .bento-card { border-radius: 12px; }
+            .bento-content { padding: 15px; }
+            .bento-title { font-size: 1.2rem; }
+            .bento-tag { font-size: 0.6rem; }
+            .bento-btn { width: 28px; height: 28px; font-size: 0.7rem; }
         }
         
         /* Reveal Animation Utility */
@@ -581,6 +586,7 @@
             <li><a onclick="app.navigate('about')" id="link-about">About Us</a></li>
         </ul>
         <div class="nav-actions">
+            <!-- Cart Icon -->
             <div class="cart-icon-wrapper" onclick="app.toggleCart()">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span id="cart-badge" class="cart-badge">0</span>
@@ -590,19 +596,16 @@
     </nav>
 
     <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-menu-brand"><i class="fa-solid fa-rose"></i> ROSE</div>
         <div class="mobile-menu-links">
-            <a onclick="app.navigate('home')" class="menu-item" id="mob-link-home">Home</a>
-            <a onclick="app.navigate('events')" class="menu-item" id="mob-link-events">Events</a>
-            <a onclick="app.navigate('gifts')" class="menu-item" id="mob-link-gifts">Gifts</a>
-            <a onclick="app.navigate('specials')" class="menu-item" id="mob-link-specials">Specials</a>
-            <a onclick="app.navigate('about')" class="menu-item" id="mob-link-about">About Us</a>
+            <a onclick="app.navigate('home')" class="menu-item" id="mob-link-home">Home <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('events')" class="menu-item" id="mob-link-events">Events <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('gifts')" class="menu-item" id="mob-link-gifts">Gifts <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('specials')" class="menu-item" id="mob-link-specials">Specials <i class="fa-solid fa-chevron-right"></i></a>
+            <a onclick="app.navigate('about')" class="menu-item" id="mob-link-about">About Us <i class="fa-solid fa-chevron-right"></i></a>
         </div>
-        <div class="mobile-wa-container">
-            <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="mobile-wa-pill">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-        </div>
+        <a href="https://wa.me/918247553115?text=Hello%20ROSE,%20I%20would%20like%20to%20speak%20with%20a%20concierge." target="_blank" class="mobile-wa-pill">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
     </div>
 
     <!-- CART OVERLAY & DRAWER -->
@@ -631,8 +634,11 @@
                     <img src="https://images.pexels.com/photos/6461814/pexels-photo-6461814.jpeg?_gl=1*15zdbj9*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzQwNTEkbzEkZzEkdDE3ODQxMzc2NDIkajU5JGwwJGgw" alt="Elegant Wedding Table Setting">
                 </div>
                 <div class="hero-content">
-                    <h1 class="hero-title reveal"><span class="text-gradient">Design the perfect</span><br><span class="text-rose">Moment.</span></h1>
-                    <p class="hero-desc reveal" style="transition-delay: 0.1s;">Masterpieces of event orchestration and premium gifting. From grand weddings to highly confidential concierge surprise plannings.</p>
+                    <div class="location-pill reveal">
+                        <i class="fa-solid fa-location-dot"></i> Now Crafting Magic In Kakinada & Rajahmundry
+                    </div>
+                    <h1 class="hero-title reveal"><span class="text-gradient">Luxurious Events.</span><br><span class="text-rose">Soul-Satisfying Surprises.</span></h1>
+                    <p class="hero-desc reveal" style="transition-delay: 0.1s;">Pioneering new concepts in event organizing. We are Rose Celebrations—your premium partner for unforgettable moments, bespoke gifts, and luxury hampers across Kakinada and Rajahmundry.</p>
                     <div class="hero-buttons reveal" style="transition-delay: 0.2s;">
                         <button onclick="app.navigate('specials')" class="btn btn-primary">Rose Specials</button>
                         <button onclick="app.navigate('events')" class="btn btn-glass">Plan an Event</button>
@@ -720,6 +726,42 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NEW: Godavari Sunset Cruise / Yacht -->
+                <div class="item-card reveal">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800" alt="Yacht Soiree"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Nautical Luxury</span>
+                        <h3 class="item-title">Godavari Sunset Soirée</h3>
+                        <p class="item-desc">Private luxury houseboat on the Godavari river with a dedicated chef, live acoustic music, and golden hour views.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Godavari Sunset Soirée">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Godavari Sunset Soirée')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Heritage Palace Engagements -->
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="Heritage Engagement"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Royal Affairs</span>
+                        <h3 class="item-title">Heritage Engagements</h3>
+                        <p class="item-desc">Step into royalty with majestic heritage venues, classical instrumentalists, and opulent floral architecture.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Heritage Engagements">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Heritage Engagements')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -782,17 +824,18 @@
                     </div>
                 </div>
 
+                <!-- NEW: 5 Senses Luxury Chest -->
                 <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800" alt="Corporate Gifts"></div>
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1628100114002-39c09930cb9f?auto=format&fit=crop&q=80&w=800" alt="5 Senses Box"></div>
                     <div class="item-content">
-                        <span class="item-tag">B2B Solutions</span>
-                        <h3 class="item-title">Corporate Gifting</h3>
-                        <p class="item-desc">Refined branded gifting solutions for client appreciation, employee onboarding, and holiday milestones.</p>
+                        <span class="item-tag">Sensory Perfection</span>
+                        <h3 class="item-title">The 5-Senses Luxury Chest</h3>
+                        <p class="item-desc">Five exquisitely wrapped gifts catering to sight, sound, smell, taste, and touch, housed in a velvet-lined vault.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Corporate Batch">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: 5-Senses Luxury Chest">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Corporate Batch')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: 5-Senses Luxury Chest')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -810,6 +853,24 @@
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
                             <button class="btn-icon-cart" onclick="app.addToCart('Gift: Luxury Florals')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Bespoke Portrait Experience -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Bespoke Art"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Timeless Masterpieces</span>
+                        <h3 class="item-title">Bespoke Art & Memories</h3>
+                        <p class="item-desc">Commissioned canvas portraits by elite artists paired with an engraved crystal memory plaque.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: Bespoke Art Keepsake">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Gift: Bespoke Art Keepsake')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -845,18 +906,36 @@
                     </div>
                 </div>
 
-                <!-- Movie Proposal -->
+                <!-- NEW: Drone Light Show -->
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1489599874127-6f1dbaf779cb?auto=format&fit=crop&q=80&w=800" alt="Movie Theater Proposal"></div>
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1506452305024-9d3f02d1c9b5?auto=format&fit=crop&q=80&w=800" alt="Drone Light Show"></div>
                     <div class="item-content">
-                        <span class="item-tag">The Grand Reveal</span>
-                        <h3 class="item-title">Movie Theater Proposals</h3>
-                        <p class="item-desc">Surprise them on the big screen! Custom movie trailers, private screenings, and the ultimate movie proposal experience.</p>
+                        <span class="item-tag">Sky High Magic</span>
+                        <h3 class="item-title">Custom Drone Light Show</h3>
+                        <p class="item-desc">Light up the night sky with a customized, synchronized drone show spelling out your love or special message.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Movie Theater Proposal">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Custom Drone Light Show">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Movie Theater Proposal')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Custom Drone Light Show')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Helicopter Flower Shower -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1544644181-1484b3fdf362?auto=format&fit=crop&q=80&w=800" alt="Helicopter Flower Shower"></div>
+                    <div class="item-content">
+                        <span class="item-tag">The Grandest Gesture</span>
+                        <h3 class="item-title">Sky-High Flower Shower</h3>
+                        <p class="item-desc">A breathtaking cascade of thousands of rose petals dropped from a private helicopter during your crucial moment.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Helicopter Flower Shower">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Helicopter Flower Shower')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -864,7 +943,7 @@
                 </div>
 
                 <!-- Date Night Surprise -->
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=800" alt="Date Night Surprise"></div>
                     <div class="item-content">
                         <span class="item-tag">Intimate Romance</span>
@@ -882,7 +961,7 @@
                 </div>
 
                 <!-- Fake Fight -->
-                <div class="item-card reveal">
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800" alt="Fake Fight Surprise"></div>
                     <div class="item-content">
                         <span class="item-tag">The Prankster</span>
@@ -899,18 +978,18 @@
                     </div>
                 </div>
                 
-                <!-- Long Drive -->
-                <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?auto=format&fit=crop&q=80&w=800" alt="Long Drive Surprise"></div>
+                <!-- NEW: Vintage Car Romance -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1511216113906-8f5fbb834b6b?auto=format&fit=crop&q=80&w=800" alt="Vintage Car Pickup"></div>
                     <div class="item-content">
-                        <span class="item-tag">Scenic Routes</span>
-                        <h3 class="item-title">Long Drive Celebrations</h3>
-                        <p class="item-desc">Decorated car trunks, midnight cake cuttings on scenic routes, and romantic getaways designed for two.</p>
+                        <span class="item-tag">Classic Charm</span>
+                        <h3 class="item-title">The Vintage Car Romance</h3>
+                        <p class="item-desc">A chauffeur-driven, meticulously restored vintage car pickup leading to a secret, candlelight destination.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Long Drive Celebration">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Vintage Car Romance">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Long Drive Celebration')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Vintage Car Romance')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -918,7 +997,7 @@
                 </div>
 
                 <!-- Cafe Surprise -->
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cafe Surprise"></div>
                     <div class="item-content">
                         <span class="item-tag">Coffee & Magic</span>
@@ -936,7 +1015,7 @@
                 </div>
 
                 <!-- Away from Home / Students -->
-                <div class="item-card reveal">
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513885055282-3fea2833111b?auto=format&fit=crop&q=80&w=800" alt="Away From Home Care"></div>
                     <div class="item-content">
                         <span class="item-tag">Heartwarming</span>
@@ -979,6 +1058,33 @@
                     <img src="https://images.pexels.com/photos/27086870/pexels-photo-27086870.jpeg?_gl=1*111oa43*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzcyMjIkajU5JGwwJGgw" alt="Rose Celebrations Expertise">
                 </div>
             </div>
+            
+            <!-- DIRECTORS SECTION -->
+            <div class="directors-section reveal">
+                <h3 class="directors-title">The Masterminds</h3>
+                <div class="directors-grid">
+                    <div class="director-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="Director of Organising">
+                        <h4>Michael Hayes</h4>
+                        <p>Director of Organising</p>
+                    </div>
+                    <div class="director-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Director of Media">
+                        <h4>Sarah Jenkins</h4>
+                        <p>Director of Media</p>
+                    </div>
+                    <div class="director-card">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="Director of Specials">
+                        <h4>David Chen</h4>
+                        <p>Director of Specials</p>
+                    </div>
+                    <div class="director-card">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" alt="Director of Logistics">
+                        <h4>Emma Watson</h4>
+                        <p>Director of Logistics</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -989,7 +1095,7 @@
                 <a onclick="app.navigate('home')" class="logo" style="margin-bottom: 1.5rem; cursor: pointer;">
                     <i class="fa-solid fa-rose"></i> ROSE
                 </a>
-                <p>Engineering unforgettable moments through meticulous event planning and premium gifting solutions.</p>
+                <p>A luxurious, soul-satisfying surprise event planner and premium gift boutique. Bringing new concepts to event organizing across Kakinada and Rajahmundry.</p>
                 <div class="social-links">
                     <a href="https://wa.me/918247553115" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
