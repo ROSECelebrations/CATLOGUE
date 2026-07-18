@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rose Celebrations | Luxurious Events & Soul-Satisfying Surprises</title>
-    
-    <!-- Resource Hints for Performance -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://images.pexels.com">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         /* ==========================================================================
            APPLE-INSPIRED DESIGN SYSTEM & VARIABLES
@@ -101,16 +94,8 @@
         @media (min-width: 768px) { .section-title { font-size: 4rem; } .section-subtitle { font-size: 1.2rem; } }
 
         /* ==========================================================================
-           COMPONENTS & UTILITIES
+           COMPONENTS
            ========================================================================== */
-        /* Image Loading Skeletons */
-        .skeleton-bg {
-            background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-            background-size: 200% 100%;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
         /* Buttons */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -162,20 +147,7 @@
         /* Cart Icon */
         .cart-icon-wrapper { position: relative; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); transition: var(--transition-fast); border: 1px solid var(--glass-border); }
         .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
-        .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .cart-badge.pop { transform: scale(1.3); background-color: var(--text-primary); color: var(--bg-base); }
-
-        /* Toast Notification (UX Improvement) */
-        .toast {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: rgba(40, 40, 40, 0.95); color: white; padding: 12px 24px;
-            border-radius: var(--radius-pill); font-size: 0.95rem; font-weight: 500;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
-            z-index: 10000; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            display: flex; align-items: center; gap: 8px; backdrop-filter: blur(10px);
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast i { color: var(--wa-color); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
         /* Premium Fullscreen Mobile Menu */
         .mobile-menu {
@@ -189,7 +161,7 @@
         .mobile-menu.active { opacity: 1; pointer-events: all; }
         
         .mobile-menu-links {
-            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 320px; margin: auto 0;
+            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 300px; margin: auto 0;
         }
         
         .mobile-menu .menu-item {
@@ -211,12 +183,6 @@
         }
         
         .mobile-menu.active .menu-item { transform: translateY(0) scale(1); opacity: 1; }
-        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
-        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
-        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
-        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
-        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.25s; }
-
         .mobile-menu.active .menu-item.active, 
         .mobile-menu.active .menu-item:hover {
             background: var(--text-primary); color: var(--bg-base);
@@ -227,7 +193,7 @@
         .menu-item.active i, .menu-item:hover i { opacity: 1; color: var(--bg-base); }
 
         .mobile-wa-pill {
-            width: 100%; max-width: 320px;
+            width: 100%; max-width: 300px;
             background: rgba(37, 211, 102, 0.15); 
             border: 1px solid rgba(37, 211, 102, 0.3);
             color: var(--wa-color); 
@@ -314,7 +280,6 @@
             mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
-        /* Optimized fetchpriority for hero image */
         .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.05); animation: slowPan 30s linear infinite alternate;}
         @keyframes slowPan { from { transform: scale(1.05) translateY(0); } to { transform: scale(1.1) translateY(-2%); } }
         
@@ -343,4 +308,30 @@
         @media (min-width: 768px) { .bento-card { aspect-ratio: 4/3; } }
         .bento-card:hover { transform: translateY(-8px); border-color: var(--glass-border-strong); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         .bento-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .bento-card:hover img { transform: scale(1.05); 
+        .bento-card:hover img { transform: scale(1.05); }
+        .bento-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%); z-index: 1; width: 100%; }
+        
+        .bento-content { position: relative; z-index: 2; padding: 2.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
+        .bento-tag { color: var(--rose-light); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 0.5rem; text-align: center; }
+        .bento-title { font-size: 2.5rem; font-weight: 600; margin-bottom: 1rem; color: white; line-height: 1.1; text-align: center;}
+        .bento-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: var(--blur-md); display: flex; align-items: center; justify-content: center; color: white; transition: var(--transition-fast); margin: 0 auto; }
+        .bento-card:hover .bento-btn { background: var(--text-primary); color: var(--bg-base); transform: translateY(-5px); }
+
+        /* ==========================================================================
+           CATALOG LAYOUTS
+           ========================================================================== */
+        .catalog-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2.5rem; width: 100%; max-width: 1200px;
+            margin: 0 auto; justify-items: center;
+        }
+
+        .item-card {
+            background: var(--bg-elevated); border-radius: var(--radius-md); overflow: hidden;
+            border: 1px solid var(--glass-border); transition: var(--transition-smooth);
+            display: flex; flex-direction: column; position: relative;
+            width: 100%; max-width: 380px;
+            text-align: center;
+        }
+        .item-card:hover { transform: translateY(-6px); border-color: rgba(183, 110, 121, 0.3); box-shadow: 0 15px 35px 
