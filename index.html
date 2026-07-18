@@ -96,15 +96,6 @@
         /* ==========================================================================
            COMPONENTS
            ========================================================================== */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-md);
-            -webkit-backdrop-filter: var(--blur-md);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--glass-shadow);
-        }
-
         /* Buttons */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -158,7 +149,7 @@
         .cart-icon-wrapper:hover { background: rgba(255,255,255,0.15); color: var(--rose-light); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--rose-deep); color: white; font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid var(--bg-elevated); display: none; }
 
-        /* Premium Fullscreen Mobile Menu - Scaled down pills */
+        /* Premium Fullscreen Mobile Menu */
         .mobile-menu {
             position: fixed; inset: 0; 
             background: rgba(10, 10, 12, 0.75);
@@ -170,7 +161,7 @@
         .mobile-menu.active { opacity: 1; pointer-events: all; }
         
         .mobile-menu-links {
-            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 320px; margin: auto 0;
+            display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 300px; margin: auto 0;
         }
         
         .mobile-menu .menu-item {
@@ -192,26 +183,17 @@
         }
         
         .mobile-menu.active .menu-item { transform: translateY(0) scale(1); opacity: 1; }
-        .mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
-        .mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
-        .mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
-        .mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
-        .mobile-menu.active .menu-item:nth-child(5) { transition-delay: 0.25s; }
-
         .mobile-menu.active .menu-item.active, 
         .mobile-menu.active .menu-item:hover {
-            background: var(--text-primary);
-            color: var(--bg-base);
-            transform: translateY(0) scale(1.02);
-            border-color: transparent;
-            font-weight: 600;
+            background: var(--text-primary); color: var(--bg-base);
+            transform: translateY(0) scale(1.02); border-color: transparent; font-weight: 600;
         }
         
         .menu-item i { opacity: 0.5; font-size: 0.9rem; transition: var(--transition-fast); }
         .menu-item.active i, .menu-item:hover i { opacity: 1; color: var(--bg-base); }
 
         .mobile-wa-pill {
-            width: 100%; max-width: 320px;
+            width: 100%; max-width: 300px;
             background: rgba(37, 211, 102, 0.15); 
             border: 1px solid rgba(37, 211, 102, 0.3);
             color: var(--wa-color); 
@@ -223,7 +205,6 @@
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .mobile-menu.active .mobile-wa-pill { transform: translateY(0); opacity: 1; transition-delay: 0.35s; }
-        .mobile-wa-pill:hover { background: var(--wa-color); color: white; transform: scale(1.02); border-color: var(--wa-color); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);}
 
         /* Location Badge Style */
         .location-pill {
@@ -394,7 +375,7 @@
         }
 
         /* ==========================================================================
-           ABOUT PAGE
+           ABOUT PAGE & DIRECTORS SECTION
            ========================================================================== */
         .about-container { 
             display: grid; grid-template-columns: 1fr; gap: 4rem; 
@@ -635,10 +616,10 @@
                 </div>
                 <div class="hero-content">
                     <div class="location-pill reveal">
-                        <i class="fa-solid fa-location-dot"></i> Now Crafting Magic In Kakinada & Rajahmundry
+                        <i class="fa-solid fa-location-dot"></i> Based in Kakinada | Serving Rajahmundry & Beyond
                     </div>
                     <h1 class="hero-title reveal"><span class="text-gradient">Luxurious Events.</span><br><span class="text-rose">Soul-Satisfying Surprises.</span></h1>
-                    <p class="hero-desc reveal" style="transition-delay: 0.1s;">Pioneering new concepts in event organizing. We are Rose Celebrations—your premium partner for unforgettable moments, bespoke gifts, and luxury hampers across Kakinada and Rajahmundry.</p>
+                    <p class="hero-desc reveal" style="transition-delay: 0.1s;">Pioneering new concepts in event organizing. We are Rose Celebrations—your premium partner for unforgettable moments, bespoke gifts, and luxury hampers.</p>
                     <div class="hero-buttons reveal" style="transition-delay: 0.2s;">
                         <button onclick="app.navigate('specials')" class="btn btn-primary">Rose Specials</button>
                         <button onclick="app.navigate('events')" class="btn btn-glass">Plan an Event</button>
@@ -676,6 +657,7 @@
             </div>
 
             <div class="catalog-grid">
+                <!-- Grand Celebrations -->
                 <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/1503520/pexels-photo-1503520.jpeg?_gl=1*k8rkse*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzY1NTgkajQ5JGwwJGgw" alt="Weddings"></div>
                     <div class="item-content">
@@ -693,7 +675,26 @@
                     </div>
                 </div>
 
+                <!-- NEW: Half-Saree / Cradle Ceremonies (Local Trending) -->
                 <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="Traditional Ceremonies"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Traditional Milestones</span>
+                        <h3 class="item-title">Grand Saree & Cradle Events</h3>
+                        <p class="item-desc">Elevating cultural milestones like Half-Saree and Cradle Ceremonies with luxurious floral architecture and royal hospitality.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Traditional Milestones">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Traditional Milestones')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birthdays -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1530103862676-de3c9de59f9e?auto=format&fit=crop&q=80&w=800" alt="Birthdays"></div>
                     <div class="item-content">
                         <span class="item-tag">Milestones</span>
@@ -710,7 +711,8 @@
                     </div>
                 </div>
                 
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                <!-- Custom Gatherings -->
+                <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/35042461/pexels-photo-35042461.jpeg?_gl=1*mto1nz*_ga*MTI3Mjc0NjU4Ni4xNzg0MTM0MDUx*_ga_8JE65Q40S6*czE3ODQxMzk2MzIkajIkbDAkaDA." alt="Custom Events"></div>
                     <div class="item-content">
                         <span class="item-tag">Bespoke Setup</span>
@@ -727,36 +729,36 @@
                     </div>
                 </div>
 
-                <!-- NEW: Godavari Sunset Cruise / Yacht -->
-                <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800" alt="Yacht Soiree"></div>
+                <!-- Destination Heritage Weddings -->
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=800" alt="Destination Heritage"></div>
                     <div class="item-content">
-                        <span class="item-tag">Nautical Luxury</span>
-                        <h3 class="item-title">Godavari Sunset Soirée</h3>
-                        <p class="item-desc">Private luxury houseboat on the Godavari river with a dedicated chef, live acoustic music, and golden hour views.</p>
+                        <span class="item-tag">Royal Affairs</span>
+                        <h3 class="item-title">Heritage Temple Weddings</h3>
+                        <p class="item-desc">Step into royalty with majestic heritage venues, classical instrumentalists, and opulent floral architecture.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Godavari Sunset Soirée">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Heritage Weddings">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Godavari Sunset Soirée')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Heritage Weddings')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- NEW: Heritage Palace Engagements -->
-                <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="Heritage Engagement"></div>
+                <!-- Godavari Sunset Soiree -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800" alt="Yacht Soiree"></div>
                     <div class="item-content">
-                        <span class="item-tag">Royal Affairs</span>
-                        <h3 class="item-title">Heritage Engagements</h3>
-                        <p class="item-desc">Step into royalty with majestic heritage venues, classical instrumentalists, and opulent floral architecture.</p>
+                        <span class="item-tag">Nautical Luxury</span>
+                        <h3 class="item-title">Godavari Sunset Soirée</h3>
+                        <p class="item-desc">Private luxury boat on the Godavari river with a dedicated chef, live acoustic music, and golden hour views.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Heritage Engagements">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Event: Godavari Sunset Soirée">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Heritage Engagements')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Event: Godavari Sunset Soirée')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -769,7 +771,7 @@
         <section id="page-gifts" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Premium</span> <span class="text-rose">Gifting</span></h2>
-                <p class="section-subtitle">Curated packages, bulk return gifts, and bespoke hampers engineered to leave a lasting impression.</p>
+                <p class="section-subtitle">Curated packages, bulk return gifts, and bespoke hampers engineered to leave a lasting impression across cities.</p>
             </div>
 
             <div class="catalog-grid">
@@ -824,12 +826,12 @@
                     </div>
                 </div>
 
-                <!-- NEW: 5 Senses Luxury Chest -->
+                <!-- 5 Senses Luxury Chest -->
                 <div class="item-card reveal">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1628100114002-39c09930cb9f?auto=format&fit=crop&q=80&w=800" alt="5 Senses Box"></div>
                     <div class="item-content">
                         <span class="item-tag">Sensory Perfection</span>
-                        <h3 class="item-title">The 5-Senses Luxury Chest</h3>
+                        <h3 class="item-title">The 5-Senses Chest</h3>
                         <p class="item-desc">Five exquisitely wrapped gifts catering to sight, sound, smell, taste, and touch, housed in a velvet-lined vault.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Gift: 5-Senses Luxury Chest">
@@ -859,7 +861,7 @@
                     </div>
                 </div>
 
-                <!-- NEW: Bespoke Portrait Experience -->
+                <!-- Bespoke Portrait Experience -->
                 <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Bespoke Art"></div>
                     <div class="item-content">
@@ -883,16 +885,52 @@
         <section id="page-specials" class="page-view">
             <div class="section-header reveal">
                 <h2 class="section-title"><span class="text-gradient">Rose</span> <span class="text-rose">Specials</span></h2>
-                <p class="section-subtitle">Out-of-the-box experiences, unique proposals, and heartwarming surprises crafted for those unforgettable moments.</p>
+                <p class="section-subtitle">Pioneering concepts crafted to evoke the deepest emotions and tears of joy.</p>
             </div>
 
             <div class="catalog-grid">
                 
-                <!-- Train Proposal -->
+                <!-- NEW: Memory Rain Shower (Tears of Memories) -->
                 <div class="item-card reveal">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800" alt="Memory Rain"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Tears of Memories</span>
+                        <h3 class="item-title">Memory Rain Shower</h3>
+                        <p class="item-desc">An automated ceiling rig releases a breathtaking shower of velvet rose petals mixed with high-quality polaroids of your shared memories raining from above.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Memory Rain Shower">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Memory Rain Shower')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Flying Screen Concept -->
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800" alt="Flying Screen"></div>
+                    <div class="item-content">
+                        <span class="item-tag">Holographic Magic</span>
+                        <h3 class="item-title">The Flying Screen Reveal</h3>
+                        <p class="item-desc">Using invisible holographic mesh, we project your custom video montage so it appears to float magically in mid-air at a park or venue.</p>
+                        <div class="item-action">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Flying Screen Reveal">
+                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
+                            </a>
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Flying Screen Reveal')" aria-label="Add to Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Train Proposal -->
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Train Proposal"></div>
                     <div class="item-content">
-                        <span class="item-tag">Cinematic Experience</span>
+                        <span class="item-tag">Cinematic Magic</span>
                         <h3 class="item-title">Dude Movie Train Proposal</h3>
                         <p class="item-desc">Recreate the iconic, cinematic "Dude" movie train proposal. A fully orchestrated, breathtaking moment on a moving train or platform.</p>
                         <div class="item-action">
@@ -906,80 +944,8 @@
                     </div>
                 </div>
 
-                <!-- NEW: Drone Light Show -->
-                <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1506452305024-9d3f02d1c9b5?auto=format&fit=crop&q=80&w=800" alt="Drone Light Show"></div>
-                    <div class="item-content">
-                        <span class="item-tag">Sky High Magic</span>
-                        <h3 class="item-title">Custom Drone Light Show</h3>
-                        <p class="item-desc">Light up the night sky with a customized, synchronized drone show spelling out your love or special message.</p>
-                        <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Custom Drone Light Show">
-                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
-                            </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Custom Drone Light Show')" aria-label="Add to Bag">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- NEW: Helicopter Flower Shower -->
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1544644181-1484b3fdf362?auto=format&fit=crop&q=80&w=800" alt="Helicopter Flower Shower"></div>
-                    <div class="item-content">
-                        <span class="item-tag">The Grandest Gesture</span>
-                        <h3 class="item-title">Sky-High Flower Shower</h3>
-                        <p class="item-desc">A breathtaking cascade of thousands of rose petals dropped from a private helicopter during your crucial moment.</p>
-                        <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Helicopter Flower Shower">
-                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
-                            </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Helicopter Flower Shower')" aria-label="Add to Bag">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Date Night Surprise -->
+                <!-- Vintage Car Romance -->
                 <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=800" alt="Date Night Surprise"></div>
-                    <div class="item-content">
-                        <span class="item-tag">Intimate Romance</span>
-                        <h3 class="item-title">Date Night Surprise</h3>
-                        <p class="item-desc">Rooftop dinners, private cabanas, and candle-lit pathways arranged secretly for a flawless romantic evening.</p>
-                        <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Date Night Setup">
-                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
-                            </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Date Night Setup')" aria-label="Add to Bag">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fake Fight -->
-                <div class="item-card reveal" style="transition-delay: 0.1s;">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800" alt="Fake Fight Surprise"></div>
-                    <div class="item-content">
-                        <span class="item-tag">The Prankster</span>
-                        <h3 class="item-title">The "Fake Fight" Surprise</h3>
-                        <p class="item-desc">A playful, carefully staged minor conflict that suddenly turns into a massive, unforgettable surprise or proposal.</p>
-                        <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Fake Fight Setup">
-                                <i class="fa-brands fa-whatsapp"></i> Get Quotation
-                            </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Fake Fight Setup')" aria-label="Add to Bag">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- NEW: Vintage Car Romance -->
-                <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1511216113906-8f5fbb834b6b?auto=format&fit=crop&q=80&w=800" alt="Vintage Car Pickup"></div>
                     <div class="item-content">
                         <span class="item-tag">Classic Charm</span>
@@ -996,18 +962,18 @@
                     </div>
                 </div>
 
-                <!-- Cafe Surprise -->
-                <div class="item-card reveal">
-                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cafe Surprise"></div>
+                <!-- Godavari Island Picnic (Local Innovation) -->
+                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                    <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800" alt="Island Picnic"></div>
                     <div class="item-content">
-                        <span class="item-tag">Coffee & Magic</span>
-                        <h3 class="item-title">Cafe Surprises</h3>
-                        <p class="item-desc">Flash mobs, hidden musicians, or private bookings at their favorite coffee shop to catch them completely off guard.</p>
+                        <span class="item-tag">Secluded Paradise</span>
+                        <h3 class="item-title">Godavari Island Picnic</h3>
+                        <p class="item-desc">A boat ride to a secluded river island near Rajahmundry, fully styled with a luxury bohemian picnic setup and private violinist.</p>
                         <div class="item-action">
-                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Cafe Surprise">
+                            <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Godavari Island Picnic">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
                             </a>
-                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Cafe Surprise')" aria-label="Add to Bag">
+                            <button class="btn-icon-cart" onclick="app.addToCart('Special: Godavari Island Picnic')" aria-label="Add to Bag">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </button>
                         </div>
@@ -1015,12 +981,12 @@
                 </div>
 
                 <!-- Away from Home / Students -->
-                <div class="item-card reveal" style="transition-delay: 0.1s;">
+                <div class="item-card reveal" style="transition-delay: 0.2s;">
                     <div class="item-img-wrapper"><img src="https://images.unsplash.com/photo-1513885055282-3fea2833111b?auto=format&fit=crop&q=80&w=800" alt="Away From Home Care"></div>
                     <div class="item-content">
                         <span class="item-tag">Heartwarming</span>
                         <h3 class="item-title">"Away From Home" Special</h3>
-                        <p class="item-desc">Perfect for students and expats. Midnight hostel deliveries, comforting care packages, and virtual-to-real surprise connections.</p>
+                        <p class="item-desc">Perfect for students. Midnight deliveries, comforting care packages, and a QR-linked video message from family played on a premium card.</p>
                         <div class="item-action">
                             <a href="#" class="btn-get-quote wa-dynamic" data-product="Special: Away From Home Package">
                                 <i class="fa-brands fa-whatsapp"></i> Get Quotation
@@ -1040,8 +1006,8 @@
                 <div class="about-content reveal">
                     <span class="item-tag" style="display: block; margin-bottom: 1rem;">The Rose Standard</span>
                     <h2>Redefining <span class="text-rose">Celebration.</span></h2>
-                    <p>At Rose Celebrations, we believe that life's most precious moments demand perfection. Born from a passion for flawless logistics and exquisite aesthetics, we bridge the gap between grand event production and intimate luxury gifting.</p>
-                    <p>Whether we are orchestrating a complex surprise planning scenario or curating thousands of premium return gifts, our approach is rooted in Apple-like precision: clean, stunning, and effortlessly executed.</p>
+                    <p>Rose Celebrations is a luxurious and soul-satisfying surprise event planner dedicated to pioneering new concepts in celebration across <strong>Kakinada</strong>, <strong>Rajahmundry</strong>, and surrounding cities. We don't just organize events; we engineer moments that resonate on a deeper level.</p>
+                    <p>Alongside our premium event organizing, we curate and deliver exclusive gifts and luxury gift hampers to doorsteps, ensuring that every facet of your celebration—from the grand reveal to the final parting gift—is touched by the Rose standard of excellence.</p>
                     
                     <div class="stats-grid">
                         <div class="stat-card">
@@ -1050,7 +1016,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-number">10k+</div>
-                            <div class="stat-text">Gifts Curated</div>
+                            <div class="stat-text">Gifts Delivered</div>
                         </div>
                     </div>
                 </div>
@@ -1095,7 +1061,7 @@
                 <a onclick="app.navigate('home')" class="logo" style="margin-bottom: 1.5rem; cursor: pointer;">
                     <i class="fa-solid fa-rose"></i> ROSE
                 </a>
-                <p>A luxurious, soul-satisfying surprise event planner and premium gift boutique. Bringing new concepts to event organizing across Kakinada and Rajahmundry.</p>
+                <p>A luxurious, soul-satisfying surprise event planner and premium gift boutique. Bringing new concepts to event organizing across Kakinada, Rajahmundry, and beyond.</p>
                 <div class="social-links">
                     <a href="https://wa.me/918247553115" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -1118,7 +1084,7 @@
                 <ul>
                     <li><i class="fa-solid fa-phone"></i> +91 8247553115</li>
                     <li><i class="fa-brands fa-whatsapp"></i> Available 24/7 on WhatsApp</li>
-                    <li><i class="fa-solid fa-envelope"></i> concierge@rosecelebrations.com</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Based in Kakinada, AP</li>
                 </ul>
             </div>
         </div>
